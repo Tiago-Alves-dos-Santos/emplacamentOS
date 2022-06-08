@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Pages\Login;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Pages\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Login::class);
+
+Route::get('/home', Dashboard::class);
