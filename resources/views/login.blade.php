@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.default')
 
-<body>
-    teste login
-</body>
-</html>
+@section('conteudo')
+teste
+@endsection
