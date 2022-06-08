@@ -10449,14 +10449,13 @@
   }
 
   .sidebar .sidebar-brand {
+    position: relative;
     height: auto;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 800;
-    padding: 1.5rem 1rem;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 0.05rem;
     z-index: 1;
   }
 
@@ -10465,7 +10464,7 @@
   }
   .sidebar .sidebar-brand .sidebar-brand-icon img {
     width: 100px;
-    height: 100px;
+    height: auto;
   }
 
   .sidebar .sidebar-brand .sidebar-brand-text {
