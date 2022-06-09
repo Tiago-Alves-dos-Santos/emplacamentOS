@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateOsTaxasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('os_taxas', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('email')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->enum('type', ['admin', 'commum'])->default('commum');
-            $table->string('password')->nullable();
-            $table->rememberToken();
+            $table->bigInteger('os_id')->unsigned()->nullable();
+            $table->bigInteger('taxa_id')->unsigned()->nullable();
+            $table->double('valor_taxa', 8, 2)->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
+            //forengKeys
+            $table->foreign('os_id')->references('id')->on('os');
+            $table->foreign('taxa_id')->references('id')->on('taxas');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('os_taxas');
     }
 }
