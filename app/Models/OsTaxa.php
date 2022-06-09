@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OsTaxa extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    //pra inserção em massa
+    protected $guarded = [];
+
+    protected $table = 'os_taxas';
 }
