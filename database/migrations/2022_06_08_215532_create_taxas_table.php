@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateTaxasTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 6
      *
      * @return void
      */

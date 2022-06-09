@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateOSTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 4
      *
      * @return void
      */

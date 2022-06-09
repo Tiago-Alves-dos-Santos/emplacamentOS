@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateDespezasMensalsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 9
      *
      * @return void
      */
