@@ -23,40 +23,28 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse ($users as $value)
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
+                    <td>{{$value->name}}</td>
+                    <td>{{$value->email}}</td>
+                    <td>{{$value->type}}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                              <button class="dropdown-item" type="button">Action</button>
-                              <button class="dropdown-item" type="button">Another action</button>
-                              <button class="dropdown-item" type="button">Something else here</button>
+                              <a href="" class="dropdown-item" type="button">Editar</a>
+                              <a href="" class="dropdown-item" type="button">Desabilitar</a>
                             </div>
                           </div>
                     </td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                              <button class="dropdown-item" type="button">Action</button>
-                              <button class="dropdown-item" type="button">Another action</button>
-                              <button class="dropdown-item" type="button">Something else here</button>
-                            </div>
-                          </div>
-                    </td>
-                  </tr>
+                  @empty
+                      <tr>
+                        <td colspan="4" class="text-center">N/A</td>
+                      </tr>
+                  @endforelse
                 </tbody>
               </table>
         </div>
