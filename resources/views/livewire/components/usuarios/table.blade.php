@@ -5,14 +5,14 @@
             <input type="search" class="form-control" placeholder="PESQUISAR">
         </div>
         <div class="col-md">
-            <a href="" class="btn btn-info d-block">
+            <a href="{{route('view.user.create')}}" class="btn btn-info d-block">
                 ADICIONAR
             </a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-striped" style="color: black">
+            <table class="table table-striped table-sm" style="color: black">
                 <caption>Lista de usuários</caption>
                 <thead class="table-light">
                   <tr>

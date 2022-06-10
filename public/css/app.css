@@ -11157,9 +11157,15 @@ body.sidebar-toggled footer.sticky-footer {
 
 * {
   margin: 0;
+  padding: 0;
   position: relative;
 }
 
 body {
-  color: black;
+  overflow-x: hidden;
+}
+
+div {
+  position: relative;
+  box-sizing: border-box;
 }

@@ -8,6 +8,8 @@ class Create extends Component
 {
     public function render()
     {
-        return view('livewire.pages.usuarios.create');
+        return view('livewire.pages.usuarios.create')
+        ->extends('layouts.admin', ['page_active' => 'user.dashboard'])
+        ->section('conteudo');
     }
 }
