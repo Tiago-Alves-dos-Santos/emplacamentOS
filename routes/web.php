@@ -3,6 +3,7 @@
 use App\Http\Livewire\Pages\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Pages\Dashboard;
+use App\Http\Livewire\Pages\Usuarios\Dashboard as  UsuarioDashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,6 @@ use App\Http\Livewire\Pages\Dashboard;
 
 Route::get('/', Login::class);
 
-Route::get('/home', Dashboard::class);
+Route::get('/home', Dashboard::class)->name('home');
+
+Route::get('/usuario/dashboard',  UsuarioDashboard::class)->name('view.user.dashboard');

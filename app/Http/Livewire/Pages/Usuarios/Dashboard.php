@@ -8,6 +8,8 @@ class Dashboard extends Component
 {
     public function render()
     {
-        return view('livewire.pages.usuarios.dashboard');
+        return view('livewire.pages.usuarios.dashboard')
+        ->extends('layouts.admin', ['page_active' => 'user.dashboard'])
+        ->section('conteudo');
     }
 }

@@ -9,7 +9,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('includes.sidebar-layout')
+        @include('includes.sidebar-layout', ['page_active' => $page_active])
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
