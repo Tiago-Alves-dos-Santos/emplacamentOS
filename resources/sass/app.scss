@@ -1,11 +1,11 @@
 @import "variables.scss";
 
-//@import "~bootstrap/scss/bootstrap.scss";
-@import "sb-admin/sb-admin-2.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+@import "layouts/sb-admin.scss";
 *{
     margin: 0;
     position: relative;
 }
 body{
-    color:black !important;
+    color:black;
 }
