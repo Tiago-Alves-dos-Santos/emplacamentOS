@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="">Email</label>
-                        <input type="text" class="form-control @error('email') is-invalid @enderror" wire:model.defer='email'>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" wire:model.defer='email'>
                         @error('email')
                         <div class="invalid-feedback">
                             {{$message}}
@@ -24,10 +24,28 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="">Senha</label>
                         <input type="password" class="form-control @error('senha') is-invalid @enderror" wire:model.defer='senha'>
                         @error('senha')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">Tipo</label>
+                        <select name="" id="" class="custom-select" wire:model.lazy='type'>
+                            <option value="">Selecione</option>
+                            @php
+                                $types = Configuracao::getTypesUser();
+                            @endphp
+                            @foreach ($types as $key => $value)
+                                <option value="{{$key}}">{{$value}}</option>
+                            @endforeach
+
+                        </select>
+                        @error('type')
                         <div class="invalid-feedback">
                             {{$message}}
                         </div>

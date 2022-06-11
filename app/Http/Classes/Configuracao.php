@@ -136,4 +136,13 @@ class Configuracao
         return $year_diff;
         //echo $year_diff." ".$month_diff." ".$day_diff;
     }
+
+    public function getTypesUser()
+    {
+        $type =  [
+            'commom' => 'COMUM',
+            'admin' => 'ADMINISTRADOR'
+        ];
+        return $type;
+    }
 }

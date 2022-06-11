@@ -12,6 +12,7 @@ class FormCreate extends Component
     public $nome = "";
     public $email = "";
     public $senha = "";
+    public $type = "";
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
         "title" => '',
@@ -32,16 +33,26 @@ class FormCreate extends Component
     {
        $this->validate();
        try {
-            User::create([
-                'name' => mb_strtoupper($this->nome),
-                'email' => $this->email,
-                'password' => base64_encode($this->senha)
-            ]);
-            $this->msg_toast['title'] = 'Sucesso!';
-            $this->msg_toast['information'] = 'Cadastro realizado com sucesso!';
-            $this->msg_toast['type'] = $this->toast_type['success'];
-            $this->emit('showToast', $this->msg_toast);
-            $this->resetExcept(['limpa']);
+            if(!User::verificarEmail($this->email)){
+                User::create([
+                    'name' => mb_strtoupper($this->nome),
+                    'email' => $this->email,
+                    'password' => base64_encode($this->senha),
+                    'type' => $this->type
+                ]);
+                $this->msg_toast['title'] = 'Sucesso!';
+                $this->msg_toast['information'] = 'Cadastro realizado com sucesso!';
+                $this->msg_toast['type'] = $this->toast_type['success'];
+                $this->emit('showToast', $this->msg_toast);
+                $this->resetExcept(['limpa']);
+            }else{
+                $this->addError('email', 'Subistitua o email.');
+                $this->msg_toast['title'] = 'Atenção!';
+                $this->msg_toast['information'] = 'Cadastro negado! <br> Email já em uso por outro usuário!';
+                $this->msg_toast['type'] = $this->toast_type['warning'];
+                $this->emit('showToast', $this->msg_toast);
+            }
+
        } catch (\Exception $e) {
             $this->msg_toast['title'] = 'Erro!';
             $this->msg_toast['information'] = $e->getMessage();
