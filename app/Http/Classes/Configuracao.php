@@ -140,7 +140,7 @@ class Configuracao
     public function getTypesUser()
     {
         $type =  [
-            'commom' => 'COMUM',
+            'common' => 'COMUM',
             'admin' => 'ADMINISTRADOR'
         ];
         return $type;

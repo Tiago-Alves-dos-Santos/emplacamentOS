@@ -24,10 +24,21 @@
                 </thead>
                 <tbody>
                   @forelse ($users as $value)
-                  <tr>
+                    @php
+                        $types = Configuracao::getTypesUser();
+                    @endphp
+                  <tr class="">
                     <td>{{$value->name}}</td>
                     <td>{{$value->email}}</td>
-                    <td>{{$value->type}}</td>
+                    @if ($value->type == 'admin')
+                    <td>
+                        <span class="badge badge-success badge-pill">{{$types[$value->type]}}</span>
+                    </td>
+                    @else
+                    <td>
+                        <span class="badge badge-primary badge-pill">{{$types[$value->type]}}</span>
+                    </td>
+                    @endif
                     <td>
                         <div class="dropdown">
                             <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
