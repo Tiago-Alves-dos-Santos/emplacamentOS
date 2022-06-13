@@ -22,11 +22,12 @@
                         <th>Ações</th>
                     </thead>
                     <tbody>
+                        @forelse ($clientes as $value)
                         <tr>
-                            <td>teste</td>
-                            <td>teste</td>
-                            <td>teste</td>
-                            <td>teste</td>
+                            <td>{{$value->nome}}</td>
+                            <td>{{$value->telefone}}</td>
+                            <td>{{date('d/m/Y', strtotime($value->data_nasc))}}</td>
+                            <td>{{Configuracao::calcIdade($value->data_nasc)}}</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
@@ -41,6 +42,11 @@
                                   </div>
                             </td>
                         </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center">N/A</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
