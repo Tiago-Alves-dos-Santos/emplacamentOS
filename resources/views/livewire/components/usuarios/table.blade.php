@@ -27,7 +27,7 @@
                     @php
                         $types = Configuracao::getTypesUser();
                     @endphp
-                  <tr class="">
+                  <tr class="@if($value->active == 'N') table-danger @endif">
                     <td>{{$value->name}}</td>
                     <td>{{$value->email}}</td>
                     @if ($value->type == 'admin')
@@ -50,7 +50,7 @@
                               ])}}" class="dropdown-item" type="button">
                                 Editar
                              </a>
-                              <a href="" class="dropdown-item" type="button">Desabilitar</a>
+                              <a class="dropdown-item" type="button" wire:click='updateStatus({{$value->id}})'>{{($value->active == 'Y')?'Desativar':'Ativar'}}</a>
                             </div>
                           </div>
                     </td>
