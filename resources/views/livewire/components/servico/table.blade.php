@@ -18,13 +18,33 @@
                         <th>Nome</th>
                         <th>Tipo</th>
                         <th>Valor</th>
+                        <th style="width: 20%">Ações</th>
                     </thead>
                     <tbody>
+                        @forelse ($servicos as $value)
                         <tr>
-                            <td>Teste</td>
-                            <td>fixo</td>
-                            <td>78,90</td>
+                            <td>{{$value->nome}}</td>
+                            @if ($value->valor_type == 'fixo')
+                            <td>
+                                <span class="badge badge-primary badge-pill">FIXO</span>
+                            </td>
+                            @else
+                            <td>
+                                <span class="badge badge-info badge-pill">VARIÁVEL</span>
+                            </td>
+                            @endif
+                            <td>{{Configuracao::getDbMoney($value->valor)}}</td>
+                            <td class="d-flex">
+                                <a class="btn btn-outline-success" wire:click=''>
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
                         </tr>
+                        @empty
+                        <tr>
+                            <td class="text-center" colspan="5">N/A</td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

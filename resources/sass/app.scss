@@ -30,6 +30,9 @@ div{
 .rotate{
     animation: is-rotating 1s infinite;
 }
+.pointer{
+    cursor: pointer;
+}
 
 input{
     text-transform: uppercase;
