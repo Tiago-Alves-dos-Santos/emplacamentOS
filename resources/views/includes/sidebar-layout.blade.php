@@ -33,8 +33,8 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Usuários</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item @if ($page_active == 'cliente.dashboard') active @endif">
+        <a class="nav-link" href="{{route('view.cliente.dashboard')}}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Clientes</span></a>
     </li>
