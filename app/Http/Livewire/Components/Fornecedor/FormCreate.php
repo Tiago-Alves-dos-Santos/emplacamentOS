@@ -35,6 +35,7 @@ class FormCreate extends Component
             $this->emit('showToast', $this->msg_toast);
             $this->resetExcept(['limpa']);
             $this->emit('fornecedor-table-reload');
+            $this->emit('closeModal', 'cadastrarFornecedor');
 
        } catch (\Exception $e) {
             $this->msg_toast['title'] = 'Erro!';

@@ -16,5 +16,13 @@ $(function(){
         window.open(route);
     });
 
+    Livewire.on('openModal',(id) => {
+        $('#'+id).modal('show');
+    });
+
+    Livewire.on('closeModal',(id) => {
+        $('#'+id).modal('hide');
+    });
+
 
 });
