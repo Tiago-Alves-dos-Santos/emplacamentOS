@@ -1,4 +1,4 @@
 <div>
     {{-- Success is as dangerous as failure. --}}
-    Clietnes aq
+    <livewire:components.cliente.table>
 </div>
