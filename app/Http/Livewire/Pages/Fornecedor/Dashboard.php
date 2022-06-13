@@ -8,6 +8,8 @@ class Dashboard extends Component
 {
     public function render()
     {
-        return view('livewire.pages.fornecedor.dashboard');
+        return view('livewire.pages.fornecedor.dashboard')
+        ->extends('layouts.admin', ['page_active' => 'fornecedor.dashboard'])
+        ->section('conteudo');
     }
 }

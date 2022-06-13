@@ -27,6 +27,9 @@ div{
     height: 30px;
     width: 30px;
 }
+.rotate{
+    animation: is-rotating 1s infinite;
+}
 
 input{
     text-transform: uppercase;

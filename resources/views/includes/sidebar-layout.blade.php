@@ -38,8 +38,8 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Clientes</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item @if ($page_active == 'fornecedor.dashboard') active @endif">
+        <a class="nav-link" href="{{route('view.fornecedor.dashboard')}}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Fornecedores</span></a>
     </li>

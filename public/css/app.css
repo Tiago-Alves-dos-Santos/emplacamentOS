@@ -11191,6 +11191,11 @@ div {
   width: 30px;
 }
 
+.rotate {
+  -webkit-animation: is-rotating 1s infinite;
+          animation: is-rotating 1s infinite;
+}
+
 input {
   text-transform: uppercase;
 }
