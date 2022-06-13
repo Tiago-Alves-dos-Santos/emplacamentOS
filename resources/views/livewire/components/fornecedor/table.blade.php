@@ -26,9 +26,13 @@
                                     <a class="btn btn-outline-success" wire:click='setID({{$value->id}})'>
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <a href="" class="btn btn-outline-danger ml-2">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                        <i class="fa-solid fa-spinner rotate"></i>
+                                    <a class="btn btn-outline-danger ml-2" wire:click='excluir({{$value->id}})' wire:loading.attr="disabled">
+                                        <div wire:loading.remove wire:target="excluir({{$value->id}})">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </div>
+                                        <div wire:loading wire:target="excluir({{$value->id}})">
+                                            <i class="fa-solid fa-spinner rotate"></i>
+                                        </div>
                                     </a>
                                 </td>
                             </tr>

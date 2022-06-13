@@ -17,6 +17,12 @@ class Table extends Component
         $this->emit('openModal', 'editarFornecedor');
     }
 
+    public function excluir($id)
+    {
+        Fornecedor::where('id', $id)->delete();
+        $this->emit('fornecedor-table-reload');
+    }
+
     public function render()
     {
         return view('livewire.components.fornecedor.table',[

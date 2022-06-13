@@ -30,17 +30,17 @@
 
     <li class="nav-item @if($page_active == 'user.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.user.dashboard')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
+            <i class="fa-solid fa-user"></i>
             <span>Usuários</span></a>
     </li>
     <li class="nav-item @if ($page_active == 'cliente.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.cliente.dashboard')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
+            <i class="fa-solid fa-user"></i>
             <span>Clientes</span></a>
     </li>
     <li class="nav-item @if ($page_active == 'fornecedor.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.fornecedor.dashboard')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
+            <i class="fa-solid fa-user"></i>
             <span>Fornecedores</span></a>
     </li>
     <div class="sidebar-heading">
