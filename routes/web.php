@@ -8,6 +8,7 @@ use App\Http\Livewire\Pages\Usuarios\Update as UserUpdate;
 use App\Http\Livewire\Pages\Cliente\Create as ClienteCreate;
 use App\Http\Livewire\Pages\Cliente\Update as ClienteUpdate;
 use App\Http\Livewire\Pages\Cliente\Dashboard as ClienteDashboard;
+use App\Http\Livewire\Pages\Servico\Dashboard as ServicoDashboard;
 use App\Http\Livewire\Pages\Usuarios\Dashboard as  UsuarioDashboard;
 use App\Http\Livewire\Pages\Fornecedor\Dashboard as FornecedorDashboard;
 
@@ -35,3 +36,5 @@ Route::get('/cliente/create',  ClienteCreate::class)->name('view.cliente.create'
 Route::get('/cliente/edit/{id}',  ClienteUpdate::class)->name('view.cliente.update');
 //fornecedores
 Route::get('/fornecedor/dashboard',  FornecedorDashboard::class)->name('view.fornecedor.dashboard');
+//serviços
+Route::get('/servicos/dashboard', ServicoDashboard::class)->name('view.servico.dashboard');
