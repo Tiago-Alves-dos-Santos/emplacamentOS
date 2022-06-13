@@ -3,11 +3,12 @@
 use App\Http\Livewire\Pages\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Pages\Dashboard;
-use App\Http\Livewire\Pages\Cliente\Create as UserCreate;
+use App\Http\Livewire\Pages\Usuarios\Create as UserCreate;
 use App\Http\Livewire\Pages\Usuarios\Update as UserUpdate;
+use App\Http\Livewire\Pages\Cliente\Create as ClienteCreate;
+use App\Http\Livewire\Pages\Cliente\Update as ClienteUpdate;
 use App\Http\Livewire\Pages\Cliente\Dashboard as ClienteDashboard;
 use App\Http\Livewire\Pages\Usuarios\Dashboard as  UsuarioDashboard;
-use App\Http\Livewire\Components\Cliente\FormCreate as ClienteCreate;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,5 @@ Route::get('/usuario/create',  UserCreate::class)->name('view.user.create');
 Route::get('/usuario/edit/{id}',  UserUpdate::class)->name('view.user.update');
 
 Route::get('/cliente/dashboard',  ClienteDashboard::class)->name('view.cliente.dashboard');
-Route::get('/cliente/create',  UserCreate::class)->name('view.cliente.create');
+Route::get('/cliente/create',  ClienteCreate::class)->name('view.cliente.create');
+Route::get('/cliente/edit/{id}',  ClienteUpdate::class)->name('view.cliente.update');

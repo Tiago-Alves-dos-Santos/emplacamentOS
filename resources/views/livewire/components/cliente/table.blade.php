@@ -34,7 +34,9 @@
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                      <a href="" class="dropdown-item" type="button">
+                                      <a href="{{route('view.cliente.update', [
+                                        'id' => $value->id
+                                      ])}}" class="dropdown-item" type="button">
                                         Editar
                                      </a>
                                       {{-- <a class="dropdown-item" type="button" wire:click='updateStatus({{$value->id}})'>{{($value->active == 'Y')?'Desativar':'Ativar'}}</a> --}}
