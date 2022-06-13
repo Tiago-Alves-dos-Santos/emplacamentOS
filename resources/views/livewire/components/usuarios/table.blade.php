@@ -45,7 +45,11 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                              <a href="" class="dropdown-item" type="button">Editar</a>
+                              <a href="{{route('view.user.update', [
+                                'id' => $value->id
+                              ])}}" class="dropdown-item" type="button">
+                                Editar
+                             </a>
                               <a href="" class="dropdown-item" type="button">Desabilitar</a>
                             </div>
                           </div>

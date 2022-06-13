@@ -11190,3 +11190,11 @@ div {
   height: 30px;
   width: 30px;
 }
+
+input {
+  text-transform: uppercase;
+}
+
+input[type=email], input[type=password], input.font-normal {
+  text-transform: none;
+}

@@ -56,9 +56,7 @@
                     <div class="col-md-12 d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary d-flex">
                             SALVAR
-                            <div class="spinner-border text-danger" role="status" wire:loading>
-                                <span class="sr-only">Loading...</span>
-                            </div>
+                            <div class="loader ml-2" wire:loading></div>
                         </button>
                     </div>
                 </div>

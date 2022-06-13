@@ -22,7 +22,7 @@ class FormCreate extends Component
     ];
     public $limpa = '';
     protected $listeners = [
-        'cliente-reload' => '$refresh',
+        //'cliente-reload' => '$refresh',
     ];
     protected $rules = [
         'nome' => 'required|min:5',
