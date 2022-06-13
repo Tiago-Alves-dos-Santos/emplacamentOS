@@ -19,16 +19,24 @@
                         <th style="width: 20%">Ações</th>
                     </thead>
                     <tbody>
-                        <td>Nome</td>
-                        <td class="d-flex">
-                            <a href="" class="btn btn-outline-success">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                            <a href="" class="btn btn-outline-danger ml-2">
-                                <i class="fa-solid fa-trash-can"></i>
-                                <i class="fa-solid fa-spinner rotate"></i>
-                            </a>
-                        </td>
+                        @forelse ($fornecedores as $value)
+                            <tr>
+                                <td>{{$value->nome}}</td>
+                                <td class="d-flex">
+                                    <a href="" class="btn btn-outline-success">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="" class="btn btn-outline-danger ml-2">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                        <i class="fa-solid fa-spinner rotate"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center">N/A</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -36,7 +44,7 @@
     </div>
 
     <x-modal id="cadastrarFornecedor" titulo='Novo fornecedor'>
-
+        <livewire:components.fornecedor.form-create>
     </x-modal>
 
     <x-modal id="editarFornecedor" titulo='Atualizar fornecedor'>
