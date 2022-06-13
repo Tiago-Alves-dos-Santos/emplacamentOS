@@ -1,4 +1,4 @@
 <div>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
-     Ola cliente {{$client_id}}
+    <livewire:components.cliente.form-update :id='$client_id'>
 </div>

@@ -35,7 +35,7 @@ class FormCreate extends Component
 
     public function createCliente()
     {
-        //$this->validate();
+       $this->validate();
        try {
             Cliente::create([
                 'nome' => mb_strtoupper($this->nome),
