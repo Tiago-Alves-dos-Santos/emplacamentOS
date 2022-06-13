@@ -23,7 +23,7 @@
                             <tr>
                                 <td>{{$value->nome}}</td>
                                 <td class="d-flex">
-                                    <a href="" class="btn btn-outline-success">
+                                    <a class="btn btn-outline-success" wire:click='setID({{$value->id}})'>
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                     <a href="" class="btn btn-outline-danger ml-2">
@@ -48,6 +48,6 @@
     </x-modal>
 
     <x-modal id="editarFornecedor" titulo='Atualizar fornecedor'>
-
+        <livewire:components.fornecedor.form-update>
     </x-modal>
 </div>
