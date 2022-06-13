@@ -9,26 +9,27 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('includes.sidebar-layout')
+        @include('includes.sidebar-layout', ['page_active' => $page_active])
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" >
 
                 <!-- Topbar -->
                 @include('includes.navbar-layout')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div style="padding: 10px">
 
                     <!-- Page Heading -->
                     @yield('conteudo')
 
                 </div>
+
                 <!-- /.container-fluid -->
 
             </div>
@@ -74,7 +75,7 @@
             </div>
         </div>
     </div>
-
+    @stack('scripts')
    @include('includes.footer')
 </body>
 

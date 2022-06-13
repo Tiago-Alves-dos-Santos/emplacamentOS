@@ -21,6 +21,7 @@ class CreateClientesTable extends Migration
             $table->integer('numero')->nullable();
             $table->string('bairro')->nullable();
             $table->text('complemento')->nullable();
+            $table->string('telefone', 50)->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

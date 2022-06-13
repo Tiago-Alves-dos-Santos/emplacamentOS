@@ -1,8 +1,44 @@
 @import "variables.scss";
 
 @import "~bootstrap/scss/bootstrap.scss";
-@import "layout/sb-admin.scss";
+@import "layouts/sb-admin.scss";
 *{
     margin: 0;
+    padding: 0;
     position: relative;
 }
+body{
+    overflow-x: hidden;
+}
+div{
+    position: relative;
+    box-sizing: border-box;
+}
+@keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+    }
+}
+.loader {
+    animation: is-rotating 1s infinite;
+    border: 6px solid #e5e5e5;
+    border-radius: 50%;
+    border-top-color: red;
+    height: 30px;
+    width: 30px;
+}
+.rotate{
+    animation: is-rotating 1s infinite;
+}
+
+input{
+    text-transform: uppercase;
+}
+input[type='email'], input[type='password'], input.font-normal{
+    text-transform: none;
+}
+
+table thead th{
+    text-transform: uppercase;
+}
+

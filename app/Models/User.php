@@ -38,4 +38,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function verificarEmail($email, $action = 'create', $id = 0)
+    {
+        switch ($action) {
+            case 'create':
+                return User::where('email',$email)->exists();
+                break;
+            case 'update':
+                return User::where('id','!=',$id)
+                ->where('email',$email)
+                ->exists();
+                    break;
+            default:
+                throw new \Exception("Opção de parametro 'action' inválida!");
+                break;
+        }
+    }
 }

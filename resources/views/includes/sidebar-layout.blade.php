@@ -14,8 +14,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item @if($page_active == 'home') active @endif">
+        <a class="nav-link" href="{{route('home')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -28,19 +28,19 @@
         Pessoal
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+    <li class="nav-item @if($page_active == 'user.dashboard') active @endif">
+        <a class="nav-link" href="{{route('view.user.dashboard')}}">
+            <i class="fa-solid fa-user"></i>
             <span>Usuários</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+    <li class="nav-item @if ($page_active == 'cliente.dashboard') active @endif">
+        <a class="nav-link" href="{{route('view.cliente.dashboard')}}">
+            <i class="fa-solid fa-user"></i>
             <span>Clientes</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+    <li class="nav-item @if ($page_active == 'fornecedor.dashboard') active @endif">
+        <a class="nav-link" href="{{route('view.fornecedor.dashboard')}}">
+            <i class="fa-solid fa-user"></i>
             <span>Fornecedores</span></a>
     </li>
     <div class="sidebar-heading">
