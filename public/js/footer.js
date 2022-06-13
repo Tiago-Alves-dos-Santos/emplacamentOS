@@ -3,6 +3,8 @@ $(function(){
     $('.mask-cpf').mask('000.000.000-00');
     //mascar money de milhoes
     $('.mask-money').mask('000.000.000,00', {reverse:true});
+    //celular
+    $('.mask-celular').mask('(00) 00000-0000');
     /** Fim mascaras */
 
     //livewire globals
