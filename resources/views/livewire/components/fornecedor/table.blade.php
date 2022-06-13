@@ -5,9 +5,9 @@
             <input type="search" class="form-control" placeholder="PESQUISAR">
         </div>
         <div class="col-md">
-            <a href="{{route('view.cliente.create')}}" class="btn btn-info d-block">
+            <button type="button" href="" class="btn btn-info d-block" data-toggle="modal" data-target="#cadastrarFornecedor">
                 ADICIONAR
-            </a>
+            </button>
         </div>
     </div>
     <div class="row">
@@ -34,4 +34,12 @@
             </div>
         </div>
     </div>
+
+    <x-modal id="cadastrarFornecedor" titulo='Novo fornecedor'>
+
+    </x-modal>
+
+    <x-modal id="editarFornecedor" titulo='Atualizar fornecedor'>
+
+    </x-modal>
 </div>
