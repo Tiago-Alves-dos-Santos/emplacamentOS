@@ -13,7 +13,7 @@ class Table extends Component
 
     public function setTaxa($id)
     {
-        //$this->emit('servico.form-update.setServico', $id);
+        $this->emit('taxa.form-update.setTaxa', $id);
 
     }
     public function render()

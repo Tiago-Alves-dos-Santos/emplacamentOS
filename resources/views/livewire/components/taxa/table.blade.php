@@ -61,6 +61,6 @@
     </x-modal>
 
     <x-modal id="atualizarTaxa" titulo="Ajustar taxa">
-
+        <livewire:components.taxa.form-update>
     </x-modal>
 </div>
