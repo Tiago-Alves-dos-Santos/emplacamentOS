@@ -43,6 +43,9 @@
                                         <i class="fa-solid fa-spinner rotate"></i>
                                     </div>
                                 </a>
+                                <a href="" class="btn btn-outline-info ml-2">
+                                    TAXAS
+                                </a>
                             </td>
                         </tr>
                         @empty
