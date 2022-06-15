@@ -10,6 +10,13 @@ class Table extends Component
     protected $listeners = [
         'servico-table-reload' => '$refresh',
     ];
+
+    public function setServico($id)
+    {
+        $this->emit('servico.form-update.setServico', $id);
+
+    }
+
     public function render()
     {
         return view('livewire.components.servico.table',[

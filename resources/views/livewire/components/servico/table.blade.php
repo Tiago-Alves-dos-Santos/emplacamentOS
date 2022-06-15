@@ -15,7 +15,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
-                        <th>Nome</th>
+                        <th>Serviço</th>
                         <th>Tipo</th>
                         <th>Valor</th>
                         <th style="width: 20%">Ações</th>
@@ -35,8 +35,13 @@
                             @endif
                             <td>{{Configuracao::getDbMoney($value->valor)}}</td>
                             <td class="d-flex">
-                                <a class="btn btn-outline-success" wire:click=''>
-                                    <i class="fa-solid fa-pen-to-square"></i>
+                                <a class="btn btn-outline-success" wire:click='setServico({{$value->id}})'>
+                                    <div wire:loading.remove wire:target="setServico({{$value->id}})">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </div>
+                                    <div wire:loading wire:target="setServico({{$value->id}})">
+                                        <i class="fa-solid fa-spinner rotate"></i>
+                                    </div>
                                 </a>
                             </td>
                         </tr>
@@ -53,5 +58,9 @@
 
     <x-modal id="cadastrarServico" titulo="Novo serviço">
         <livewire:components.servico.form-create>
+    </x-modal>
+
+    <x-modal id="atualizarServico" titulo="Ajustar serviço">
+        <livewire:components.servico.form-update>
     </x-modal>
 </div>
