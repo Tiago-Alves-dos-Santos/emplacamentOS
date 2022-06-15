@@ -50,6 +50,10 @@ function moneyRule(campo) {
     campo.value = campo.value.replace(/[^0-9 .,]/g,'');
 }
 
+function moneyRulePhp(campo) {
+    campo.value = campo.value.replace(/[^0-9 .]/g,'');
+}
+
 /*****************************************FULLSCREEN*******************************************/
 function GoInFullscreen() {
     var element = document.documentElement;

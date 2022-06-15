@@ -18,6 +18,8 @@ class Taxa extends Model
 
     public function servicos()
     {
-        return $this->belongsToMany(Servico::class,'servico_taxas')->as('servico_taxas');
+        return $this->belongsToMany(Servico::class,'servico_taxas')->as('servico_taxas')
+        ->withPivot(['valor_taxa'])
+    	->withTimestamps();
     }
 }

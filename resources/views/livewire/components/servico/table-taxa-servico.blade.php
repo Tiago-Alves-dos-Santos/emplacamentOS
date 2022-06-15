@@ -21,7 +21,7 @@
                         <span class="badge badge-info badge-pill">VARIÁVEL</span>
                     </td>
                     @endif
-                    <td>{{Configuracao::getDbMoney($value->valor)}}</td>
+                    <td>{{Configuracao::getDbMoney($value->servico_taxas->valor_taxa)}}</td>
                     <td class="d-flex">
                         <a class="btn btn-outline-success" wire:click='setServico({{$value->id}})'>
                             <div wire:loading.remove wire:target="setServico({{$value->id}})">
