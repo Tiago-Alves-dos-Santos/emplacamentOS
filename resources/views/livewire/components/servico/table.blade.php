@@ -18,10 +18,18 @@
                         <th>Serviço</th>
                         <th>Tipo</th>
                         <th>Valor</th>
+                        <th>Taxas</th>
                         <th style="width: 20%">Ações</th>
                     </thead>
                     <tbody>
                         @forelse ($servicos as $value)
+                        @php
+                            $total_taxas = 0;
+                            foreach ($value->taxas as $value_taxa){
+                                $total_taxas += $value_taxa->servico_taxas->valor_taxa;
+                            }
+
+                        @endphp
                         <tr>
                             <td>{{$value->nome}}</td>
                             @if ($value->valor_type == 'fixo')
@@ -34,6 +42,7 @@
                             </td>
                             @endif
                             <td>{{Configuracao::getDbMoney($value->valor)}}</td>
+                            <td class="@if($total_taxas > 0) text-danger @endif">{{Configuracao::getDbMoney($total_taxas)}}</td>
                             <td class="d-flex">
                                 <a class="btn btn-outline-success" wire:click='setServico({{$value->id}})'>
                                     <div wire:loading.remove wire:target="setServico({{$value->id}})">

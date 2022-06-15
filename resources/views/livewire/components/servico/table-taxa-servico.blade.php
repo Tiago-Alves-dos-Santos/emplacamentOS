@@ -23,9 +23,9 @@
                     @endif
                     <td>{{Configuracao::getDbMoney($value->servico_taxas->valor_taxa)}}</td>
                     <td class="d-flex">
-                        <a class="btn btn-outline-success" wire:click='setServico({{$value->id}})'>
+                        <a href="" class="btn btn-outline-danger">
                             <div wire:loading.remove wire:target="setServico({{$value->id}})">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-trash-can"></i>
                             </div>
                             <div wire:loading wire:target="setServico({{$value->id}})">
                                 <i class="fa-solid fa-spinner rotate"></i>
