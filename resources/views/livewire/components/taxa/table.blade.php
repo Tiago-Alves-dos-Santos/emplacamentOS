@@ -56,8 +56,8 @@
         </div>
     </div>
 
-    <x-modal id="cadastrarTaxa" titulo="Novo taxa">
-
+    <x-modal id="cadastrarTaxa" titulo="Nova taxa">
+        <livewire:components.taxa.form-create>
     </x-modal>
 
     <x-modal id="atualizarTaxa" titulo="Ajustar taxa">
