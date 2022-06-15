@@ -2,7 +2,7 @@
     {{-- Be like water. --}}
     <div class="row">
         <div class="col-md-12">
-            <form method="POST" wire:submit.prevent='cadastrar'>
+            <form method="POST" wire:submit.prevent='atualizar'>
                 <div class="form-row">
                     <div class="col-md-12">
                         <label for="">Serviço</label>
@@ -16,7 +16,7 @@
                           <label class="custom-control-label pointer" for="radio1">FIXO</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                          <input type="radio" id="radio2" name="type" value="variavel" class="custom-control-input pointer type-service-update" required wire:model.defer='valor_type'>
+                          <input type="radio" id="radio2" name="type" value="variavel" class="custom-control-input pointer type-service-update" required wire:model.defer='valor_type' wire:click="$set('valor', 0)">
                           <label class="custom-control-label pointer" for="radio2">VARIÁVEL</label>
                         </div>
                     </div>
@@ -48,10 +48,10 @@
                     $("#valor-update").prop('required', true);
                     $("#valor-update").prop('readonly', false);
                     $("#valor-update").trigger('focus');
+                    $("#valor-update").val("");
                 }else if(value == "variavel"){
                     $("#valor-update").removeAttr('required');
                     $("#valor-update").prop('readonly', true);
-                    $("#valor-update").val("");
                 }
             });
         </script>

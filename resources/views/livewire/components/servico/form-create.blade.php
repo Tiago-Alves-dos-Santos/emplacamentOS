@@ -47,11 +47,12 @@
                 if(value == 'fixo'){
                     $("#valor").prop('required', true);
                     $("#valor").prop('readonly', false);
+                    $("#valor").val("");
                     $("#valor").trigger('focus');
                 }else if(value == "variavel"){
                     $("#valor").removeAttr('required');
                     $("#valor").prop('readonly', true);
-                    $("#valor").val("");
+                    $("#valor").val(0);
                 }
             });
         </script>
