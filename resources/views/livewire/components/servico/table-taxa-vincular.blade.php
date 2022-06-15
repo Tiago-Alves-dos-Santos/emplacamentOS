@@ -9,12 +9,6 @@
                 <th style="width: 20%">Ações</th>
             </thead>
             <tbody>
-                <tr style="visibility: hidden">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
                 @forelse ($taxas as $value)
                 <tr>
                     <td>{{$value->nome}}</td>
@@ -28,9 +22,8 @@
                         <span class="badge badge-info badge-pill">VARIÁVEL</span>
                     </td>
                     <td>
-
                         <input type="text" class="form-control" placeholder="R$ 0,00" wire:model.lazy='valor_taxa.{{$loop->index}}'
-                        wire:change='converToMoney({{$loop->index}})' onkeyup="moneyRulePhp(this)">
+                         onkeyup="moneyMask(this)">
                     </td>
                     @endif
 

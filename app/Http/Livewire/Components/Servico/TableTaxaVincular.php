@@ -32,16 +32,6 @@ class TableTaxaVincular extends Component
         $this->servico_id = $servico_id;
     }
 
-    public function converToMoney($index_array)
-    {
-
-        $valor = $this->valor_taxa[$index_array];
-        if(!empty($valor)){
-            $this->valor_taxa[$index_array] = Configuracao::getDbMoney($valor);
-        }
-
-    }
-
     public function vincular($servico_id, $taxa_id,$index_taxa)
     {
         $taxa = Taxa::find($taxa_id);
@@ -55,7 +45,7 @@ class TableTaxaVincular extends Component
                 'valor_taxa' => (Configuracao::convertToMoney(empty($taxa->valor)?$this->valor_taxa[$index_taxa]:$taxa->valor))
             ]);
             //$this->valor_taxa[$index_taxa] = "";
-            $this->resetExcept(['limpa','valor_taxa','servico_id']);
+            $this->resetExcept(['limpa','servico_id']);
             $this->emit('servico.table-taxa-vincular.reload');
             $this->emit('servico.table-taxa-servico.reload');
         } catch (\Exception $e) {

@@ -42,6 +42,21 @@ function showQuestionYesNo(title,question_data, callback,color='dark'){
     });
 }
 
+function moneyMask(campo) {
+    let value = campo.value;
+    value = value.replace('.', '').replace(',', '').replace(/\D/g, '')
+
+    const options = { minimumFractionDigits: 2 }
+    const result = new Intl.NumberFormat('pt-BR', options).format(
+        parseFloat(value) / 100
+    )
+    if(!campo.value){
+        campo.value = "";
+    }else{
+        campo.value = result;
+    }
+}
+
 function soletras(campo) {
     campo.value = campo.value.replace(/[^a-zA-Z ]/g,'');
 }
