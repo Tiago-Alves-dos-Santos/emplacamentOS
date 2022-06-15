@@ -1,5 +1,5 @@
 <div>
-    {{-- Be like water. --}}
+    {{-- Care about people's approval and you will be their prisoner. --}}
     <div class="row">
         <div class="col-md-12">
             <form method="POST" wire:submit.prevent='atualizar'>

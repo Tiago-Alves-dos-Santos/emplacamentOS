@@ -3,11 +3,14 @@
 use App\Http\Livewire\Pages\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Pages\Dashboard;
+use App\Http\Livewire\Pages\Servico\TaxasVincular;
 use App\Http\Livewire\Pages\Usuarios\Create as UserCreate;
 use App\Http\Livewire\Pages\Usuarios\Update as UserUpdate;
 use App\Http\Livewire\Pages\Cliente\Create as ClienteCreate;
 use App\Http\Livewire\Pages\Cliente\Update as ClienteUpdate;
+use App\Http\Livewire\Pages\Taxa\Dashboard as TaxaDashboard;
 use App\Http\Livewire\Pages\Cliente\Dashboard as ClienteDashboard;
+use App\Http\Livewire\Pages\Servico\Dashboard as ServicoDashboard;
 use App\Http\Livewire\Pages\Usuarios\Dashboard as  UsuarioDashboard;
 use App\Http\Livewire\Pages\Fornecedor\Dashboard as FornecedorDashboard;
 
@@ -35,3 +38,8 @@ Route::get('/cliente/create',  ClienteCreate::class)->name('view.cliente.create'
 Route::get('/cliente/edit/{id}',  ClienteUpdate::class)->name('view.cliente.update');
 //fornecedores
 Route::get('/fornecedor/dashboard',  FornecedorDashboard::class)->name('view.fornecedor.dashboard');
+//serviços
+Route::get('/servicos/dashboard', ServicoDashboard::class)->name('view.servico.dashboard');
+Route::get('/servicos/vincular-taxa/{servico_id}', TaxasVincular::class)->name('view.servico.vincular-taxas');
+//taxa
+Route::get('/taxa/dashboard', TaxaDashboard::class)->name('view.taxa.dashboard');

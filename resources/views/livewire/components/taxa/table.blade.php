@@ -1,11 +1,11 @@
 <div>
-    {{-- Stop trying to control. --}}
+    {{-- Do your work, then step back. --}}
     <div class="row mb-3">
         <div class="col-md-11">
             <input type="search" class="form-control" placeholder="PESQUISAR">
         </div>
         <div class="col-md">
-            <button type="button" href="" class="btn btn-info d-block" data-toggle="modal" data-target="#cadastrarServico">
+            <button type="button" href="" class="btn btn-info d-block" data-toggle="modal" data-target="#cadastrarTaxa">
                 ADICIONAR
             </button>
         </div>
@@ -15,21 +15,13 @@
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
-                        <th>Serviço</th>
+                        <th>Taxa</th>
                         <th>Tipo</th>
                         <th>Valor</th>
-                        <th>Taxas</th>
                         <th style="width: 20%">Ações</th>
                     </thead>
                     <tbody>
-                        @forelse ($servicos as $value)
-                        @php
-                            $total_taxas = 0;
-                            foreach ($value->taxas as $value_taxa){
-                                $total_taxas += $value_taxa->servico_taxas->valor_taxa;
-                            }
-
-                        @endphp
+                        @forelse ($taxas as $value)
                         <tr>
                             <td>{{$value->nome}}</td>
                             @if ($value->valor_type == 'fixo')
@@ -42,20 +34,14 @@
                             </td>
                             @endif
                             <td>{{Configuracao::getDbMoney($value->valor)}}</td>
-                            <td class="@if($total_taxas > 0) text-danger @endif">{{Configuracao::getDbMoney($total_taxas)}}</td>
                             <td class="d-flex">
-                                <a class="btn btn-outline-success" wire:click='setServico({{$value->id}})'>
-                                    <div wire:loading.remove wire:target="setServico({{$value->id}})">
+                                <a class="btn btn-outline-success" wire:click='setTaxa({{$value->id}})'>
+                                    <div wire:loading.remove wire:target="setTaxa({{$value->id}})">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </div>
-                                    <div wire:loading wire:target="setServico({{$value->id}})">
+                                    <div wire:loading wire:target="setTaxa({{$value->id}})">
                                         <i class="fa-solid fa-spinner rotate"></i>
                                     </div>
-                                </a>
-                                <a href="{{route('view.servico.vincular-taxas', [
-                                    'servico_id' => $value->id
-                                ])}}" class="btn btn-outline-info ml-2">
-                                    TAXAS
                                 </a>
                             </td>
                         </tr>
@@ -70,11 +56,11 @@
         </div>
     </div>
 
-    <x-modal id="cadastrarServico" titulo="Novo serviço">
-        <livewire:components.servico.form-create>
+    <x-modal id="cadastrarTaxa" titulo="Nova taxa">
+        <livewire:components.taxa.form-create>
     </x-modal>
 
-    <x-modal id="atualizarServico" titulo="Ajustar serviço">
-        <livewire:components.servico.form-update>
+    <x-modal id="atualizarTaxa" titulo="Ajustar taxa">
+        <livewire:components.taxa.form-update>
     </x-modal>
 </div>

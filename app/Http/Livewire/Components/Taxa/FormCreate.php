@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Components\Servico;
+namespace App\Http\Livewire\Components\Taxa;
 
-use App\Models\Servico;
+use App\Models\Taxa;
 use Livewire\Component;
 use App\Http\Classes\Configuracao;
 
@@ -23,11 +23,10 @@ class FormCreate extends Component
     protected $listeners = [
         //'cliente-reload' => '$refresh',
     ];
-
     public function cadastrar()
     {
         try {
-            Servico::create([
+            Taxa::create([
                 'nome' => mb_strtoupper($this->nome),
                 'valor_type' => $this->valor_type,
                 'valor' => (empty($this->valor)?0:Configuracao::convertToMoney($this->valor))
@@ -37,8 +36,8 @@ class FormCreate extends Component
             $this->msg_toast['type'] = $this->toast_type['success'];
             $this->emit('showToast', $this->msg_toast);
             $this->resetExcept(['limpa']);
-            $this->emit('servico-table-reload');
-            $this->emit('closeModal', 'cadastrarServico');
+            $this->emit('taxa-table-reload');
+            $this->emit('closeModal', 'cadastrarTaxa');
 
        } catch (\Exception $e) {
             $this->msg_toast['title'] = 'Erro!';
@@ -49,6 +48,6 @@ class FormCreate extends Component
     }
     public function render()
     {
-        return view('livewire.components.servico.form-create');
+        return view('livewire.components.taxa.form-create');
     }
 }
