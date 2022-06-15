@@ -43,7 +43,9 @@
                                         <i class="fa-solid fa-spinner rotate"></i>
                                     </div>
                                 </a>
-                                <a href="" class="btn btn-outline-info ml-2">
+                                <a href="{{route('view.servico.vincular-taxas', [
+                                    'servico_id' => $value->id
+                                ])}}" class="btn btn-outline-info ml-2">
                                     TAXAS
                                 </a>
                             </td>
