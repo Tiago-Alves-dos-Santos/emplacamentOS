@@ -30,7 +30,6 @@ class FormCreate extends Component
     protected $rules = [
         'nome' => 'required|min:5',
         'telefone' => 'required|min:13|max:13',
-        'senha' => 'required|min:5'
     ];
 
     public function createCliente()
