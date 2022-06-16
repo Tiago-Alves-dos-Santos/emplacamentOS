@@ -29,7 +29,7 @@
     <script>
         function select2Alpine() {
                 this.select2 = $(this.$refs.select).select2({
-
+                    theme: "bootstrap-5",
                 });
                 this.select2.on("select2:select", (event) => {
                     //this.selectedCliente = Array.from(event.target.options).filter(option => option.selected).map(option => option.value)
