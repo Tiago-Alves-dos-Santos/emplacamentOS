@@ -4,7 +4,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$title ?? 'OSPL'}}</title>
     @livewireStyles()
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     {{-- fonts-do-layout --}}
     <script src="https://kit.fontawesome.com/4ecb736ddb.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">

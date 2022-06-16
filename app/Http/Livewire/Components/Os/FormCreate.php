@@ -8,15 +8,11 @@ use Livewire\Component;
 class FormCreate extends Component
 {
     public $nome = "";
-    public $select = "";
+    public $select = 1;
     protected $listeners = [
        // 'teste-rl' => '$refresh',
     ];
 
-    public function enviar()
-    {
-
-    }
     public function render()
     {
         return view('livewire.components.os.form-create', [
