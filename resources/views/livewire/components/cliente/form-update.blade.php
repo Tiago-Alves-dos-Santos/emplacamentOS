@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="">Celular</label>
-                        <input type="text" name="" id="" class="form-control mask-celular @error('telefone') is-invalid @enderror" wire:model.defer='telefone' required minlength="13" maxlength="13">
+                        <input type="text" name="" id="" class="form-control mask-celular @error('telefone') is-invalid @enderror" wire:model.defer='telefone' required minlength="15" maxlength="15">
                         @error('telefone')
                         <div class="invalid-feedback">
                             {{$message}}
