@@ -13,6 +13,7 @@ class Create extends Component
 {
     public $data = null;
     public $servicos_add = [];
+    public $valor = "";
     protected $listeners = [
         'os.creloadate.reload' => '$refresh',
         'adicionar'
@@ -30,6 +31,7 @@ class Create extends Component
             'servico_id' => $servico_id,
             'valor' => $valor
         ];
+        $this->valor = "";
         $this->emit('os.creloadate.reload');
     }
 

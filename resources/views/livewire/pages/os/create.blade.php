@@ -44,7 +44,7 @@
                         </td>
                         @else
                         <td>
-                            <input type="text" class="form-control" placeholder="R$ 0,00" onkeyup="moneyMask(this)">
+                            <input type="text" class="form-control" placeholder="R$ 0,00" onkeyup="moneyMask(this)" wire:model.defer='valor'>
                         </td>
                         @endif
                         <td class="@if($total_taxas > 0) text-danger @endif">{{Configuracao::getDbMoney($total_taxas)}}</td>
@@ -76,7 +76,7 @@
                 </thead>
                 <tbody>
                     @php
-                        $limit = 1;
+                        $limit = 10;
                         $cont = 1;
                         $page = 1;
                         $visible = true;
