@@ -5,9 +5,6 @@ namespace App\Http\Livewire\Pages\Os;
 use App\Models\Servico;
 use Livewire\Component;
 use App\Http\Classes\Configuracao;
-use Illuminate\Support\Collection;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class Create extends Component
 {
@@ -37,7 +34,17 @@ class Create extends Component
 
     public function remover($servico_id)
     {
-        # code...
+        $i = 0;
+        foreach($this->servicos_add as $value){
+            $value = (object) $value;
+            if($value->servico_id == $servico_id){
+                $this->servicos_add = Configuracao::excluirPosicaoVetor($i,  $this->servicos_add);
+                $this->emit('os.creloadate.reload');
+                break;
+            }
+            $i++;
+        }
+
     }
 
     public function render()

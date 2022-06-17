@@ -52,6 +52,7 @@
                             <a class="btn btn-success ml-2 addServico"
                             data-input="{{$value->valor_type}}"
                             data-servico-id="{{$value->id}}"
+                            onclick="addServico(this)"
                             >
                                 ADICIONAR
                             </a>
@@ -108,8 +109,8 @@
                         </td>
                         <td class="@if($total_taxas > 0) text-danger @endif">{{Configuracao::getDbMoney($total_taxas)}}</td>
                         <td class="d-flex">
-                            <a class="btn btn-success ml-2">
-                                ADICIONAR
+                            <a class="btn btn-outline-danger ml-2" wire:click='remover({{$value->id}})'>
+                                <i class="fa-solid fa-xmark"></i>
                             </a>
                         </td>
                     </tr>
@@ -146,22 +147,21 @@
     @push('scripts')
         <script>
 
-
-            $(".addServico").on('click', function (e){
-                let servico_id = $(this).attr('data-servico-id');
-                let is_input = $(this).attr('data-input');
+            function addServico(btn){
+                let servico_id = $(btn).attr('data-servico-id');
+                let is_input = $(btn).attr('data-input');
                 let valor_input = 0;
                 if(is_input != 'fixo'){
-                    valor_input = $(this).parents('tr').find('input').val();
+                    valor_input = $(btn).parents('tr').find('input').val();
                 }else{
-                    valor_input = $(this).parents('tr').find('td.valor-fixo').html()
+                    valor_input = $(btn).parents('tr').find('td.valor-fixo').html()
                 }
                 if(is_input != 'fixo' && valor_input == "" || valor_input <= 0){
-                    $(this).parents('tr').find('input').addClass('is-invalid');
+                    $(btn).parents('tr').find('input').addClass('is-invalid');
                 }else{
                     Livewire.emit('adicionar', servico_id, valor_input);
                 }
-            });
+            }
 
             function paginate(campo,table){
                 // e.preventDefault();

@@ -68,6 +68,27 @@ class Configuracao
         return number_format($money, 2 ,',','.');
     }
 
+    public static function excluirPosicaoVetor($posicao_excuir, $vetor) {
+        if ($posicao_excuir >= count($vetor) || $posicao_excuir < 0) {
+            echo "<br>Posição ".$posicao_excuir." invalida digite uma posição de 0 a ".(count($vetor) - 1)."<br>";
+            return $vetor;
+        } else if ($posicao_excuir === (count($vetor) - 1)) {
+            unset($vetor[$posicao_excuir]);
+            return $vetor;
+        } else {
+            for ($i = $posicao_excuir; $i < count($vetor); $i++) {
+                $j = $i;
+                if ($i === (count($vetor) - 1)) {
+                    unset($vetor[$i]);
+                } else {
+                    $vetor[$i] = $vetor[++$j];
+                }
+            }
+            return $vetor;
+        }
+    }
+
+
     public static function validarCPF($cpf)
     {
         // Verifica se um número foi informado
