@@ -1,10 +1,10 @@
 <div>
     {{-- Stop trying to control. --}}
     <div class="row mb-3">
-        <div class="col-md-11">
+        <div class="col-md-12 order-sm-last">
             <input type="search" class="form-control" placeholder="PESQUISAR">
         </div>
-        <div class="col-md">
+        <div class="col-md-12 d-flex justify-content-end mt-sm-2 mb-sm-2">
             <button type="button" href="" class="btn btn-info d-block" data-toggle="modal" data-target="#cadastrarServico">
                 ADICIONAR
             </button>
