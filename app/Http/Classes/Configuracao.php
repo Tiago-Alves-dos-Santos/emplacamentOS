@@ -70,8 +70,7 @@ class Configuracao
 
     public static function excluirPosicaoVetor($posicao_excuir, $vetor) {
         if ($posicao_excuir >= count($vetor) || $posicao_excuir < 0) {
-            echo "<br>Posição ".$posicao_excuir." invalida digite uma posição de 0 a ".(count($vetor) - 1)."<br>";
-            return $vetor;
+            throw new \Exception("Posição ".$posicao_excuir." invalida digite uma posição de 0 a ".(count($vetor) - 1));
         } else if ($posicao_excuir === (count($vetor) - 1)) {
             unset($vetor[$posicao_excuir]);
             return $vetor;

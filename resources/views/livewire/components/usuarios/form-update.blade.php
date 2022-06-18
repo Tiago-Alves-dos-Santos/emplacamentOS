@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="">Tipo</label>
-                            <select name="" id="" class="custom-select" wire:model.lazy='type'>
+                            <select name="" id="" class="custom-select" wire:model.defer='type'>
                                 <option value="">Selecione</option>
                                 @php
                                     $types = Configuracao::getTypesUser();
