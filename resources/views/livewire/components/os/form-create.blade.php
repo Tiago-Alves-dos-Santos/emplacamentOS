@@ -1,6 +1,6 @@
-<div>
+<div class="cadastro-os">
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-    <form action="">
+    <form method="POST">
         <div class="form-row">
             <div class="col-md-6">
                 <input type="search" wire:model='search_cliente' class="select-search form-control" placeholder="Nome cliente">
@@ -66,16 +66,19 @@
                                     <span class="badge badge-info badge-pill">VARIÁVEL</span>
                                 </td>
                                 @endif
-                                <td>{{Configuracao::getDbMoney($value->valor)}}</td>
+                                @if ($value->valor_type == 'fixo')
+                                <td class="valor-fixo">
+                                    {{Configuracao::getDbMoney($value->valor)}}
+                                </td>
+                                @else
+                                <td>
+                                    <input type="text" class="form-control" placeholder="R$ 0,00" onkeyup="moneyMask(this)">
+                                </td>
+                                @endif
                                 <td class="@if($total_taxas > 0) text-danger @endif">{{Configuracao::getDbMoney($total_taxas)}}</td>
                                 <td class="d-flex">
-                                    <a class="btn btn-outline-success" wire:click='setServico({{$value->id}})'>
-                                        <div wire:loading.remove wire:target="setServico({{$value->id}})">
-                                            <span>ADICIONAR</span>
-                                        </div>
-                                        <div wire:loading wire:target="setServico({{$value->id}})">
-                                            <i class="fa-solid fa-spinner rotate"></i>
-                                        </div>
+                                    <a class="btn btn-outline-success" data-input="{{$value->valor_type}}" data-servico-id="{{$value->id}}" onclick="addServico(this)">
+                                        ADICIONAR
                                     </a>
                                 </td>
                             </tr>
@@ -90,12 +93,68 @@
             </div>
         </div>
 
+        <div class="form-row">
+            <div class="col-md-12 ">
+                <div class="lista-servicos w-100">
+                    <h3 class="text-center">Adicionados</h3>
+                    @forelse ($servicos_lista as $value_array)
+                    @php
+                        $value_array = (object) $value_array;
+                        $value = \App\Models\Servico::find($value_array->servico_id);
+                        $total_taxas = 0;
+                        foreach ($value->taxas as $value_taxa){
+                            $total_taxas += $value_taxa->servico_taxas->valor_taxa;
+                        }
+                    @endphp
+                    <div class="details-servicos shadow">
+                        <h4>{{$value->nome}}</h4>
+                        <ul>
+                            <li>
+                                Valor: {{Configuracao::getDbMoney($value_array->valor)}}
+                            </li>
+                            <li>
+                                Taxas: {{$total_taxas}}
+                            </li>
+                            <li>
+                                Lucros: {{Configuracao::getDbMoney($value_array->valor - $total_taxas)}}
+                            </li>
+                        </ul>
+                    </div>
+                    @empty
+
+                    @endforelse
+                </div>
+
+            </div>
+        </div>
+
         <div class="form-row mt-5">
             <div class="col-md-12 d-flex justify-content-end">
-                <button type="button" class="btn btn-success btn-lg" wire:click='salvar'>
+                <button type="submit" class="btn btn-success btn-lg">
                     SALVAR OS
                 </button>
             </div>
         </div>
     </form>
+
+    @push('scripts')
+        <script>
+            function addServico(campo){
+                let servico_id = $(campo).attr('data-servico-id');
+                let is_input = $(campo).attr('data-input');
+                let valor_input = 0;
+                if(is_input != 'fixo'){
+                    valor_input = $(campo).parents('tr').find('input').val();
+                }else{
+                    valor_input = $(campo).parents('tr').find('td.valor-fixo').html()
+                }
+                if(is_input != 'fixo' && valor_input == "" || valor_input <= 0){
+                    $(campo).parents('tr').find('input').addClass('is-invalid');
+                }else{
+                    Livewire.emit('os.form-create-addLista', servico_id, valor_input);
+                    $("tr").find('input').val("");
+                }
+            }
+        </script>
+    @endpush
 </div>
