@@ -13,10 +13,21 @@ class FormCreate extends Component
     public $search_cliente = "";
     public $search = "";
     public $servicos_add = [];
+    public $taxas_variaveis = [];
+    public $taxa_servico_nome = "";
+    public $taxa_servico_id = "";
+    public $taxa_servico_lista = [];
+    public $taxa_valores = [];
     protected $listeners = [
         'os.form-create.reload' => '$refresh',
-        'os.form-create-addLista' => 'addLista'
+        'os.form-create-addLista' => 'addLista',
+        'os.form-create-addTaxasLista' => 'addTaxasLista'
     ];
+
+    public function mount()
+    {
+        // dd(is_object($this->taxa_servico));
+    }
 
     public function addLista($servico_id, $valor)
     {
@@ -41,6 +52,51 @@ class FormCreate extends Component
             $i++;
         }
         $this->emit('os.form-create.reload');
+    }
+
+    public function addTaxasModal($servico_id)
+    {
+        $servico = Servico::find($servico_id);
+        $this->taxa_servico_nome = $servico->nome;
+        $this->taxa_servico_id = $servico_id;
+        $this->taxas_variaveis = Servico::find($servico_id)->taxas()->where('valor_type','variavel')->get();
+        $this->emit('openModal',"addTaxasVariaveis-$servico_id");
+    }
+
+    public function saveOS()
+    {
+
+    }
+
+    public function addTaxasLista($servico_id,$taxas_ids, $taxas_value)
+    {
+        $atualizar = false;
+        $i=0;
+        foreach($this->taxa_servico_lista as $value){
+            if($value['servico_id'] == $servico_id){
+                $atualizar = true;
+                break;
+            }
+            $i++;
+        }
+        if($atualizar){
+
+            $this->taxa_servico_lista = Configuracao::excluirPosicaoVetor($i, $this->taxa_servico_lista);
+        }
+        $taxas = [];
+        for($i = 0; $i < count($taxas_ids); $i++){
+            $taxas[] = [
+                'id' => $taxas_ids[$i],
+                'valor' => $taxas_value[$i]
+            ];
+        }
+        $this->taxa_servico_lista[] = [
+            'servico_id' => $servico_id,
+            'taxas' => $taxas
+        ];
+
+
+        $this->emit('closeModal',"addTaxasVariaveis-$servico_id");
     }
 
     public function render()

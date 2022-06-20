@@ -102,8 +102,17 @@
                         $value_array = (object) $value_array;
                         $value = \App\Models\Servico::find($value_array->servico_id);
                         $total_taxas = 0;
+                        $is_taxa_variavel = false;
                         foreach ($value->taxas as $value_taxa){
                             $total_taxas += $value_taxa->servico_taxas->valor_taxa;
+                            $is_taxa_variavel = ($value_taxa->valor_type != 'fixo')?true:false;
+                        }
+
+                        $lista_taxas = "";
+
+                        foreach ($taxa_servico_lista as $key => $value_lista_taxa) {
+                            $value_lista_taxa = (object)$value_lista_taxa;
+
                         }
                     @endphp
                     <div class="details-servicos shadow">
@@ -123,6 +132,34 @@
                                 Lucros: <span class="{{$class}}">{{$valor}}</span>
                             </li>
                         </ul>
+
+                        @if ($is_taxa_variavel)
+                        <button type="button" class="btn btn-info" wire:click='addTaxasModal({{$value_array->servico_id}})'>
+                            Taxas variáveis
+                        </button>
+
+                        <x-modal id="addTaxasVariaveis-{{$value_array->servico_id}}" titulo='Adicionar Taxa: {{$taxa_servico_nome}}'>
+                            <input type="hidden" value="{{$taxa_servico_id}}" class="servico_id" wire:model.defer='taxa_servico_id'>
+                            @forelse ($taxas_variaveis as $value)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="">{{$value->nome}} </label>
+                                    <input type="hidden"  class="id_taxas" value="{{$value->id}}">
+                                    <input type="text"  class="form-control values_taxas" onkeyup="moneyMask(this)" placeholder="R$ 0,00">
+                                </div>
+                            </div>
+                            @empty
+
+                            @endforelse
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-info" onclick="addTaxaLista(this)">
+                                        ADICIONAR
+                                    </button>
+                                </div>
+                            </div>
+                        </x-modal>
+                        @endif
 
                         <div class="remove-service" wire:click='removerLista({{$value_array->servico_id}})'>
                             <i class="fa-solid fa-xmark"></i>
@@ -145,8 +182,32 @@
         </div>
     </form>
 
+
+
     @push('scripts')
         <script>
+            function addTaxaLista(campo){
+                let form = $(campo).parents('form');
+                let servico_id = $(form).find('input.servico_id').val();
+                let inputs_ids = $(form).find('input.id_taxas');
+                let inputs = $(form).find('input.values_taxas');
+                let array_ids = [];
+                let array_values = [];
+                $(inputs_ids).each(function( index ) {
+                    //console.log( index + ": " + $( this ).val() );
+                    array_ids.push($(this).val());
+                });
+                $(inputs).each(function( index ) {
+                    //console.log( index + ": " + $( this ).val() );
+                    array_values.push($(this).val())
+                });
+                Livewire.emit('os.form-create-addTaxasLista', servico_id, array_ids, array_values)
+
+                array_ids = [];
+                array_values = [];
+
+            }
+
             function addServico(campo){
                 let servico_id = $(campo).attr('data-servico-id');
                 let is_input = $(campo).attr('data-input');
