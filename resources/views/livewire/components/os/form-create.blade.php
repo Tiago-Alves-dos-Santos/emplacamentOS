@@ -113,12 +113,20 @@
                                 Valor: {{Configuracao::getDbMoney($value_array->valor)}}
                             </li>
                             <li>
-                                Taxas: {{$total_taxas}}
+                                Taxas: {{Configuracao::getDbMoney($total_taxas)}}
                             </li>
                             <li>
-                                Lucros: {{Configuracao::getDbMoney($value_array->valor - $total_taxas)}}
+                                @php
+                                   $valor =  Configuracao::getDbMoney($value_array->valor - $total_taxas);
+                                   $class = ($valor < 0)?'text-danger':'text-success';
+                                @endphp
+                                Lucros: <span class="{{$class}}">{{$valor}}</span>
                             </li>
                         </ul>
+
+                        <div class="remove-service">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
                     </div>
                     @empty
 
