@@ -38,7 +38,7 @@ class TableTaxaVincular extends Component
             ServicoTaxa::create([
                 'servico_id' => $servico_id,
                 'taxa_id' => $taxa_id,
-                'valor_taxa' => Configuracao::convertToMoney($taxa->valor)
+                'valor_taxa' => $taxa->valor
             ]);
             //$this->valor_taxa[$index_taxa] = "";
             $this->resetExcept(['limpa','servico_id']);
