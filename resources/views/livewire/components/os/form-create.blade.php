@@ -124,7 +124,7 @@
                             </li>
                         </ul>
 
-                        <div class="remove-service">
+                        <div class="remove-service" wire:click='removerLista({{$value_array->servico_id}})'>
                             <i class="fa-solid fa-xmark"></i>
                         </div>
                     </div>

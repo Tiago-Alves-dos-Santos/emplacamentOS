@@ -29,6 +29,20 @@ class FormCreate extends Component
         $this->emit('os.form-create.reload');
     }
 
+    public function removerLista($servico_id)
+    {
+        $i = 0;
+        foreach($this->servicos_add as $value){
+            $value = (object) $value;
+            if($value->servico_id == $servico_id){
+                $this->servicos_add = Configuracao::excluirPosicaoVetor($i, $this->servicos_add);
+                break;
+            }
+            $i++;
+        }
+        $this->emit('os.form-create.reload');
+    }
+
     public function render()
     {
         $servico_ids = [];
