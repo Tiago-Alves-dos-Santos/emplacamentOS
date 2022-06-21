@@ -57,10 +57,19 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Taxa</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>OS</span></a>
+    <li class="nav-item @if ($page_active == 'os.create' || $page_active == 'os.dashboard') active @endif">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>OS</span>
+        </a>
+        <div id="collapseTwo" class="collapse @if ($page_active == 'os.create' || $page_active == 'os.dashboard') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Ordens de Serviço</h6>
+                <a class="collapse-item @if ($page_active == 'os.create') active @endif" href="{{route('view.os.create')}}">Nova</a>
+                <a class="collapse-item @if ($page_active == 'os.dashboard') active @endif" href="{{route('view.os.dashboard')}}">Lista</a>
+            </div>
+        </div>
     </li>
     <div class="sidebar-heading">
         Despezas

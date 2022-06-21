@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="">Celular</label>
-                        <input type="text" name="" id="" class="form-control mask-celular @error('telefone') is-invalid @enderror" wire:model.defer='telefone' required minlength="13" maxlength="13">
+                        <input type="text" name="" id="" class="form-control mask-celular @error('telefone') is-invalid @enderror" wire:model.defer='telefone' required minlength="15" maxlength="15">
                         @error('telefone')
                         <div class="invalid-feedback">
                             {{$message}}
@@ -72,9 +72,13 @@
                 </div>
                 <div class="form-row mt-3">
                     <div class="col-md-12 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary d-flex">
+                        <button type="submit" class="btn btn-success d-flex">
                             SALVAR
                             <div class="loader ml-2" wire:loading></div>
+                        </button>
+
+                        <button type="button" class="btn btn-info d-flex ml-2" data-toggle="modal" data-target="#cadastrarVeiculo">
+                            ADICIONAR VEÍCULO
                         </button>
                     </div>
                 </div>

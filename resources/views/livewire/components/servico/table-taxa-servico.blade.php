@@ -3,7 +3,7 @@
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
-                <th>Serviço</th>
+                <th>Taxa</th>
                 <th>Tipo</th>
                 <th>Valor</th>
                 <th style="width: 20%">Ações</th>
@@ -23,11 +23,11 @@
                     @endif
                     <td>{{Configuracao::getDbMoney($value->servico_taxas->valor_taxa)}}</td>
                     <td class="d-flex">
-                        <a href="" class="btn btn-outline-danger">
-                            <div wire:loading.remove wire:target="setServico({{$value->id}})">
-                                <i class="fa-solid fa-trash-can"></i>
+                        <a  class="btn btn-outline-danger" wire:click='desvincular({{$value->servico_taxas->id}})'>
+                            <div wire:loading.remove wire:target="desvincular({{$value->servico_taxas->id}})">
+                                <i class="fa-solid fa-xmark"></i>
                             </div>
-                            <div wire:loading wire:target="setServico({{$value->id}})">
+                            <div wire:loading wire:target="desvincular({{$value->servico_taxas->id}})">
                                 <i class="fa-solid fa-spinner rotate"></i>
                             </div>
                         </a>

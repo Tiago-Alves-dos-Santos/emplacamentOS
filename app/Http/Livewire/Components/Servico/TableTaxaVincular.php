@@ -11,7 +11,6 @@ new Configuracao();
 class TableTaxaVincular extends Component
 {
     public $servico_id = 0;
-    public $valor_taxa = [];
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
         "title" => '',
@@ -32,17 +31,14 @@ class TableTaxaVincular extends Component
         $this->servico_id = $servico_id;
     }
 
-    public function vincular($servico_id, $taxa_id,$index_taxa)
+    public function vincular($servico_id, $taxa_id)
     {
         $taxa = Taxa::find($taxa_id);
-        if(empty($taxa->valor)){
-            $this->validate();
-        }
         try {
             ServicoTaxa::create([
                 'servico_id' => $servico_id,
                 'taxa_id' => $taxa_id,
-                'valor_taxa' => (Configuracao::convertToMoney(empty($taxa->valor)?$this->valor_taxa[$index_taxa]:$taxa->valor))
+                'valor_taxa' => $taxa->valor
             ]);
             //$this->valor_taxa[$index_taxa] = "";
             $this->resetExcept(['limpa','servico_id']);

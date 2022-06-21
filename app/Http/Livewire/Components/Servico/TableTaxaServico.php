@@ -26,6 +26,24 @@ class TableTaxaServico extends Component
     {
         $this->servico_id = $servico_id;
     }
+
+    /**
+     * Undocumented function
+     * id da tabela servico_taxas
+     * @param [int] $id
+     * @return void
+     */
+    public function desvincular($id)
+    {
+        try {
+            ServicoTaxa::where('id', $id)->forceDelete();
+            $this->emit('servico.table-taxa-servico.reload');
+            $this->emit('servico.table-taxa-vincular.reload');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
     public function render()
     {
         return view('livewire.components.servico.table-taxa-servico', [

@@ -52,8 +52,9 @@ class Configuracao
     }
 
 
-    //usado em conjunto com jquery mask com formato money
-    //formato ',' para deciamais '.' para centenas, milhares etc
+    //usado em conjunto com a função maskMoney javascript,
+    //ele convert um formato mascarado em double do php que oq vai pro banco
+    //caso realmente queira um double com casa decimais para calculos, faça -> (double)Configuracao::convertToMoney($valor)
     public static function convertToMoney($money)
     {
         $source = array('.', ',');
@@ -61,12 +62,18 @@ class Configuracao
         return str_replace($source ,$replace,$money);
     }
 
-    //ao pegar valor do banco ele pode vir meio bugado em um campo com jquewry mask
-    //configurado para money
+    //ao pegar um dado do banco usamos o numero format para delimitar os decimais com ','
+    //convert o dado do banco em money
     public static function getDbMoney($money)
     {
         return number_format($money, 2 ,',','.');
     }
+
+    public static function excluirPosicaoVetor($posicao_excuir, $vetor) {
+            unset($vetor[$posicao_excuir]);
+            return array_values($vetor);
+    }
+
 
     public static function validarCPF($cpf)
     {

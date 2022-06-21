@@ -30,7 +30,7 @@ class FormUpdate extends Component
     ];
     protected $rules = [
         'nome' => 'required|min:5',
-        'telefone' => 'required|min:13|max:13',
+        'telefone' => 'required|min:15|max:15',
         'senha' => 'required|min:5'
     ];
     public function mount($id)

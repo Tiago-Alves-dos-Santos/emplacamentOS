@@ -19,7 +19,7 @@ class Taxa extends Model
     public function servicos()
     {
         return $this->belongsToMany(Servico::class,'servico_taxas')->as('servico_taxas')
-        ->withPivot(['valor_taxa'])
+        ->withPivot(['id','valor_taxa'])
     	->withTimestamps();
     }
 }

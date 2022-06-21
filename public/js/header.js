@@ -166,3 +166,10 @@ function timer(hora_id,minute_id,second_id, mlsecond_id) {
     document.getElementById(second_id).innerText = '00';
     //document.getElementById(mlsecond_id).innerText = '000';
   }
+  /****************Converter tabela em array */
+
+  function tableToArray(id){
+    const table = document.getElementById(id)
+    const arr = [...table.rows].map(r => [...r.querySelectorAll('td, th')].map(td => td.textContent))
+    return arr;
+  }
