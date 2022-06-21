@@ -107,12 +107,21 @@
                             $total_taxas += $value_taxa->servico_taxas->valor_taxa;
                             $is_taxa_variavel = ($value_taxa->valor_type != 'fixo')?true:false;
                         }
-
-                        $lista_taxas = "";
-
-                        foreach ($taxa_servico_lista as $key => $value_lista_taxa) {
-                            $value_lista_taxa = (object)$value_lista_taxa;
-
+                        $is_taxa_variavel_add = false;
+                        if($is_taxa_variavel){
+                            $taxas_variaveis = \App\Models\Servico::find($value->id)->taxas()->where('valor_type','variavel')->get();
+                            $valor_total_variavel = 0;
+                            foreach($taxa_servico_lista as $lista){
+                                if($lista['servico_id'] == $value->id){
+                                    foreach($lista['taxas'] as $taxa){
+                                        $valor = (double)Configuracao::convertToMoney($taxa['valor']);
+                                        if($valor > 0){
+                                            $is_taxa_variavel_add = true;
+                                        }
+                                        $total_taxas += $valor;
+                                    }
+                                }
+                            }
                         }
                     @endphp
                     <div class="details-servicos shadow">
@@ -134,12 +143,12 @@
                         </ul>
 
                         @if ($is_taxa_variavel)
-                        <button type="button" class="btn btn-info" wire:click='addTaxasModal({{$value_array->servico_id}})'>
+                        <button type="button" class="btn @if($is_taxa_variavel_add) btn-success @else btn-warning @endif" data-toggle="modal" data-target="#addTaxasVariaveis-{{$value->id}}">
                             Taxas variáveis
                         </button>
 
-                        <x-modal id="addTaxasVariaveis-{{$value_array->servico_id}}" titulo='Adicionar Taxa: {{$taxa_servico_nome}}'>
-                            <input type="hidden" value="{{$taxa_servico_id}}" class="servico_id" wire:model.defer='taxa_servico_id'>
+                        <x-modal id="addTaxasVariaveis-{{$value->id}}" titulo='Adicionar Taxa: {{$value->nome}}'>
+                            <input type="hidden" value="{{$value->id}}" class="servico_id" >
                             @forelse ($taxas_variaveis as $value)
                             <div class="row">
                                 <div class="col-md-12">
@@ -149,12 +158,11 @@
                                 </div>
                             </div>
                             @empty
-
                             @endforelse
                             <div class="row mt-3">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-info" onclick="addTaxaLista(this)">
-                                        ADICIONAR
+                                    <button type="button" class="btn btn-info" onclick="addTaxaLista(this, 'addTaxasVariaveis-{{$value_array->servico_id}}')">
+                                        SALVAR
                                     </button>
                                 </div>
                             </div>
@@ -186,15 +194,16 @@
 
     @push('scripts')
         <script>
-            function addTaxaLista(campo){
-                let form = $(campo).parents('form');
+            function addTaxaLista(campo, form_id){
+                let form = $(campo).parents('#'+form_id);
+                console.log(form);
                 let servico_id = $(form).find('input.servico_id').val();
                 let inputs_ids = $(form).find('input.id_taxas');
                 let inputs = $(form).find('input.values_taxas');
                 let array_ids = [];
                 let array_values = [];
                 $(inputs_ids).each(function( index ) {
-                    //console.log( index + ": " + $( this ).val() );
+                    // console.log( index + ": " + $( this ).val() );
                     array_ids.push($(this).val());
                 });
                 $(inputs).each(function( index ) {
@@ -205,6 +214,8 @@
 
                 array_ids = [];
                 array_values = [];
+
+                console.log(array_ids)
 
             }
 

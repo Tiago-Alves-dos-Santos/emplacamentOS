@@ -13,11 +13,7 @@ class FormCreate extends Component
     public $search_cliente = "";
     public $search = "";
     public $servicos_add = [];
-    public $taxas_variaveis = [];
-    public $taxa_servico_nome = "";
-    public $taxa_servico_id = "";
     public $taxa_servico_lista = [];
-    public $taxa_valores = [];
     protected $listeners = [
         'os.form-create.reload' => '$refresh',
         'os.form-create-addLista' => 'addLista',
@@ -42,6 +38,16 @@ class FormCreate extends Component
 
     public function removerLista($servico_id)
     {
+        //remove as taxa que são desse serviço, as taxa variavel
+        $i=0;
+        foreach($this->taxa_servico_lista as $value){
+            if($value['servico_id'] == $servico_id){
+                $this->taxa_servico_lista = Configuracao::excluirPosicaoVetor($i, $this->taxa_servico_lista);
+                break;
+            }
+            $i++;
+        }
+
         $i = 0;
         foreach($this->servicos_add as $value){
             $value = (object) $value;
@@ -52,15 +58,6 @@ class FormCreate extends Component
             $i++;
         }
         $this->emit('os.form-create.reload');
-    }
-
-    public function addTaxasModal($servico_id)
-    {
-        $servico = Servico::find($servico_id);
-        $this->taxa_servico_nome = $servico->nome;
-        $this->taxa_servico_id = $servico_id;
-        $this->taxas_variaveis = Servico::find($servico_id)->taxas()->where('valor_type','variavel')->get();
-        $this->emit('openModal',"addTaxasVariaveis-$servico_id");
     }
 
     public function saveOS()
@@ -84,11 +81,14 @@ class FormCreate extends Component
             $this->taxa_servico_lista = Configuracao::excluirPosicaoVetor($i, $this->taxa_servico_lista);
         }
         $taxas = [];
-        for($i = 0; $i < count($taxas_ids); $i++){
-            $taxas[] = [
-                'id' => $taxas_ids[$i],
-                'valor' => $taxas_value[$i]
-            ];
+        for($i = 0; $i < count($taxas_value); $i++){
+            if($taxas_value[$i] > 0){
+                $taxas[] = [
+                    'id' => $taxas_ids[$i],
+                    'valor' => $taxas_value[$i]
+                ];
+            }
+
         }
         $this->taxa_servico_lista[] = [
             'servico_id' => $servico_id,
