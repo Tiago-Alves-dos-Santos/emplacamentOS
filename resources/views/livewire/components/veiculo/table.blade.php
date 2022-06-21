@@ -22,10 +22,10 @@
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                      <a href="" class="dropdown-item" type="button">
+                                      <a class="dropdown-item" type="button" wire:click='$emit("show-modal-updateVeiculo", {{$value->id}})'>
                                         Editar
                                       </a>
-                                      <a href="" class="dropdown-item" type="button">
+                                      <a  class="dropdown-item" type="button" wire:click='showQuestionDelete({{$value->id}})'>
                                         Excluir
                                       </a>
                                       {{-- <a class="dropdown-item" type="button" wire:click='updateStatus({{$value->id}})'>{{($value->active == 'Y')?'Desativar':'Ativar'}}</a> --}}
@@ -43,4 +43,18 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            $(function(){
+
+                Livewire.on('veiculo.table.deleteVeiculo', (question) => {
+                    function deletes(){
+                        Livewire.emit('veiculo.table.delete',question.veiculo_id);
+                    }
+
+                    showQuestionYesNo(question.title, question.data, deletes);
+                });
+            });
+        </script>
+    @endpush
 </div>

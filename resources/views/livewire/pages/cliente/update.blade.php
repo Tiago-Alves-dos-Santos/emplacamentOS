@@ -7,4 +7,8 @@
     <x-modal id="cadastrarVeiculo" titulo='Novo veículo' size='modal-lg'>
         <livewire:components.veiculo.form-create :cliente_id='$client_id'>
     </x-modal>
+
+    <x-modal id="atualizarVeiculo" titulo='Atualizar veículo' size='modal-lg'>
+        <livewire:components.veiculo.form-update>
+    </x-modal>
 </div>

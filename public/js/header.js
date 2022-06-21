@@ -33,7 +33,7 @@ function showQuestionYesNo(title,question_data, callback,color='dark'){
                 action: callback
             },
             Nao: {
-                text: 'NÂO',
+                text: 'NÃO',
                 action: function(){
 
                 }

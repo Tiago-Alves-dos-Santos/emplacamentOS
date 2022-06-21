@@ -16,11 +16,12 @@ class CreateOSTable extends Migration
         Schema::create('os', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cliente_id')->unsigned()->nullable();
+            $table->bigInteger('veiculo_id')->unsigned()->nullable();
             $table->text('descricao')->nullable();
-            $table->double('emplcamento_valor', 8, 2)->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->foreign('veiculo_id')->references('id')->on('veiculos');
         });
     }
 

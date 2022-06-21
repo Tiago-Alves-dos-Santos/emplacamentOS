@@ -1,29 +1,32 @@
 <div class="cadastro-os">
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-    <form method="POST">
+    <form method="POST" wire:submit.prevent='saveOS'>
         <div class="form-row">
             <div class="col-md-6">
                 <input type="search" wire:model='search_cliente' class="select-search form-control" placeholder="Nome cliente">
             </div>
-            <div class="col-md-6">
-                <select name="" id="" class="custom-select" wire:model.defer='cliente_id' wire:change='setIdCliente'>
+            <div class="col-md-6 d-flex">
+                <select name="" id="" class="custom-select" wire:model.lazy='cliente_id' class="w-90" required>
                     <option value="" selected>Selecione</option>
                     @foreach ($clientes as $value)
                         <option value="{{$value->id}}">{{$value->nome}}</option>
                     @endforeach
                 </select>
+                <a href="" class="btn btn-info ml-2" data-toggle="modal" data-target="#cadastroCliente">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
             </div>
         </div>
 
         <div class="form-row mt-3">
             <div class="col-md-6">
-                <input type="search" class="select-search form-control" placeholder="Placa">
+                <input type="search" class="select-search form-control" placeholder="Placa" wire:model='search_veiculo'>
             </div>
             <div class="col-md-6">
-                <select name="" id="" class="custom-select" wire:model.defer='cliente_id' wire:change='setIdCliente'>
+                <select name="" id="" class="custom-select" wire:model.defer='veiculo_id' required>
                     <option value="" selected>Selecione</option>
-                    @foreach ($clientes as $value)
-                        <option value="{{$value->id}}">{{$value->nome}}</option>
+                    @foreach ($veiculos_cliente as $value)
+                        <option value="{{$value->id}}">{{$value->modelo}} - {{$value->placa}}</option>
                     @endforeach
                 </select>
             </div>
@@ -181,6 +184,12 @@
             </div>
         </div>
 
+        <div class="form-row mt-3" wire:ignore>
+            <div class="col-md-12">
+                <textarea name="" id="description" rows="10" class="w-100"></textarea>
+            </div>
+        </div>
+
         <div class="form-row mt-5">
             <div class="col-md-12 d-flex justify-content-end">
                 <button type="submit" class="btn btn-success btn-lg">
@@ -190,10 +199,31 @@
         </div>
     </form>
 
-
+    <x-modal id="cadastroCliente" titulo='Novo cliente' size='modal-lg'>
+        @php
+            $setar_id = [
+                'setar_id' => true,
+                'metodo_set_id' => 'os.form-create-setClienteID'
+            ];
+        @endphp
+        <livewire:components.cliente.form-create :setar_id='$setar_id'>
+    </x-modal>
 
     @push('scripts')
         <script>
+            let editor = CKEDITOR.replace( 'description' );
+            CKEDITOR.instances['description'].setData("")
+
+            editor.on( 'change', function( evt ) {
+                // getData() returns CKEditor's HTML content.
+                //console.log( 'Total bytes: ' + evt.editor.getData());
+
+                Livewire.emit('os.form-create-setDescricao', evt.editor.getData());
+            });
+            $("#teste").on('click', function(){
+                console.log(CKEDITOR.instances['description'].getData());
+                // alert(editor.getData());
+            })
             function addTaxaLista(campo, form_id){
                 let form = $(campo).parents('#'+form_id);
                 console.log(form);
