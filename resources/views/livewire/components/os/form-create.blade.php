@@ -184,6 +184,12 @@
             </div>
         </div>
 
+        <div class="form-row mt-3" wire:ignore>
+            <div class="col-md-12">
+                <textarea name="" id="description" rows="10" class="w-100"></textarea>
+            </div>
+        </div>
+
         <div class="form-row mt-5">
             <div class="col-md-12 d-flex justify-content-end">
                 <button type="submit" class="btn btn-success btn-lg">
@@ -205,6 +211,19 @@
 
     @push('scripts')
         <script>
+            let editor = CKEDITOR.replace( 'description' );
+            CKEDITOR.instances['description'].setData("")
+
+            editor.on( 'change', function( evt ) {
+                // getData() returns CKEditor's HTML content.
+                //console.log( 'Total bytes: ' + evt.editor.getData());
+
+                Livewire.emit('os.form-create-setDescricao', evt.editor.getData());
+            });
+            $("#teste").on('click', function(){
+                console.log(CKEDITOR.instances['description'].getData());
+                // alert(editor.getData());
+            })
             function addTaxaLista(campo, form_id){
                 let form = $(campo).parents('#'+form_id);
                 console.log(form);

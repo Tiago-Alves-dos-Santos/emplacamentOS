@@ -33,6 +33,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     {{-- select-2 --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- ckeditor --}}
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script> --}}
+    <script src="//cdn.ckeditor.com/4.19.0/basic/ckeditor.js" charset="utf-8"></script>
     {{-- meu script --}}
     <script src="{{asset('js/header.js')}}"></script>
     @stack('scripts-top')

@@ -34,12 +34,18 @@ class FormCreate extends Component
         'os.form-create.reload' => '$refresh',
         'os.form-create-addLista' => 'addLista',
         'os.form-create-addTaxasLista' => 'addTaxasLista',
-        'os.form-create-setClienteID' => 'setIdCliente'
+        'os.form-create-setClienteID' => 'setIdCliente',
+        'os.form-create-setDescricao' => 'setDescricao'
     ];
 
     public function mount()
     {
         // dd(is_object($this->taxa_servico));
+    }
+
+    public function setDescricao($descricao)
+    {
+       $this->descricao = $descricao;
     }
 
     public function setIdCliente($cliente_id)
@@ -133,6 +139,7 @@ class FormCreate extends Component
             $this->emit('showToast', $this->msg_toast);
 
             $this->resetExcept(['limpa']);
+            $this->emit('os.form-create.reload');
 
         } catch (\Exception $e) {
             $this->msg_toast['title'] = 'Erro!';
