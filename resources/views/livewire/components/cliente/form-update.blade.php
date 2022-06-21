@@ -72,9 +72,13 @@
                 </div>
                 <div class="form-row mt-3">
                     <div class="col-md-12 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary d-flex">
+                        <button type="submit" class="btn btn-success d-flex">
                             SALVAR
                             <div class="loader ml-2" wire:loading></div>
+                        </button>
+
+                        <button type="button" class="btn btn-info d-flex ml-2" data-toggle="modal" data-target="#cadastrarVeiculo">
+                            ADICIONAR VEÍCULO
                         </button>
                     </div>
                 </div>
