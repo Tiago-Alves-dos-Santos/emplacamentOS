@@ -16,13 +16,12 @@ class FormCreate extends Component
     public $telefone = "";
     public $bairro = "";
     public $complemento = "";
-    public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     /*[
         'setar_id' => false,
         'metodo_set_id' => ''
     ];*/
     public $setar_id;
-
+    public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
         "title" => '',
         "information" => '',

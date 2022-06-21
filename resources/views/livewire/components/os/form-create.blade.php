@@ -6,7 +6,7 @@
                 <input type="search" wire:model='search_cliente' class="select-search form-control" placeholder="Nome cliente">
             </div>
             <div class="col-md-6 d-flex">
-                <select name="" id="" class="custom-select" wire:model.lazy='cliente_id' class="w-90">
+                <select name="" id="" class="custom-select" wire:model.lazy='cliente_id' class="w-90" required>
                     <option value="" selected>Selecione</option>
                     @foreach ($clientes as $value)
                         <option value="{{$value->id}}">{{$value->nome}}</option>
@@ -23,7 +23,7 @@
                 <input type="search" class="select-search form-control" placeholder="Placa" wire:model='search_veiculo'>
             </div>
             <div class="col-md-6">
-                <select name="" id="" class="custom-select" wire:model.defer='veiculo_id'>
+                <select name="" id="" class="custom-select" wire:model.defer='veiculo_id' required>
                     <option value="" selected>Selecione</option>
                     @foreach ($veiculos_cliente as $value)
                         <option value="{{$value->id}}">{{$value->modelo}} - {{$value->placa}}</option>

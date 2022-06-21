@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire\Components\Os;
 
+use App\Models\OS;
 use App\Models\Cliente;
 use App\Models\Servico;
 use Livewire\Component;
 use App\Models\Veiculos;
+use App\Models\ServicoOS;
+use App\Models\TaxaVariavelOS;
 use App\Http\Classes\Configuracao;
 
+new Configuracao();
 class FormCreate extends Component
 {
     public $cliente_id = 0;
@@ -17,6 +21,15 @@ class FormCreate extends Component
     public $search = "";
     public $servicos_add = [];
     public $taxa_servico_lista = [];
+    public $descricao = "";
+    public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
+    public $msg_toast = [
+        "title" => '',
+        "information" => '',
+        "type" => 1,
+        "time" => TIME_TOAST
+    ];
+    public $limpa = '';
     protected $listeners = [
         'os.form-create.reload' => '$refresh',
         'os.form-create-addLista' => 'addLista',
@@ -72,7 +85,62 @@ class FormCreate extends Component
 
     public function saveOS()
     {
-        dd('save os');
+        try {
+            //criar os
+            $os = OS::create([
+                'cliente_id' => $this->cliente_id,
+                'veiculo_id' => $this->veiculo_id,
+                'descricao' => $this->descricao
+            ]);
+            //verficar se tem algum serviço selecionado
+            if(count($this->servicos_add) > 0){
+                //cadastrar servicos nas servico_os
+                foreach($this->servicos_add as $value){
+                    $value = (object) $value;
+                    ServicoOS::create([
+                        'os_id' => $os->id,
+                        'servico_id' => $value->servico_id,
+                        'valor_servico' => $value->valor
+                    ]);
+                }
+                //verficar se tem taxas variaveis para adicionar
+                if(count($this->taxa_servico_lista) > 0){
+                    //cadastrar as taxas variavel do servico
+                    foreach($this->taxa_servico_lista as $value){
+                        $servico_id = $value['servico_id'];
+                        $taxas = $value['taxas'];
+
+                        foreach($taxas as $value){
+                            TaxaVariavelOS::create([
+                                'servico_id' => $servico_id,
+                                'taxa_id' => $value['id'],
+                                'os_id' => $os->id,
+                                'valor' => $value['valor']
+                            ]);
+                        }
+                    }
+                }
+            }else{
+                $this->msg_toast['title'] = 'Atenção!';
+                $this->msg_toast['information'] = "Adicione no minímo um serviço!";
+                $this->msg_toast['type'] = $this->toast_type['warning'];
+                $this->emit('showToast', $this->msg_toast);
+            }
+
+            $this->msg_toast['title'] = 'Sucesso!';
+            $this->msg_toast['information'] = "OS Nº {$os->id} criada com sucesso!";
+            $this->msg_toast['type'] = $this->toast_type['success'];
+            $this->emit('showToast', $this->msg_toast);
+
+            $this->resetExcept(['limpa']);
+
+        } catch (\Exception $e) {
+            $this->msg_toast['title'] = 'Erro!';
+            $this->msg_toast['information'] = $e->getMessage();
+            $this->msg_toast['type'] = $this->toast_type['error'];
+            $this->emit('showToast', $this->msg_toast);
+        }
+
     }
 
     public function addTaxasLista($servico_id,$taxas_ids, $taxas_value)
