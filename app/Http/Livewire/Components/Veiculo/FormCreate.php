@@ -9,7 +9,7 @@ use App\Http\Classes\Configuracao;
 new Configuracao();
 class FormCreate extends Component
 {
-    public $cliente_id;
+    public $cliente_id = 0;
 
     public $placa = "";
     public $marca = "";
