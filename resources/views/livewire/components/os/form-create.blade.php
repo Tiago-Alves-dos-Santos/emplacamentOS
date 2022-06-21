@@ -5,13 +5,16 @@
             <div class="col-md-6">
                 <input type="search" wire:model='search_cliente' class="select-search form-control" placeholder="Nome cliente">
             </div>
-            <div class="col-md-6">
-                <select name="" id="" class="custom-select" wire:model.lazy='cliente_id'>
+            <div class="col-md-6 d-flex">
+                <select name="" id="" class="custom-select" wire:model.lazy='cliente_id' class="w-90">
                     <option value="" selected>Selecione</option>
                     @foreach ($clientes as $value)
                         <option value="{{$value->id}}">{{$value->nome}}</option>
                     @endforeach
                 </select>
+                <a href="" class="btn btn-info ml-2" data-toggle="modal" data-target="#cadastroCliente">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
             </div>
         </div>
 
@@ -190,7 +193,15 @@
         </div>
     </form>
 
-
+    <x-modal id="cadastroCliente" titulo='Novo cliente' size='modal-lg'>
+        @php
+            $setar_id = [
+                'setar_id' => true,
+                'metodo_set_id' => 'os.form-create-setClienteID'
+            ];
+        @endphp
+        <livewire:components.cliente.form-create :setar_id='$setar_id'>
+    </x-modal>
 
     @push('scripts')
         <script>

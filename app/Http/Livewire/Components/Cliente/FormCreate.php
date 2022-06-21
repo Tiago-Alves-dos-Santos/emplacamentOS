@@ -17,6 +17,12 @@ class FormCreate extends Component
     public $bairro = "";
     public $complemento = "";
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
+    /*[
+        'setar_id' => false,
+        'metodo_set_id' => ''
+    ];*/
+    public $setar_id;
+
     public $msg_toast = [
         "title" => '',
         "information" => '',
@@ -32,11 +38,17 @@ class FormCreate extends Component
         'telefone' => 'required|min:15|max:15',
     ];
 
+    public function mount($setar_id = [])
+    {
+        $this->setar_id = $setar_id;
+       // dd();
+    }
+
     public function createCliente()
     {
        $this->validate();
        try {
-            Cliente::create([
+            $cliente = Cliente::create([
                 'nome' => mb_strtoupper($this->nome),
                 'data_nasc' => $this->data_nasc,
                 'rua' => $this->rua,
@@ -45,6 +57,10 @@ class FormCreate extends Component
                 'bairro' => $this->bairro,
                 'complemento' => $this->complemento
             ]);
+            if(!empty($this->setar_id) && $this->setar_id['setar_id']){
+                $this->emit($this->setar_id['metodo_set_id'], $cliente->id);
+                $this->emit('closeModal','cadastroCliente');
+            }
             $this->msg_toast['title'] = 'Sucesso!';
             $this->msg_toast['information'] = 'Cadastro realizado com sucesso!';
             $this->msg_toast['type'] = $this->toast_type['success'];

@@ -20,12 +20,19 @@ class FormCreate extends Component
     protected $listeners = [
         'os.form-create.reload' => '$refresh',
         'os.form-create-addLista' => 'addLista',
-        'os.form-create-addTaxasLista' => 'addTaxasLista'
+        'os.form-create-addTaxasLista' => 'addTaxasLista',
+        'os.form-create-setClienteID' => 'setIdCliente'
     ];
 
     public function mount()
     {
         // dd(is_object($this->taxa_servico));
+    }
+
+    public function setIdCliente($cliente_id)
+    {
+        $this->cliente_id = $cliente_id;
+        $this->emit('os.form-create.reload');
     }
 
     public function addLista($servico_id, $valor)
