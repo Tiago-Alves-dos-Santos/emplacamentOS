@@ -5,12 +5,15 @@ namespace App\Http\Livewire\Components\Os;
 use App\Models\Cliente;
 use App\Models\Servico;
 use Livewire\Component;
+use App\Models\Veiculos;
 use App\Http\Classes\Configuracao;
 
 class FormCreate extends Component
 {
     public $cliente_id = 0;
     public $search_cliente = "";
+    public $veiculo_id;
+    public $search_veiculo = "";
     public $search = "";
     public $servicos_add = [];
     public $taxa_servico_lista = [];
@@ -99,6 +102,8 @@ class FormCreate extends Component
         $this->emit('closeModal',"addTaxasVariaveis-$servico_id");
     }
 
+
+
     public function render()
     {
         $servico_ids = [];
@@ -106,13 +111,24 @@ class FormCreate extends Component
             $value = (object) $value;
             $servico_ids[] = $value->servico_id;
         }
+
+
         return view('livewire.components.os.form-create',[
             'servicos' => ($this->search == "")?[]:
             Servico::whereNotIn('id', $servico_ids)
             ->where('nome','like', "%{$this->search}%")
             ->paginate(10),
+
             'servicos_lista' => $this->servicos_add,
-            'clientes' => ($this->search_cliente == "")? Cliente::limit(50)->get() : Cliente::where('nome', 'like', "%{$this->search_cliente}%")->get()
+
+            'clientes' => ($this->search_cliente == "")? Cliente::limit(50)->get() : Cliente::where('nome', 'like', "%{$this->search_cliente}%")->get(),
+
+            'veiculos_cliente' => Veiculos::where('cliente_id', $this->cliente_id)
+            ->where(function ($query) {
+                $query->where('placa', 'like', "%{$this->search_veiculo}%");
+                $query->orWhere('modelo', 'like', "%{$this->search_veiculo}%");
+            })
+            ->get()
         ]);
     }
 }
