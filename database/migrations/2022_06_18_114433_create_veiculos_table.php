@@ -15,7 +15,13 @@ class CreateVeiculosTable extends Migration
     {
         Schema::create('veiculos', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('cliente_id')->unsigned()->nullable();
+            $table->string('marca',50);
+            $table->string('modelo',50);
+            $table->string('placa',50);
             $table->timestamps();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->foreign('cliente_id')->references('id')->on('clientes');
         });
     }
 
