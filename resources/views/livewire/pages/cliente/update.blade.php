@@ -5,6 +5,6 @@
     <livewire:components.veiculo.table>
 
     <x-modal id="cadastrarVeiculo" titulo='Novo veículo' size='modal-lg'>
-        <livewire:components.veiculo.form-create>
+        <livewire:components.veiculo.form-create :cliente_id='$client_id'>
     </x-modal>
 </div>

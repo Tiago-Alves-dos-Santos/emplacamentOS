@@ -5,16 +5,17 @@
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
-                        <th>Placa</th>
-                        <th>Marca</th>
                         <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Placa</th>
                         <th>Ações</th>
                     </thead>
                     <tbody>
+                        @forelse ($veiculos as $value)
                         <tr>
-                            <td>teste</td>
-                            <td>teste</td>
-                            <td>teste</td>
+                            <td>{{$value->modelo}}</td>
+                            <td>{{$value->marca}}</td>
+                            <td>{{$value->placa}}</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
@@ -32,6 +33,11 @@
                                   </div>
                             </td>
                         </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">N/A</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
