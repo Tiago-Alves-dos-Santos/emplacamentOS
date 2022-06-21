@@ -1,6 +1,6 @@
 <div class="cadastro-os">
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-    <form method="POST">
+    <form method="POST" wire:submit.prevent='saveOS'>
         <div class="form-row">
             <div class="col-md-6">
                 <input type="search" wire:model='search_cliente' class="select-search form-control" placeholder="Nome cliente">
