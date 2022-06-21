@@ -22,7 +22,7 @@
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                      <a href="" class="dropdown-item" type="button">
+                                      <a class="dropdown-item" type="button" wire:click='$emit("show-modal-updateVeiculo", {{$value->id}})'>
                                         Editar
                                       </a>
                                       <a href="" class="dropdown-item" type="button">
@@ -43,4 +43,5 @@
             </div>
         </div>
     </div>
+
 </div>
