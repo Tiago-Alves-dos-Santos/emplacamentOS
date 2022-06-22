@@ -81,6 +81,12 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12" data-valor="{{$value->descricao}}">
+                        <textarea name="{{$loop->index}}" class="editor" id="description-{{$value->id}}"></textarea>
+                    </div>
+                </div>
+
                 <div class="w-100 shadow-sm rounded d-flex justify-content-start mt-3">
                   <a href="">
                       <img src="{{asset('img/pdf_48px.png')}}" style="width: 40px" alt="" class="img_fluid" title="Gerar PDF">
@@ -94,8 +100,21 @@
 
         @endforelse
 
-
-
-
       </div>
+
+      @push('scripts')
+      <script>
+        $(function(){
+
+            $( 'textarea.editor').each( function() {
+                let valor =  $(this).parent().attr('data-valor');
+                CKEDITOR.replace( $(this).attr('id') );
+                CKEDITOR.instances[$(this).attr('id')].setData(valor);
+                CKEDITOR.instances[$(this).attr('id')].config.readOnly = true;
+
+            });
+
+        });
+     </script>
+      @endpush
 </div>
