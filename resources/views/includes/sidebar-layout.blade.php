@@ -63,11 +63,11 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>OS</span>
         </a>
-        <div id="collapseTwo" class="collapse @if ($page_active == 'os.create' || $page_active == 'os.dashboard') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse @if ($page_active == 'os.create' || $page_active == 'os.lista') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Ordens de Serviço</h6>
                 <a class="collapse-item @if ($page_active == 'os.create') active @endif" href="{{route('view.os.create')}}">Nova</a>
-                <a class="collapse-item @if ($page_active == 'os.dashboard') active @endif" href="{{route('view.os.dashboard')}}">Lista</a>
+                <a class="collapse-item @if ($page_active == 'os.lista') active @endif" href="{{route('view.os.lista')}}">Lista</a>
             </div>
         </div>
     </li>

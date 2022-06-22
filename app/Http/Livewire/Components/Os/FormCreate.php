@@ -8,6 +8,7 @@ use App\Models\Servico;
 use Livewire\Component;
 use App\Models\Veiculos;
 use App\Models\ServicoOS;
+use App\Models\ServicoTaxa;
 use App\Models\TaxaVariavelOS;
 use App\Http\Classes\Configuracao;
 
@@ -22,6 +23,8 @@ class FormCreate extends Component
     public $servicos_add = [];
     public $taxa_servico_lista = [];
     public $descricao = "";
+    public $valor_pago;
+    public $troco =0;
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
         "title" => '',
@@ -108,6 +111,17 @@ class FormCreate extends Component
                         'servico_id' => $value->servico_id,
                         'valor_servico' => $value->valor
                     ]);
+                    //cadastrar taxa fixa na 'TaxaVariavelOS', para qnd for mudar a taxa não alterar 'OS' ja criadas
+                    $taxas = ServicoTaxa::where('servico_id', $value->servico_id)
+                    ->where('valor_taxa', '>', 0)->get();
+                    foreach($taxas as $taxa){
+                        TaxaVariavelOS::create([
+                            'servico_id' => $value->servico_id,
+                            'taxa_id' => $taxa->taxa_id,
+                            'os_id' => $os->id,
+                            'valor' => $taxa->valor_taxa
+                        ]);
+                    }
                 }
                 //verficar se tem taxas variaveis para adicionar
                 if(count($this->taxa_servico_lista) > 0){
@@ -126,6 +140,7 @@ class FormCreate extends Component
                         }
                     }
                 }
+
             }else{
                 $this->msg_toast['title'] = 'Atenção!';
                 $this->msg_toast['information'] = "Adicione no minímo um serviço!";
@@ -184,6 +199,13 @@ class FormCreate extends Component
         $this->emit('closeModal',"addTaxasVariaveis-$servico_id");
     }
 
+    public function cacularTrocoOs($total)
+    {
+        $valor = (double)Configuracao::convertToMoney($this->valor_pago);
+        $this->troco = $valor - $total;
+        // $this->emit('closeModal','totalOS');
+        // $this->emit('openModal','totalOS');
+    }
 
 
     public function render()

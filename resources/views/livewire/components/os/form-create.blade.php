@@ -1,5 +1,9 @@
 <div class="cadastro-os">
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
+    @php
+        $total_os = 0;
+        $total_all_taxas = 0;
+    @endphp
     <form method="POST" wire:submit.prevent='saveOS'>
         <div class="form-row">
             <div class="col-md-6">
@@ -108,7 +112,9 @@
                         $is_taxa_variavel = false;
                         foreach ($value->taxas as $value_taxa){
                             $total_taxas += $value_taxa->servico_taxas->valor_taxa;
-                            $is_taxa_variavel = ($value_taxa->valor_type != 'fixo')?true:false;
+                            if(!$is_taxa_variavel){//qnd achar pelo menos uma taxa varivel não precisa mais verifica, se achar não verfica mais
+                                $is_taxa_variavel = ($value_taxa->valor_type != 'fixo')?true:false;
+                            }
                         }
                         $is_taxa_variavel_add = false;
                         if($is_taxa_variavel){
@@ -140,6 +146,8 @@
                                 @php
                                    $valor =  Configuracao::getDbMoney($value_array->valor - $total_taxas);
                                    $class = ($valor < 0)?'text-danger':'text-success';
+                                   $total_os += $value_array->valor;
+                                   $total_all_taxas += $total_taxas;
                                 @endphp
                                 Lucros: <span class="{{$class}}">{{$valor}}</span>
                             </li>
@@ -192,12 +200,45 @@
 
         <div class="form-row mt-5">
             <div class="col-md-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#totalOS">
+                    TOTAL LUCRO
+                </button>
                 <button type="submit" class="btn btn-success btn-lg">
                     SALVAR OS
                 </button>
             </div>
         </div>
     </form>
+
+    <div class="row mt-3">
+        <div class="col-md-12" style="background-color: rgb(15, 15, 15); color: white; padding:10px">
+            <div class="w-100 d-flex justify-content-between" >
+                <h5>Total: R$ {{Configuracao::getDbMoney($total_os)}}</h5>
+                <h5 class="text-danger">Taxas: R$ {{Configuracao::getDbMoney($total_all_taxas)}}</h5>
+                <h5 class="text-success">Lucro: R$ {{Configuracao::getDbMoney($total_os - $total_all_taxas)}}</h5>
+            </div>
+            <div class="w-100">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="R$ 0,00" onkeyup="moneyMask(this)" wire:model.lazy='valor_pago'>
+                    </div>
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-light btn-block" wire:click.prevent='cacularTrocoOs({{($total_os - $total_all_taxas)}})'>
+                            CALCULAR
+                        </button>
+                    </div>
+                    <div class="col-md-4 d-flex justify-content-start">
+                        <h4>Troco: R$ {{Configuracao::getDbMoney($troco)}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row mt-3">
+
+    </div>
 
     <x-modal id="cadastroCliente" titulo='Novo cliente' size='modal-lg'>
         @php
@@ -265,6 +306,7 @@
                     $("tr").find('input').val("");
                 }
             }
+
         </script>
     @endpush
 </div>
