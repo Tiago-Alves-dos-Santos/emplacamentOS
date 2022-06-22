@@ -112,7 +112,9 @@
                         $is_taxa_variavel = false;
                         foreach ($value->taxas as $value_taxa){
                             $total_taxas += $value_taxa->servico_taxas->valor_taxa;
-                            $is_taxa_variavel = ($value_taxa->valor_type != 'fixo')?true:false;
+                            if(!$is_taxa_variavel){//qnd achar pelo menos uma taxa varivel não precisa mais verifica, se achar não verfica mais
+                                $is_taxa_variavel = ($value_taxa->valor_type != 'fixo')?true:false;
+                            }
                         }
                         $is_taxa_variavel_add = false;
                         if($is_taxa_variavel){

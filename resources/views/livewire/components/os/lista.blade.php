@@ -50,17 +50,10 @@
                             @forelse ($taxas as $taxa)
                                 <div class="w-100 rounded mt-2" style="border: 0.3px solid rgb(162, 161, 161); padding: 5px 10px">
                                     <h6>{{$taxa->nome}}</h6>
-                                    @if ($taxa->valor_type == 'fixo')
-                                    @php
-                                        $servico_taxas += $taxa->valor_fixo;
-                                    @endphp
-                                        <h6>Valor R$ {{Configuracao::getDbMoney($taxa->valor_fixo)}}</h6>
-                                    @else
                                     @php
                                         $servico_taxas += $taxa->valor;
                                     @endphp
                                         <h6>Valor R$ {{Configuracao::getDbMoney($taxa->valor)}}</h6>
-                                    @endif
                                 </div>
                             @empty
 
