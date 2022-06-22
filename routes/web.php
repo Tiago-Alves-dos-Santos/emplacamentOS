@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Livewire\Pages\Login;
+use App\Http\Livewire\Pages\Os\Lista as OSLista;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Pages\Dashboard;
 use App\Http\Livewire\Pages\Os\Create as OSCreate;
 use App\Http\Livewire\Pages\Servico\TaxasVincular;
-use App\Http\Livewire\Pages\Os\Dashboard as OSDashboard;
 use App\Http\Livewire\Pages\Usuarios\Create as UserCreate;
 use App\Http\Livewire\Pages\Usuarios\Update as UserUpdate;
 use App\Http\Livewire\Pages\Cliente\Create as ClienteCreate;
@@ -47,4 +47,4 @@ Route::get('/servicos/vincular-taxa/{servico_id}', TaxasVincular::class)->name('
 Route::get('/taxa/dashboard', TaxaDashboard::class)->name('view.taxa.dashboard');
 //os
 Route::get('/os/create', OSCreate::class)->name('view.os.create');
-Route::get('/os/dashboard', OSDashboard::class)->name('view.os.dashboard');
+Route::get('/os/lista', OSLista::class)->name('view.os.lista');
