@@ -20,11 +20,11 @@
                     </div>
                 </div>
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-12">
                         <h6 class="text-white bg-secondary rounded" style="padding:5px 5px">Serviços</h6>
                     </div>
-                </div>
+                </div> --}}
                 @php
                     $servicos = $value->servicos()->get();
                     $total_os = 0;
@@ -37,8 +37,8 @@
                 @endphp
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="w-100" style="border-bottom: 2px solid black; padding: 5px 10px">
-                            <h6>{{$servico->nome}} - R$ {{Configuracao::getDbMoney($servico->pivot->valor_servico)}}</h6>
+                        <div class="w-100" style="padding: 5px 10px">
+                            <h6 class="text-white bg-secondary rounded"  style="padding:5px 5px">{{$servico->nome}} - R$ {{Configuracao::getDbMoney($servico->pivot->valor_servico)}}</h6>
 
                             @php
                                $total_os += $servico->pivot->valor_servico;
@@ -90,6 +90,9 @@
                 <div class="w-100 shadow-sm rounded d-flex justify-content-start mt-3">
                   <a href="">
                       <img src="{{asset('img/pdf_48px.png')}}" style="width: 40px" alt="" class="img_fluid" title="Gerar PDF">
+                  </a>
+                  <a href="">
+                      <img src="{{asset('img/delete_document_48px.png')}}" style="width: 40px" alt="" class="img_fluid" title="Excluir OS">
                   </a>
                 </div>
 
