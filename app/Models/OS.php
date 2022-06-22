@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Cliente;
+use App\Models\Servico;
 use App\Models\Veiculos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,6 +27,13 @@ class OS extends Model
     {
         return $this->belongsTo(Veiculos::class);
     }
+
+    public function servicos()
+    {
+        return $this->belongsToMany(Servico::class, 'servico_os', 'os_id')
+        ->withPivot(['valor_servico']);
+    }
+
 
 
 }
