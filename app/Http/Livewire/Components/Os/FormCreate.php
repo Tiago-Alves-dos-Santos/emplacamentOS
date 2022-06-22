@@ -22,6 +22,8 @@ class FormCreate extends Component
     public $servicos_add = [];
     public $taxa_servico_lista = [];
     public $descricao = "";
+    public $valor_pago;
+    public $troco =0;
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
         "title" => '',
@@ -184,6 +186,13 @@ class FormCreate extends Component
         $this->emit('closeModal',"addTaxasVariaveis-$servico_id");
     }
 
+    public function cacularTrocoOs($total)
+    {
+        $valor = (double)Configuracao::convertToMoney($this->valor_pago);
+        $this->troco = $valor - $total;
+        // $this->emit('closeModal','totalOS');
+        // $this->emit('openModal','totalOS');
+    }
 
 
     public function render()
