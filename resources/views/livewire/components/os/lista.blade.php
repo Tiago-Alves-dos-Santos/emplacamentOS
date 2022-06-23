@@ -88,7 +88,9 @@
                 </div>
 
                 <div class="w-100 shadow-sm rounded d-flex justify-content-start mt-3">
-                  <a class="pointer" href="">
+                  <a class="pointer" href="{{route('os.pdf', [
+                    'id' => $value->id
+                  ])}}" target="_blank">
                       <img src="{{asset('img/pdf_48px.png')}}" style="width: 40px" alt="" class="img_fluid" title="Gerar PDF">
                   </a>
                   <a class="pointer" wire:click='deleteQuestion({{$value->id}})'>
