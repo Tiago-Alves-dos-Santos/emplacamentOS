@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <title>OS-PDF</title>
+    <title>OS Nº {{$os->id}}</title>
+
+
     <style type="text/css">
        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
         *{
@@ -21,12 +23,21 @@
             position: relative;
             box-sizing: border-box;
         }
-        .border{
+        .borders{
             border:1px solid red;
         }
         .clear{
             clear: both;
         }
+        div.img-back{
+            position: fixed;
+            top: 25%;
+            left:27%;
+        }
+        div.img-back img{
+            opacity: 0.2;
+        }
+
         div.cabecalho{
             background-color: rgb(204, 229, 255);
             padding: 10px 5px;
@@ -74,16 +85,23 @@
         }
     </style>
 </head>
+
 <body>
+
+    <div class="img-back">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/logo.png'))) }}" style="width: 360px">
+    </div>
     <div class="cabecalho">
         <h3 style="width: 20%">Nº {{$os->id}}</h3>
         <h3 style="width: 60%; text-align: center">{{$os->cliente->nome}}</h3>
         <h3 style="width: 19%; text-align: right">{{date('d/m/Y', strtotime($os->created_at))}}</h3>
         <div class="clear"></div>
     </div>
+    @if (!empty($os->veiculo->modelo))
     <div class="sub-cabecalho">
         <h5 style="text-align: center">{{$os->veiculo->modelo}} - {{$os->veiculo->placa}}</h5>
     </div>
+    @endif
     @php
         $servicos = $os->servicos()->get();
         $total_os = 0;
@@ -130,15 +148,20 @@
 
     <div class="container-total" style="margin-top: 90px">
         <div class="result-total" style="border: 0.5px solid black">
-            <h3 class="mr-2" style="position: relative; top:45px; left:0px; text-align: center">Total: <br> R$ {{Configuracao::getDbMoney($total_os)}}</h5>
+            <h3 class="mr-2" style="position: relative; top:45px; left:0px; text-align: center">Total <br> R$ {{Configuracao::getDbMoney($total_os)}}</h5>
         </div>
-        <div class="result-total-taxa border" style="margin-left: 150px;">
-            <h3 class="danger" style="position: relative; top:45px; left:0px; text-align: center">Taxas: <br> {{Configuracao::getDbMoney($total_taxas_os)}}</h3>
+        <div class="result-total-taxa borders" style="margin-left: 150px;">
+            <h3 class="danger" style="position: relative; top:45px; left:0px; text-align: center">Taxas <br> {{Configuracao::getDbMoney($total_taxas_os)}}</h3>
         </div>
         <div class="result-total-lucro" style="margin-left: 150px; border:1px solid rgb(110, 234, 139)">
-            <h3 class="success" style="position: relative; top:45px; left:0px; text-align: center">Lucro: <br> R$ {{Configuracao::getDbMoney($total_os - $total_taxas_os)}}</h3>
+            <h3 class="success" style="position: relative; top:45px; left:0px; text-align: center">Lucro <br> R$ {{Configuracao::getDbMoney($total_os - $total_taxas_os)}}</h3>
         </div>
     </div>
+    <div class="clear"></div>
+    <div style="float: right; margin-top: 10px">
+        <h6>Usuario1 em {{date('d/m/Y')}} as {{date('H:i:s')}}</h6>
+    </div>
+    <div class="clear"></div>
 
 
     <script type="text/php">

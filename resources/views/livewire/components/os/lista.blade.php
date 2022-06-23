@@ -15,7 +15,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h6>
-                            Veículo: {{$value->modelo}} - {{$value->placa}}
+                            @if (!empty($value->modelo))
+                                Veículo: {{$value->modelo}} - {{$value->placa}}
+                            @else
+                            Sem veículo
+                            @endif
                         </h6>
                     </div>
                 </div>

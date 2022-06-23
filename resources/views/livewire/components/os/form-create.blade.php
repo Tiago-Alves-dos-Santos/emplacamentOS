@@ -27,7 +27,7 @@
                 <input type="search" class="select-search form-control" placeholder="Placa" wire:model='search_veiculo'>
             </div>
             <div class="col-md-6">
-                <select name="" id="" class="custom-select" wire:model.defer='veiculo_id' required>
+                <select name="" id="" class="custom-select" wire:model.defer='veiculo_id'>
                     <option value="" selected>Selecione</option>
                     @foreach ($veiculos_cliente as $value)
                         <option value="{{$value->id}}">{{$value->modelo}} - {{$value->placa}}</option>
