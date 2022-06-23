@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Servico;
+use App\Models\ServicoTaxa;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,7 +19,7 @@ class Taxa extends Model
 
     public function servicos()
     {
-        return $this->belongsToMany(Servico::class,'servico_taxas')->as('servico_taxas')
+        return $this->belongsToMany(Servico::class,ServicoTaxa::class)->as('servico_taxas')
         ->withPivot(['id','valor_taxa'])
     	->withTimestamps();
     }

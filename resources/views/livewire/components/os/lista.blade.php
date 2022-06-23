@@ -81,17 +81,17 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" wire:ignore>
                     <div class="col-md-12" data-valor="{{$value->descricao}}">
                         <textarea name="{{$loop->index}}" class="editor" id="description-{{$value->id}}"></textarea>
                     </div>
                 </div>
 
                 <div class="w-100 shadow-sm rounded d-flex justify-content-start mt-3">
-                  <a href="">
+                  <a class="pointer" href="">
                       <img src="{{asset('img/pdf_48px.png')}}" style="width: 40px" alt="" class="img_fluid" title="Gerar PDF">
                   </a>
-                  <a href="">
+                  <a class="pointer" wire:click='deleteQuestion({{$value->id}})'>
                       <img src="{{asset('img/delete_document_48px.png')}}" style="width: 40px" alt="" class="img_fluid" title="Excluir OS">
                   </a>
                 </div>
@@ -108,7 +108,13 @@
       @push('scripts')
       <script>
         $(function(){
+            Livewire.on('os.lista.delete', (question) => {
+                    function deletes(){
+                        Livewire.emit('os.lista.deleteOS',question.os_id);
+                    }
 
+                    showQuestionYesNo(question.title, question.data, deletes);
+            });
             $( 'textarea.editor').each( function() {
                 let valor =  $(this).parent().attr('data-valor');
                 CKEDITOR.replace( $(this).attr('id') );
