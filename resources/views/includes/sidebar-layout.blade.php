@@ -81,11 +81,11 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Despezas</span>
         </a>
-        <div id="collapseDespeza" class="collapse @if ($page_active == 'despeza.create' || $page_active == 'os.lista') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseDespeza" class="collapse @if ($page_active == 'despeza.create' || $page_active == 'despeza.filter-mensal') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Despezas</h6>
                 <a class="collapse-item @if ($page_active == 'despeza.create') active @endif" href="{{route('view.despeza.create')}}">Nova</a>
-                <a class="collapse-item @if ($page_active == 'os.lista') active @endif" href="{{route('view.os.lista')}}">Mensal</a>
+                <a class="collapse-item @if ($page_active == 'despeza.filter-mensal') active @endif" href="{{route('view.despeza.filter-mensal')}}">Mensal</a>
             </div>
         </div>
     </li>
