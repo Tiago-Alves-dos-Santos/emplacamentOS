@@ -78,9 +78,9 @@
                     </div>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="myChart"></canvas>
+                <div class="card-body d-flex justify-content-center">
+                    <div class="chart-container" >
+                        <canvas id="myChart" height="800px"></canvas>
                     </div>
                 </div>
             </div>
@@ -88,35 +88,40 @@
     </div>
     @push('scripts')
         <script>
-            const labels = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-            ];
-
             const data = {
-                labels: labels,
-                datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45],
-                }]
+            labels: [
+                'Total',
+                'Taxas',
+                'Despezas',
+                'Lucro',
+
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [300, 50, 50, 200],
+                backgroundColor: [
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
+                'rgb(255, 205, 86)',
+                'rgb(50, 229, 92)',
+
+                ],
+                hoverOffset: 4
+            }]
             };
 
             const config = {
-                type: 'line',
+                type: 'pie',
                 data: data,
-                options: {}
             };
 
             const myChart = new Chart(
                 document.getElementById('myChart'),
                 config
             );
+
+           // myChart.canvas.parentNode.style.height = '200px';
+            myChart.canvas.parentNode.style.width = '500px';
         </script>
     @endpush
 </div>
