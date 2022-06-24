@@ -4,6 +4,7 @@ use App\Http\Controllers\PDFC;
 use App\Http\Livewire\Pages\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Pages\Dashboard;
+use App\Http\Livewire\Pages\Despeza\Create as DespezaCreate;
 use App\Http\Livewire\Pages\Os\Lista as OSLista;
 use App\Http\Livewire\Pages\Os\Create as OSCreate;
 use App\Http\Livewire\Pages\Servico\TaxasVincular;
@@ -50,3 +51,5 @@ Route::get('/taxa/dashboard', TaxaDashboard::class)->name('view.taxa.dashboard')
 Route::get('/os/create', OSCreate::class)->name('view.os.create');
 Route::get('/os/lista', OSLista::class)->name('view.os.lista');
 Route::get('/os/pdf/{id}', [PDFC::class, 'os'])->name('os.pdf');
+//despezas
+Route::get('/despeza/create', DespezaCreate::class)->name('view.despeza.create');

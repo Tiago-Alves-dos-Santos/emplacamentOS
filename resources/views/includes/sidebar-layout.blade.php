@@ -57,7 +57,7 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Taxa</span></a>
     </li>
-    <li class="nav-item @if ($page_active == 'os.create' || $page_active == 'os.dashboard') active @endif">
+    <li class="nav-item @if ($page_active == 'os.create' || $page_active == 'os.lista') active @endif">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
@@ -75,15 +75,19 @@
         Despezas
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Despezas</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Despeza mensal</span></a>
+    <li class="nav-item @if ($page_active == 'despeza.create' || $page_active == 'despeza.filter-mensal') active @endif">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDespeza"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Despezas</span>
+        </a>
+        <div id="collapseDespeza" class="collapse @if ($page_active == 'despeza.create' || $page_active == 'os.lista') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Despezas</h6>
+                <a class="collapse-item @if ($page_active == 'despeza.create') active @endif" href="{{route('view.despeza.create')}}">Nova</a>
+                <a class="collapse-item @if ($page_active == 'os.lista') active @endif" href="{{route('view.os.lista')}}">Mensal</a>
+            </div>
+        </div>
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
     {{-- <li class="nav-item">
@@ -121,23 +125,23 @@
     </li> --}}
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    {{-- <hr class="sidebar-divider"> --}}
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    {{-- <div class="sidebar-heading">
         Relátorios / Gráficos
-    </div>
+    </div> --}}
 
     <!-- Nav Item - Pages Collapse Menu -->
     {{--  <li class="nav-item active">--}}
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+    {{-- <li class="nav-item"> --}}
+        {{-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
             aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>Relátorios</span>
-        </a>
+        </a> --}}
         {{-- class="collapse show" coloque show para exibir de primeira --}}
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+        {{-- <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
@@ -149,8 +153,8 @@
                 <a class="collapse-item" href="404.html">404 Page</a>
                 <a class="collapse-item active" href="blank.html">Blank Page</a>
             </div>
-        </div>
-    </li>
+        </div> --}}
+    {{-- </li> --}}
 
     {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
