@@ -98,7 +98,7 @@ class FormCreate extends Component
             //criar os
             $os = OS::create([
                 'cliente_id' => $this->cliente_id,
-                'veiculo_id' => $this->veiculo_id,
+                'veiculo_id' => (empty($this->veiculo_id)?null:$this->veiculo_id),
                 'descricao' => $this->descricao
             ]);
             //verficar se tem algum serviço selecionado

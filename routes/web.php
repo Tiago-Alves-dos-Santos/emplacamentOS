@@ -1,15 +1,18 @@
 <?php
 
+use App\Http\Controllers\PDFC;
 use App\Http\Livewire\Pages\Login;
-use App\Http\Livewire\Pages\Os\Lista as OSLista;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Pages\Dashboard;
+use App\Http\Livewire\Pages\Os\Lista as OSLista;
+use App\Http\Livewire\Pages\Despeza\FiltroMensal;
 use App\Http\Livewire\Pages\Os\Create as OSCreate;
 use App\Http\Livewire\Pages\Servico\TaxasVincular;
 use App\Http\Livewire\Pages\Usuarios\Create as UserCreate;
 use App\Http\Livewire\Pages\Usuarios\Update as UserUpdate;
 use App\Http\Livewire\Pages\Cliente\Create as ClienteCreate;
 use App\Http\Livewire\Pages\Cliente\Update as ClienteUpdate;
+use App\Http\Livewire\Pages\Despeza\Create as DespezaCreate;
 use App\Http\Livewire\Pages\Taxa\Dashboard as TaxaDashboard;
 use App\Http\Livewire\Pages\Cliente\Dashboard as ClienteDashboard;
 use App\Http\Livewire\Pages\Servico\Dashboard as ServicoDashboard;
@@ -48,3 +51,8 @@ Route::get('/taxa/dashboard', TaxaDashboard::class)->name('view.taxa.dashboard')
 //os
 Route::get('/os/create', OSCreate::class)->name('view.os.create');
 Route::get('/os/lista', OSLista::class)->name('view.os.lista');
+Route::get('/os/pdf/{id}', [PDFC::class, 'os'])->name('os.pdf');
+Route::get('/os/lucro-mensal/{data}/{total_despezas}', [PDFC::class, 'lucroMensal'])->name('os.lucro-mensal');
+//despezas
+Route::get('/despeza/create', DespezaCreate::class)->name('view.despeza.create');
+Route::get('/despeza/mes-referente', FiltroMensal::class)->name('view.despeza.filter-mensal');

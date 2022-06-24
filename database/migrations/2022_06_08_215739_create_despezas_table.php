@@ -17,6 +17,8 @@ class CreateDespezasTable extends Migration
             $table->id();
             $table->bigInteger('fornecedor_id')->unsigned()->nullable();
             $table->string('nome',255)->nullable();
+            $table->double('valor', 8, 2)->nullable();
+            $table->date('mes_referente')->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->foreign('fornecedor_id')->references('id')->on('fornecedor');

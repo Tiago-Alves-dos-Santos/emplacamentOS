@@ -22,7 +22,7 @@ class Table extends Component
     {
         $question = [
             'title' => 'Deletar veículo',
-            'data' => 'Realmente deseja o veículo de placa: <span style="color:red; white-space: nowrap;">'.Veiculos::find($veiculo_id)->placa.'</span>',
+            'data' => 'Realmente deseja excluir o veículo de placa: <span style="color:red; white-space: nowrap;">'.Veiculos::find($veiculo_id)->placa.'</span>',
             'veiculo_id' => $veiculo_id
         ];
         $this->emit('veiculo.table.deleteVeiculo', $question);
