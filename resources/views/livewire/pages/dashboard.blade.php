@@ -1,5 +1,8 @@
 <div>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
+    @php
+        //dd($os_lucro_mensal);
+    @endphp
     <div class="row">
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -91,18 +94,16 @@
             const data = {
             labels: [
                 'Total',
-                'Taxas',
-                'Despezas',
+                'Taxas e Despezas',
                 'Lucro',
 
             ],
             datasets: [{
                 label: 'My First Dataset',
-                data: [300, 50, 50, 200],
+                data: ["{{$os_lucro_mensal->total}}", "{{($os_lucro_mensal->taxas + $total_despeza_mensal)}}", "{{($os_lucro_mensal->lucro - $total_despeza_mensal)}}"],
                 backgroundColor: [
                 'rgb(54, 162, 235)',
                 'rgb(255, 99, 132)',
-                'rgb(255, 205, 86)',
                 'rgb(50, 229, 92)',
 
                 ],

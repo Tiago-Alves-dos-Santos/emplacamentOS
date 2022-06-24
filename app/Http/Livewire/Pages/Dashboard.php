@@ -11,9 +11,6 @@ class Dashboard extends Component
 {
 
 
-
-
-    //grafico de total - taxas e lucro das os desse mes
     public function render()
     {
         return view('livewire.pages.dashboard',[
@@ -26,6 +23,8 @@ class Dashboard extends Component
             'os_mes_atual' => OS::whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))
             ->count(),
+            //grafico de total - taxas e lucro das os desse mes
+            'os_lucro_mensal' => OS::lucroMensal(date('m'), date('Y'))
         ])
         ->extends('layouts.admin', ['page_active' => 'home'])
         ->section('conteudo');
