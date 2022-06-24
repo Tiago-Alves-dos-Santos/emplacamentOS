@@ -37,6 +37,8 @@
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script> --}}
     <script src="//cdn.ckeditor.com/4.19.0/basic/ckeditor.js" charset="utf-8"></script>
     <script src="{{asset('plugins/ckeditor/adapters/jquery.js')}}"></script>
+    {{-- Chart js --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     {{-- meu script --}}
     <script src="{{asset('js/header.js')}}"></script>
     @stack('scripts-top')
