@@ -50,6 +50,10 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="shadow-sm p-3 mb-5 bg-white rounded text-danger">
+               R$ {{Configuracao::getDbMoney($total_despeza_mensal)}}
+            </div>
         </div>
     </div>
 </div>

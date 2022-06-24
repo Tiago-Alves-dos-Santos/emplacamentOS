@@ -32,7 +32,10 @@ class FiltroMensal extends Component
         return view('livewire.components.despeza.filtro-mensal',[
             'despezas' => Despezas::whereMonth('mes_referente', $mes)
             ->whereYear('mes_referente', $ano)
-            ->paginate(30)
+            ->paginate(30),
+            'total_despeza_mensal' => Despezas::whereMonth('mes_referente', $mes)
+            ->whereYear('mes_referente', $ano)
+            ->sum('valor')
         ]);
     }
 }
