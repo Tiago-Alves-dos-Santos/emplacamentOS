@@ -73,7 +73,9 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                             aria-labelledby="dropdownMenuLink">
                             <div class="dropdown-header">Opções</div>
-                            <a class="dropdown-item" href="#">Relátorio de lucro</a>
+                            <a class="dropdown-item" href="{{route('os.lucro-mensal', [
+                                'data' => date('Y')."-".date('m')
+                            ])}}" target="_blank">Relátorio de lucro</a>
                             {{-- <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Something else here</a> --}}

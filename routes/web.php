@@ -52,6 +52,7 @@ Route::get('/taxa/dashboard', TaxaDashboard::class)->name('view.taxa.dashboard')
 Route::get('/os/create', OSCreate::class)->name('view.os.create');
 Route::get('/os/lista', OSLista::class)->name('view.os.lista');
 Route::get('/os/pdf/{id}', [PDFC::class, 'os'])->name('os.pdf');
+Route::get('/os/lucro-mensal/{data}', [PDFC::class, 'lucroMensal'])->name('os.lucro-mensal');
 //despezas
 Route::get('/despeza/create', DespezaCreate::class)->name('view.despeza.create');
 Route::get('/despeza/mes-referente', FiltroMensal::class)->name('view.despeza.filter-mensal');
