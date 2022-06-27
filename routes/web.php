@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\PDFC;
 use App\Http\Livewire\Pages\Login;
-use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Pages\Notificacao\Lista as NotificacaoLista;
+use App\Http\Livewire\Pages\Dashboard;
 use App\Http\Livewire\Pages\Os\Lista as OSLista;
+use App\Http\Controllers\Dashboard as DashboardC;
 use App\Http\Livewire\Pages\Despeza\FiltroMensal;
 use App\Http\Livewire\Pages\Os\Create as OSCreate;
 use App\Http\Livewire\Pages\Servico\TaxasVincular;
@@ -16,6 +16,7 @@ use App\Http\Livewire\Pages\Cliente\Update as ClienteUpdate;
 use App\Http\Livewire\Pages\Despeza\Create as DespezaCreate;
 use App\Http\Livewire\Pages\Taxa\Dashboard as TaxaDashboard;
 use App\Http\Livewire\Pages\Cliente\Dashboard as ClienteDashboard;
+use App\Http\Livewire\Pages\Notificacao\Lista as NotificacaoLista;
 use App\Http\Livewire\Pages\Servico\Dashboard as ServicoDashboard;
 use App\Http\Livewire\Pages\Usuarios\Dashboard as  UsuarioDashboard;
 use App\Http\Livewire\Pages\Fornecedor\Dashboard as FornecedorDashboard;
@@ -33,7 +34,8 @@ use App\Http\Livewire\Pages\Fornecedor\Dashboard as FornecedorDashboard;
 
 Route::get('/', Login::class);
 
-Route::match(['get', 'post'],'/home', [Dashboard::class,'index'])->name('home');
+Route::get('/home', Dashboard::class)->name('home');
+Route::post('/home/ajax/data-dashboard', [DashboardC::class,'index'])->name('home.ajax.data-dashboard');
 //Route::match(['get', 'post'], '/home/ajax/data-dashboard', [Dashboard::class,'dataDashboard'])->name('home.ajax.data-dashboard');
 //usuarios
 Route::get('/usuario/dashboard',  UsuarioDashboard::class)->name('view.user.dashboard');

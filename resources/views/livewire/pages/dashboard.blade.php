@@ -1,6 +1,3 @@
-@extends('layouts.admin',['page_active' => 'home'])
-
-@section('conteudo')
 <div>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
     @php
@@ -136,7 +133,7 @@
             $("#mes_dashboard").on('change', function(){
                 let element = $(this);
                 $.ajax({
-                    url: "{{route('home')}}",
+                    url: "{{route('home.ajax.data-dashboard')}}",
                     dataType: 'html',
                     type: 'POST',
                     data: {
@@ -190,5 +187,3 @@
         </script>
     @endpush
 </div>
-
-@endsection
