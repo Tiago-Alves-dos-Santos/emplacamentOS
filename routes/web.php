@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\PDFC;
 use App\Http\Livewire\Pages\Login;
+use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Pages\Dashboard;
 use App\Http\Livewire\Pages\Os\Lista as OSLista;
 use App\Http\Livewire\Pages\Despeza\FiltroMensal;
 use App\Http\Livewire\Pages\Os\Create as OSCreate;
@@ -32,7 +32,8 @@ use App\Http\Livewire\Pages\Fornecedor\Dashboard as FornecedorDashboard;
 
 Route::get('/', Login::class);
 
-Route::get('/home', Dashboard::class)->name('home');
+Route::match(['get', 'post'],'/home', [Dashboard::class,'index'])->name('home');
+//Route::match(['get', 'post'], '/home/ajax/data-dashboard', [Dashboard::class,'dataDashboard'])->name('home.ajax.data-dashboard');
 //usuarios
 Route::get('/usuario/dashboard',  UsuarioDashboard::class)->name('view.user.dashboard');
 Route::get('/usuario/create',  UserCreate::class)->name('view.user.create');

@@ -42,6 +42,16 @@ function showQuestionYesNo(title,question_data, callback,color='dark'){
     });
 }
 
+function moneyMaskValue(value, cifrao = false) {
+
+    if(cifrao){
+        var retorno = value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
+    }else{
+        var retorno = value.toLocaleString('pt-br', {minimumFractionDigits: 2});
+    }
+    return retorno;
+}
+
 function moneyMask(campo) {
     let value = campo.value;
     value = value.replace('.', '').replace(',', '').replace(/\D/g, '')
