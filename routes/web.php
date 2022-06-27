@@ -4,6 +4,7 @@ use App\Http\Controllers\PDFC;
 use App\Http\Livewire\Pages\Login;
 use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Pages\Notificacao\Lista as NotificacaoLista;
 use App\Http\Livewire\Pages\Os\Lista as OSLista;
 use App\Http\Livewire\Pages\Despeza\FiltroMensal;
 use App\Http\Livewire\Pages\Os\Create as OSCreate;
@@ -57,3 +58,5 @@ Route::get('/os/lucro-mensal/{data}/{total_despezas}', [PDFC::class, 'lucroMensa
 //despezas
 Route::get('/despeza/create', DespezaCreate::class)->name('view.despeza.create');
 Route::get('/despeza/mes-referente', FiltroMensal::class)->name('view.despeza.filter-mensal');
+//notificação
+Route::get('/notificacao/lista', NotificacaoLista::class)->name('view.notificacao.lista');

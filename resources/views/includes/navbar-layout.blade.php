@@ -93,7 +93,7 @@
                         Spending Alert: We've noticed unusually high spending for your account.
                     </div>
                 </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                <a class="dropdown-item text-center small text-gray-500" href="{{route('view.notificacao.lista')}}">Show All Alerts</a>
             </div>
         </li>
 
