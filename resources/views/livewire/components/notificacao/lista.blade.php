@@ -14,7 +14,7 @@
                 </h4>
             </div>
             <div class="col-md-4 d-flex justify-content-end">
-                <button class="btn btn-success">
+                <button class="btn btn-success" wire:click='marcarLida({{$value->id}})'>
                     Marcar como lida
                 </button>
             </div>

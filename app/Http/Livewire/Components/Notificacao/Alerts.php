@@ -7,6 +7,9 @@ use App\Models\Notification;
 
 class Alerts extends Component
 {
+    protected $listeners = [
+        'notificacao.alerts.reload' => '$refresh',
+    ];
     public function render()
     {
         return view('livewire.components.notificacao.alerts', [
