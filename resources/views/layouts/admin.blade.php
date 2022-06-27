@@ -23,7 +23,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div style="padding: 10px">
+                <div style="padding: 10px" id="conteudo">
 
                     <!-- Page Heading -->
                     @yield('conteudo')

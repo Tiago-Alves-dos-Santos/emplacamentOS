@@ -19,6 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->text('descricao')->nullable();
             $table->string('tabela',255)->nullable();
             $table->bigInteger('id_destino')->unsigned()->nullable();//se id for nulo, mandar notificação pra geral
+            $table->enum('lida', ['S', 'N'])->default('N');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

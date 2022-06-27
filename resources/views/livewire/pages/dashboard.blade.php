@@ -3,6 +3,11 @@
     @php
         //dd($os_lucro_mensal);
     @endphp
+    <div class="row mb-2">
+        <div class="col-md-2">
+            <input type="month" class="form-control" value="{{date('Y-m')}}" id="mes_dashboard">
+        </div>
+    </div>
     <div class="row">
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -27,8 +32,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                Total Despezas ({{date('m/Y')}})</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{Configuracao::getDbMoney($total_despeza_mensal)}}</div>
+                                Total Despezas</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total_despezas">R$ {{Configuracao::getDbMoney($total_despeza_mensal)}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -44,8 +49,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                OS Realizadas ({{date('m/Y')}})</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$os_mes_atual}}</div>
+                                OS Realizadas</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="os_realizadas">{{$os_mes_atual}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fa-solid fa-file-invoice fa-2x text-gray-300"></i>
@@ -73,7 +78,7 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                             aria-labelledby="dropdownMenuLink">
                             <div class="dropdown-header">Opções</div>
-                            <a class="dropdown-item" href="{{route('os.lucro-mensal', [
+                            <a class="dropdown-item" id="link_relatorio" href="{{route('os.lucro-mensal', [
                                 'data' => date('Y')."-".date('m'),
                                 'total_despezas' => $total_despeza_mensal
                             ])}}" target="_blank">Relátorio de lucro</a>
@@ -94,38 +99,91 @@
     </div>
     @push('scripts')
         <script>
-            const data = {
-            labels: [
-                'Total',
-                'Taxas e Despezas',
-                'Lucro',
-
-            ],
-            datasets: [{
-                label: 'My First Dataset',
-                data: ["{{$os_lucro_mensal->total}}", "{{($os_lucro_mensal->taxas + $total_despeza_mensal)}}", "{{($os_lucro_mensal->lucro - $total_despeza_mensal)}}"],
-                backgroundColor: [
-                'rgb(54, 162, 235)',
-                'rgb(255, 99, 132)',
-                'rgb(50, 229, 92)',
-
+            let data = {
+                labels: [
+                    'Total',
+                    'Taxas e Despezas',
+                    'Lucro',
                 ],
-                hoverOffset: 4
-            }]
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: ["{{$os_lucro_mensal->total}}", "{{($os_lucro_mensal->taxas + $total_despeza_mensal)}}", "{{($os_lucro_mensal->lucro - $total_despeza_mensal)}}"],
+                    backgroundColor: [
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)',
+                    'rgb(50, 229, 92)',
+                    ],
+                    hoverOffset: 4
+                }]
             };
 
-            const config = {
-                type: 'pie',
-                data: data,
+            let config = {
+                    type: 'pie',
+                    data: data,
             };
-
-            const myChart = new Chart(
+            let myChart = new Chart(
                 document.getElementById('myChart'),
                 config
             );
+            myChart.canvas.parentNode.style.width = '500px';
 
            // myChart.canvas.parentNode.style.height = '200px';
-            myChart.canvas.parentNode.style.width = '500px';
+
+
+            $("#mes_dashboard").on('change', function(){
+                let element = $(this);
+                $.ajax({
+                    url: "{{route('home.ajax.data-dashboard')}}",
+                    dataType: 'html',
+                    type: 'POST',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        'data': $(element).val()
+
+                    },
+                    complete: function() {
+                      //$("#conteudo").empty().html();
+                    },
+                    success: function(data, textStatus) {
+                        let objeto = JSON.parse(data);
+                        $("#total_despezas").html(moneyMaskValue(objeto.total_despeza_mensal, true));
+                        $("#link_relatorio").attr('href', objeto.link.relatorio);
+                        $("#os_realizadas").html(objeto.os_mes_atual)
+                        //carrega grafico
+                        let datas = {
+                            labels: [
+                                'Total',
+                                'Taxas e Despezas',
+                                'Lucro',
+                            ],
+                            datasets: [{
+                                label: 'My First Dataset',
+                                data: [objeto.os_lucro_mensal.total, (objeto.os_lucro_mensal.taxas + objeto.total_despeza_mensal), (objeto.os_lucro_mensal.lucro + objeto.total_despeza_mensal)],
+                                backgroundColor: [
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 99, 132)',
+                                'rgb(50, 229, 92)',
+                                ],
+                                hoverOffset: 4
+                            }]
+                        };
+                        myChart.destroy();
+                        config = {
+                            type: 'pie',
+                            data: datas,
+                        };
+                        myChart = new Chart(
+                            document.getElementById('myChart'),
+                            config
+                        );
+                        myChart.canvas.parentNode.style.width = '500px';
+                        //$("#conteudo").empty().html(data);
+                    },
+                    error: function(xhr,er) {
+                        console.log('<p class="destaque">Error ' + xhr.status + ' - ' + xhr.statusText + '<br />Tipo de erro: ' + er + '</p>')
+                    }
+                });
+            });
         </script>
     @endpush
 </div>
