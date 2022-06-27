@@ -17,7 +17,7 @@
             </h6>
             {{-- uma ideia, tranformar compoennte em livewire, para qnd marcar como lida já atualizar aq? --}}
             @forelse ($notificacoes as $value)
-            <a class="dropdown-item d-flex align-items-center" href="#">
+            <a class="dropdown-item d-flex align-items-center" href="{{route('view.notificacao.lista')}}">
                 <div class="mr-3">
                     <div class="icon-circle bg-primary">
                         <img src="{{asset('img/party_balloons_48px.png')}}" alt="" class="img-fluid">
