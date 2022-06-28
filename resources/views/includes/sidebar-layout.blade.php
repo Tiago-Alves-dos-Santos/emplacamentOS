@@ -49,18 +49,18 @@
 
     <li class="nav-item @if ($page_active == 'servico.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.servico.dashboard')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
+            <i class="fa-solid fa-list-ul"></i>
             <span>Serviços</span></a>
     </li>
     <li class="nav-item @if ($page_active == 'taxa.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.taxa.dashboard')}}">
-            <i class="fas fa-fw fa-chart-area"></i>
+            <i class="fa-solid fa-list-ul"></i>
             <span>Taxa</span></a>
     </li>
     <li class="nav-item @if ($page_active == 'os.create' || $page_active == 'os.lista') active @endif">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fa-solid fa-clipboard-list"></i>
             <span>OS</span>
         </a>
         <div id="collapseTwo" class="collapse @if ($page_active == 'os.create' || $page_active == 'os.lista') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -78,7 +78,7 @@
     <li class="nav-item @if ($page_active == 'despeza.create' || $page_active == 'despeza.filter-mensal') active @endif">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDespeza"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fa-solid fa-dollar-sign"></i>
             <span>Despezas</span>
         </a>
         <div id="collapseDespeza" class="collapse @if ($page_active == 'despeza.create' || $page_active == 'despeza.filter-mensal') show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
