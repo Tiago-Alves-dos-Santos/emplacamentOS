@@ -42,6 +42,8 @@ class FormUpdate extends Component
         $this->type = $user->type;
     }
 
+
+
     public function updateUser()
     {
         $this->validate();

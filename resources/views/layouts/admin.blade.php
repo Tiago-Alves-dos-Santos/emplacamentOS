@@ -70,7 +70,7 @@
                 <div class="modal-body">Selecione "SAIR" abaixo se estiver pronto para encerrar sua sessão atual.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="{{route('logout')}}">SAIR</a>
+                    <a class="btn btn-danger" href="{{route('logout')}}">SAIR</a>
                 </div>
             </div>
         </div>
