@@ -12,6 +12,10 @@ $(function(){
         showToast(msg_toast.title, msg_toast.information, msg_toast.type, msg_toast.time);
     });
 
+    Livewire.on('showAlert',(msg) => {
+        showAlert(msg.title, msg.information, msg.type);
+    });
+
     Livewire.on('openGetRouteNewTab',(route) => {
         window.open(route);
     });
