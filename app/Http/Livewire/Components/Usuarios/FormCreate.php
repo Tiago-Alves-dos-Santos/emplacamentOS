@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Components\Usuarios;
 use App\Models\User;
 use Livewire\Component;
 use App\Http\Classes\Configuracao;
+use Illuminate\Support\Facades\Hash;
 
 new Configuracao();
 class FormCreate extends Component
@@ -37,7 +38,7 @@ class FormCreate extends Component
                 User::create([
                     'name' => mb_strtoupper($this->nome),
                     'email' => $this->email,
-                    'password' => base64_encode($this->senha),
+                    'password' => Hash::make($this->senha),
                     'type' => $this->type
                 ]);
                 $this->msg_toast['title'] = 'Sucesso!';
