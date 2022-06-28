@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Classes;
 
-use App\Models\Autorizacoes;
-
 class Authentication
 {
     public static function check()
