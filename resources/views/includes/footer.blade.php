@@ -8,7 +8,7 @@
 
 @if(session()->has('msg'))
 <script>
-    showAlert("{{session('msg.title')}}", "{{session(msg.information)}}","{{session(msg.type)}}");
+    showAlert("{{session('msg.title')}}", "{{session('msg.information')}}","{{session('msg.type')}}");
 </script>
 @php
     session()->forget('msg');

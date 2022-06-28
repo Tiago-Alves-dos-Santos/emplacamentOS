@@ -8,6 +8,7 @@ class Login extends Controller
 {
     public function logout()
     {
-        # code...
+        session()->flush();
+        return redirect()->route('login');
     }
 }
