@@ -15,6 +15,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
+                        <th>COD</th>
                         <th>Serviço</th>
                         <th>Tipo</th>
                         <th>Valor</th>
@@ -31,6 +32,7 @@
 
                         @endphp
                         <tr>
+                            <td>{{$value->id}}</td>
                             <td>{{$value->nome}}</td>
                             @if ($value->valor_type == 'fixo')
                             <td>
