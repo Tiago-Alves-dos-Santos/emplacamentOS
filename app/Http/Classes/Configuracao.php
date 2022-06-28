@@ -19,7 +19,7 @@ if(PRODUCAO){
 }
 class Configuracao
 {
-    public static $LIMITE_PAGINA = 1;
+    public static $LIMITE_PAGINA = 10;
     /**
      * [Description for isProduction]
      *
