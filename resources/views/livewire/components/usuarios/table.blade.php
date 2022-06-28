@@ -2,7 +2,7 @@
     {{-- Because she competes with no one, no one can compete with her. --}}
     <div class="row mb-3">
         <div class="col-md-11">
-            <input type="search" class="form-control" placeholder="PESQUISAR">
+            <input type="search" class="form-control" placeholder="PESQUISAR NOME" wire:model='search'>
         </div>
         <div class="col-md">
             <a href="{{route('view.user.create')}}" class="btn btn-info d-block">

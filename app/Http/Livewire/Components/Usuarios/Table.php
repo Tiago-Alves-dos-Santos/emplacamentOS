@@ -11,6 +11,7 @@ class Table extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    public $search = "";
     protected $listeners = [
         'users-reload' => '$refresh',
     ];
@@ -30,7 +31,8 @@ class Table extends Component
     public function render()
     {
         return view('livewire.components.usuarios.table',[
-            'users' => User::paginate(Configuracao::$LIMITE_PAGINA)
+            'users' => User::where('name','like',"%{$this->search}%")
+            ->paginate(Configuracao::$LIMITE_PAGINA)
         ]);
     }
 }
