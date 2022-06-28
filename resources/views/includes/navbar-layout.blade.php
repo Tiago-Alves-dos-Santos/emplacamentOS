@@ -22,11 +22,12 @@
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
-        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-        <li class="nav-item dropdown no-arrow d-sm-none">
+        <!-- Nav Item - Search Dropdown (Visible Only XS) - busca(mobil) vista qnd a tela tiver tamanho de celular xs -->
+        {{-- <li class="nav-item dropdown no-arrow d-sm-none">
             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
+
             </a>
             <!-- Dropdown - Messages -->
             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
@@ -44,7 +45,7 @@
                     </div>
                 </form>
             </div>
-        </li>
+        </li> --}}
 
         <!-- Nav Item - Alerts -->
         <livewire:components.notificacao.alerts>
@@ -124,6 +125,7 @@
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auths::user()->name}}</span>
                 {{-- <img class="img-profile rounded-circle"
                     src="img/undraw_profile.svg"> --}}
+
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
