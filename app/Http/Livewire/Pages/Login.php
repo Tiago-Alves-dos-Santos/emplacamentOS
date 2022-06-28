@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Pages;
 
 use App\Models\User;
 use Livewire\Component;
+use App\Http\Classes\Authentication;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 
@@ -21,7 +22,9 @@ class Login extends Component
 
     public function mount()
     {
-        if(Cookie::has('lembrar_de_mim')){
+        if(Authentication::check()){
+            redirect()->route('home');
+        }else if(Cookie::has('lembrar_de_mim')){
             $this->lembrar_de_min =  Cookie::get('lembrar_de_mim');
             $this->email =  Cookie::get('user_name');
             $this->senha =  Cookie::get('user_pass');
