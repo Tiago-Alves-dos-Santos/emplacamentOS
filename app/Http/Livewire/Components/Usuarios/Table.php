@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Classes\Configuracao;
+use App\Http\Classes\Authentication;
 
 class Table extends Component
 {
@@ -30,8 +31,14 @@ class Table extends Component
     }
     public function render()
     {
+        $condition_type = "true";
+        if(Authentication::user()->type != 'admin'){
+           $condition_type =  "type =  'common'";
+        }
         return view('livewire.components.usuarios.table',[
-            'users' => User::where('name','like',"%{$this->search}%")
+            'users' => User::where('id', '!=', Authentication::user()->id)
+            ->where('name','like',"%{$this->search}%")
+            ->whereRaw($condition_type)
             ->paginate(Configuracao::$LIMITE_PAGINA)
         ]);
     }
