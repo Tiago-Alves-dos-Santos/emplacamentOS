@@ -4,12 +4,22 @@ namespace App\Http\Livewire\Components\Usuarios;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
+use App\Http\Classes\Configuracao;
 
 class Table extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     protected $listeners = [
         'users-reload' => '$refresh',
     ];
+
+    // public function paginationView()
+    // {
+    //     return 'vendor.pagination.custom';
+    // }
+
     public function updateStatus($id)
     {
         $user = User::find($id);
@@ -20,7 +30,7 @@ class Table extends Component
     public function render()
     {
         return view('livewire.components.usuarios.table',[
-            'users' => User::paginate(10)
+            'users' => User::paginate(Configuracao::$LIMITE_PAGINA)
         ]);
     }
 }
