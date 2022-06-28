@@ -4,9 +4,14 @@ namespace App\Http\Livewire\Components\Fornecedor;
 
 use Livewire\Component;
 use App\Models\Fornecedor;
+use Livewire\WithPagination;
+use App\Http\Classes\Configuracao;
 
 class Table extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    public $search = "";
     protected $listeners = [
         'fornecedor-table-reload' => '$refresh',
     ];
@@ -26,7 +31,8 @@ class Table extends Component
     public function render()
     {
         return view('livewire.components.fornecedor.table',[
-            'fornecedores' => Fornecedor::paginate(10)
+            'fornecedores' => Fornecedor::where('nome','like',"%{$this->search}%")
+            ->paginate(Configuracao::$LIMITE_PAGINA)
         ]);
     }
 }

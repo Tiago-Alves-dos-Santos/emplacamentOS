@@ -2,7 +2,7 @@
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     <div class="row mb-3">
         <div class="col-md-11">
-            <input type="search" class="form-control" placeholder="PESQUISAR">
+            <input type="search" class="form-control" placeholder="PESQUISAR NOME" wire:model='search'>
         </div>
         <div class="col-md">
             <button type="button" href="" class="btn btn-info d-block" data-toggle="modal" data-target="#cadastrarFornecedor">
@@ -43,6 +43,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="col-md-12">
+                    {{$fornecedores->links()}}
+                </div>
             </div>
         </div>
     </div>
