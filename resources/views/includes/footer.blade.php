@@ -5,3 +5,12 @@
 <script src="{{asset('js/layout/jquery.easing.min.js')}}"></script>
 <script src="{{asset('js/layout/sb-admin.js')}}"></script>
 <script src="{{asset('js/footer.js')}}"></script>
+
+@if(session()->has('msg'))
+<script>
+    showAlert("{{session('msg.title')}}", "{{session(msg.information)}}","{{session(msg.type)}}");
+</script>
+@php
+    session()->forget('msg');
+@endphp
+@endif
