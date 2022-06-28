@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Classes;
 
-use App\Models\Autorizacoes;
-
 class Authentication
 {
     public static function check()
@@ -21,12 +19,6 @@ class Authentication
         return session('user');
     }
 
-    public function checkPermissao($permissao)
-    {
-        return Autorizacoes::where('usuario_id', Authentication::user()->id)
-        ->where('chave_autorizacao', $permissao)
-        ->exists();
-    }
 }
 
 //middleware login com a classe acima

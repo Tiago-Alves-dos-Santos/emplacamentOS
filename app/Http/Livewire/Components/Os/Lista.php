@@ -5,12 +5,20 @@ namespace App\Http\Livewire\Components\Os;
 use App\Models\OS;
 use Livewire\Component;
 use App\Models\ServicoOS;
+use Livewire\WithPagination;
 use App\Models\TaxaVariavelOS;
 use App\Http\Classes\Configuracao;
 
 new Configuracao();
 class Lista extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    public $search = [
+        'nome' => '',
+        'id' => '',
+        'created_at' => ''
+    ];
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
         "title" => '',
@@ -67,8 +75,11 @@ class Lista extends Component
         return view('livewire.components.os.lista', [
             'os' => OS::JOIN('clientes', 'clientes.id', '=', 'os.cliente_id')
             ->leftJoin('veiculos','veiculos.id','=','os.veiculo_id')
+            ->where('os.id', 'like', "%{$this->search['id']}%")
+            ->where('clientes.nome', 'like', "%{$this->search['nome']}%")
+            ->where('os.created_at', 'like', "%{$this->search['created_at']}%")
             ->select('os.id','os.descricao','os.created_at','clientes.nome','veiculos.modelo','veiculos.placa')
-            ->paginate(30)
+            ->paginate(Configuracao::$LIMITE_PAGINA)
         ]);
     }
 }

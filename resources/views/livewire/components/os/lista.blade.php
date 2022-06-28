@@ -1,5 +1,16 @@
 <div>
     {{-- Be like water. --}}
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Nº" wire:model.lazy='search.id'>
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="NOME" wire:model.lazy='search.nome'>
+        </div>
+        <div class="col-md-4">
+            <input type="date" class="form-control"  wire:model.lazy='search.created_at'>
+        </div>
+    </div>
     <div class="accordion" id="accordionExample">
         @forelse ($os as $value)
         <div class="card">
@@ -109,8 +120,12 @@
 
         @endforelse
 
-      </div>
-
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            {{$os->links()}}
+        </div>
+    </div>
       @push('scripts')
       <script>
         $(function(){

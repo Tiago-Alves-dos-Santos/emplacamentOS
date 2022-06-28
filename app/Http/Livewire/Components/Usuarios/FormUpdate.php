@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Components\Usuarios;
 use App\Models\User;
 use Livewire\Component;
 use App\Http\Classes\Configuracao;
+use Illuminate\Support\Facades\Hash;
 
 new Configuracao();
 class FormUpdate extends Component
@@ -12,7 +13,8 @@ class FormUpdate extends Component
     public $user_id = 0;
     public $nome = "";
     public $email = "";
-    public $senha = "";
+    public $senha = null;
+    public $old_password = "";
     public $type = "";
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
@@ -28,7 +30,6 @@ class FormUpdate extends Component
     protected $rules = [
         'nome' => 'required|min:5',
         'email' => 'required|email',
-        'senha' => 'required|min:5'
     ];
 
     public function mount($user_id)
@@ -37,9 +38,11 @@ class FormUpdate extends Component
         $user = User::find($this->user_id);
         $this->nome = $user->name;
         $this->email = $user->email;
-        $this->senha = base64_decode($user->password);
+        $this->old_password = $user->password;
         $this->type = $user->type;
     }
+
+
 
     public function updateUser()
     {
@@ -49,7 +52,7 @@ class FormUpdate extends Component
                 User::where('id', $this->user_id)->update([
                     'name' => mb_strtoupper($this->nome),
                     'email' => $this->email,
-                    'password' => base64_encode($this->senha),
+                    'password' => (empty($this->senha)?$this->old_password:Hash::make($this->senha)) ,
                     'type' => $this->type
                 ]);
                 $this->msg_toast['title'] = 'Sucesso!';

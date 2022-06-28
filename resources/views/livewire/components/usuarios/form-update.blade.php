@@ -28,7 +28,7 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="">Senha</label>
-                            <input type="password" class="form-control @error('senha') is-invalid @enderror" wire:model.defer='senha'>
+                            <input type="password" class="form-control @error('senha') is-invalid @enderror" wire:model.defer='senha' id="senha" autocomplete="off">
                             @error('senha')
                             <div class="invalid-feedback">
                                 {{$message}}
@@ -67,4 +67,12 @@
         </div>
     </div>
 
+    <script>
+
+        $(function(){
+            Livewire.hook('message.processed', (component) => {
+               // $('input[type="text"]').val('')
+            })
+        });
+    </script>
 </div>

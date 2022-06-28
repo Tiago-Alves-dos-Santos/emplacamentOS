@@ -2,7 +2,7 @@
     {{-- Stop trying to control. --}}
     <div class="row mb-3">
         <div class="col-md-12 order-sm-last">
-            <input type="search" class="form-control" placeholder="PESQUISAR">
+            <input type="search" class="form-control" placeholder="PESQUISAR NOME" wire:model='search'>
         </div>
         <div class="col-md-12 d-flex justify-content-end mt-sm-2 mb-sm-2">
             <button type="button" href="" class="btn btn-info d-block" data-toggle="modal" data-target="#cadastrarServico">
@@ -15,6 +15,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
+                        <th>COD</th>
                         <th>Serviço</th>
                         <th>Tipo</th>
                         <th>Valor</th>
@@ -31,6 +32,7 @@
 
                         @endphp
                         <tr>
+                            <td>{{$value->id}}</td>
                             <td>{{$value->nome}}</td>
                             @if ($value->valor_type == 'fixo')
                             <td>
@@ -66,6 +68,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="col-md-12">
+                    {{$servicos->links()}}
+                </div>
             </div>
         </div>
     </div>

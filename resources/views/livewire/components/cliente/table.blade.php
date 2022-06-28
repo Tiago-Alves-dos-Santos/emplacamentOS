@@ -2,7 +2,7 @@
     {{-- The best athlete wants his opponent at his best. --}}
     <div class="row mb-3">
         <div class="col-md-11">
-            <input type="search" class="form-control" placeholder="PESQUISAR">
+            <input type="search" class="form-control" placeholder="PESQUISAR NOME" wire:model='search'>
         </div>
         <div class="col-md">
             <a href="{{route('view.cliente.create')}}" class="btn btn-info d-block">
@@ -51,6 +51,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="col-md-12">
+                    {{$clientes->links()}}
+                </div>
             </div>
         </div>
     </div>

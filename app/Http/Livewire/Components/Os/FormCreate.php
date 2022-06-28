@@ -221,6 +221,8 @@ class FormCreate extends Component
             'servicos' => ($this->search == "")?[]:
             Servico::whereNotIn('id', $servico_ids)
             ->where('nome','like', "%{$this->search}%")
+            ->orWhere('id','like', "%{$this->search}%")
+            ->orderBy('id', 'desc')
             ->paginate(10),
 
             'servicos_lista' => $this->servicos_add,
