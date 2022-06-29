@@ -80,7 +80,7 @@
                             <div class="dropdown-header">Opções</div>
                             <a class="dropdown-item" id="link_relatorio" href="{{route('os.lucro-mensal', [
                                 'data' => date('Y')."-".date('m'),
-                                'total_despezas' => $total_despeza_mensal
+                                'total_despezas' => base64_encode($total_despeza_mensal)
                             ])}}" target="_blank">Relátorio de lucro</a>
                             {{-- <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
