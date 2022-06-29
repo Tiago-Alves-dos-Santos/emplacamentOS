@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use PDF;
 use App\Models\OS;
+use App\Models\Cliente;
+use App\Models\Veiculos;
 use Illuminate\Http\Request;
 
 class PDFC extends Controller
@@ -17,7 +19,18 @@ class PDFC extends Controller
 
     public function osOrcamento(Request $request)
     {
-        # code...
+        $cliente = isset($request->cliente_id)?Cliente::find($request->cliente_id):[];
+        $veiculo = isset($request->veiculo_id)?Veiculos::find($request->veiculo_id):[];
+        $lista_servicos = isset($request->lista_servicos)?json_decode($request->lista_servicos):"";
+        $lista_taxas = isset($request->lista_taxas)?json_decode($request->lista_taxas):"";
+        $pdf = PDF::loadView('pdf.os-orcamento', compact(
+            'cliente',
+            'veiculo',
+            'lista_servicos',
+            'lista_taxas'
+        ));
+        return $pdf->stream('orçamento.pdf');
+
     }
 
     public function lucroMensal(Request $request)

@@ -27,7 +27,7 @@
                 <input type="search" class="select-search form-control" placeholder="Placa" wire:model='search_veiculo'>
             </div>
             <div class="col-md-6">
-                <select name=""  class="custom-select" wire:model.defer='veiculo_id' id="veiculo_id">
+                <select name=""  class="custom-select" wire:model.lazy='veiculo_id' id="veiculo_id">
                     <option value="" selected>Selecione</option>
                     @foreach ($veiculos_cliente as $value)
                         <option value="{{$value->id}}">{{$value->modelo}} - {{$value->placa}}</option>
@@ -159,7 +159,7 @@
                                 @php
                                    $lucro =  Configuracao::getDbMoney(($lista_servico->valor + ($total_adicional_taxas - $total_taxas)));
                                    $class = ($lucro < 0)?'text-danger':'text-success';
-                                   $total_os += $lista_servico->valor;
+                                   $total_os += ($lista_servico->valor + $total_adicional_taxas);
                                    $total_all_taxas += $total_taxas;
                                 @endphp
                                 Lucros: <span class="{{$class}}">{{$lucro}}</span>
@@ -217,15 +217,27 @@
 
         <div class="form-row mt-5">
             <div class="col-md-12 d-flex justify-content-end">
-                <button type="button" class="btn btn-danger btn-lg mr-2" title="ORÇAMENTO" onclick="pdfOrcamento(this)" data-lista-taxas="{{json_encode($taxa_servico_lista)}}" data-lista-servicos="{{json_encode($servicos_add)}}">
-                    <i class="fa-solid fa-file-pdf"></i>
-                </button>
                 <button type="submit" class="btn btn-success btn-lg">
                     SALVAR OS
                 </button>
             </div>
         </div>
     </form>
+
+    <div class="row mt-3">
+        <div class="col-md-12 d-flex justify-content-end">
+            <form action="{{route('os.orcamento')}}" method="POST">
+                @csrf
+                <input type="hidden" name="lista_servicos" value="{{json_encode($servicos_add)}}">
+                <input type="hidden" name="lista_taxas" value="{{json_encode($taxa_servico_lista)}}">
+                <input type="hidden" name="cliente_id" value="{{$cliente_id}}">
+                <input type="hidden" name="veiculo_id" value="{{$veiculo_id}}">
+                <button type="submit" class="btn btn-danger btn-lg mr-2" title="ORÇAMENTO" formtarget="_blank">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 
     <div class="row mt-3">
         <div class="col-md-12" style="background-color: rgb(15, 15, 15); color: white; padding:10px">
@@ -328,22 +340,16 @@
                 }
             }
 
-            function pdfOrcamento(campo){
-                let cliente_id = $("#cliente_id").val();
-                let veiculo_id = $("#veiculo_id").val();
-                let lista_servicos = $(campo).attr('data-lista-servicos');
-                let lista_taxas = $(campo).attr('data-lista-taxas');
-                //fazer validação, cliente é obrigatorio
-                if(!cliente_id){
-                    //toast
-                }
-                //fazer ajax postas
-                //dados corretos
-                console.log(cliente_id);
-                console.log(veiculo_id);
-                console.log(lista_servicos);
-                console.log(lista_taxas);
+            function downloadFile(response) {
+                var blob = new Blob([response]);
 
+                var link = document.createElement('a');
+
+                link.href = window.URL.createObjectURL(blob);
+
+                link.download = "Sample.pdf";
+
+                link.click();
             }
 
         </script>
