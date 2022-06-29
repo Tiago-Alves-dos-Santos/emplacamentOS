@@ -19,6 +19,7 @@ class CreateTaxaVariavelOSTable extends Migration
             $table->bigInteger('taxa_id')->unsigned()->nullable();
             $table->bigInteger('os_id')->unsigned()->nullable();
             $table->double('valor', 8, 2)->nullable();
+            $table->double('valor_adicional', 8, 2)->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->foreign('servico_id')->references('id')->on('servicos');
