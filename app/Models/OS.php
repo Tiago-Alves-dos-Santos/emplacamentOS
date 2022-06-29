@@ -45,10 +45,14 @@ class OS extends Model
         $total_taxas = TaxaVariavelOS::whereMonth('created_at', $mes)
         ->whereYear('created_at', $ano)->sum('valor');
 
-        $lucro = $total_servicos - $total_taxas;
+        $total_taxas_adicionais = TaxaVariavelOS::whereMonth('created_at', $mes)
+        ->whereYear('created_at', $ano)->sum('valor_adicional');
+
+        $lucro = ($total_servicos + $total_taxas_adicionais) - $total_taxas;
         $retorno = [
             'total' => $total_servicos,
             'taxas' => $total_taxas,
+            'taxas_adicionais' => $total_taxas_adicionais,
             'lucro' => $lucro
         ];
         return (object)$retorno;
