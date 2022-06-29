@@ -44,7 +44,6 @@
                     $servicos = $value->servicos()->get();
                     $total_os = 0;
                     $total_taxas_os = 0;
-                    $total_servico_taxas_adicional = 0;
                 @endphp
                 @forelse ($servicos as $servico)
                 @php
