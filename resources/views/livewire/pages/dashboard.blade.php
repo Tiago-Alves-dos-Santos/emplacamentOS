@@ -102,15 +102,17 @@
             let data = {
                 labels: [
                     'Total',
-                    'Taxas e Despezas',
+                    'Taxas',
+                    'Despezas',
                     'Lucro',
                 ],
                 datasets: [{
                     label: 'My First Dataset',
-                    data: ["{{$os_lucro_mensal->total}}", "{{($os_lucro_mensal->taxas + $total_despeza_mensal)}}", "{{($os_lucro_mensal->lucro - $total_despeza_mensal)}}"],
+                    data: ["{{$os_lucro_mensal->total}}", "{{($os_lucro_mensal->taxas)}}", "{{$total_despeza_mensal}}","{{($os_lucro_mensal->lucro - $total_despeza_mensal)}}"],
                     backgroundColor: [
                     'rgb(54, 162, 235)',
                     'rgb(255, 99, 132)',
+                    'rgb(255, 233, 0)',
                     'rgb(50, 229, 92)',
                     ],
                     hoverOffset: 4
@@ -153,12 +155,12 @@
                         let datas = {
                             labels: [
                                 'Total',
-                                'Taxas e Despezas',
+                                'Taxas',
                                 'Lucro',
                             ],
                             datasets: [{
                                 label: 'My First Dataset',
-                                data: [objeto.os_lucro_mensal.total, (objeto.os_lucro_mensal.taxas + objeto.total_despeza_mensal), (objeto.os_lucro_mensal.lucro + objeto.total_despeza_mensal)],
+                                data: [objeto.os_lucro_mensal.total, objeto.os_lucro_mensal.taxas, objeto.os_lucro_mensal.lucro],
                                 backgroundColor: [
                                 'rgb(54, 162, 235)',
                                 'rgb(255, 99, 132)',

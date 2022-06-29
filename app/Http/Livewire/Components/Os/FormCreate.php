@@ -65,7 +65,7 @@ class FormCreate extends Component
             'servico_id' => $servico_id,
             'valor' => $valor
         ];
-        $this->emit('os.form-create.reload');
+        //$this->emit('os.form-create.reload');
     }
 
     public function removerLista($servico_id)
@@ -119,7 +119,7 @@ class FormCreate extends Component
                             'servico_id' => $value->servico_id,
                             'taxa_id' => $taxa->taxa_id,
                             'os_id' => $os->id,
-                            'valor' => $taxa->valor_taxa
+                            'valor' => $taxa->valor_taxa,
                         ]);
                     }
                 }
@@ -135,7 +135,8 @@ class FormCreate extends Component
                                 'servico_id' => $servico_id,
                                 'taxa_id' => $value['id'],
                                 'os_id' => $os->id,
-                                'valor' => $value['valor']
+                                'valor' => $value['valor'],
+                                'valor_adicional' => $value['valor_adicional']
                             ]);
                         }
                     }
@@ -165,7 +166,7 @@ class FormCreate extends Component
 
     }
 
-    public function addTaxasLista($servico_id,$taxas_ids, $taxas_value)
+    public function addTaxasLista($servico_id,$taxas_ids, $taxas_value, $taxas_adicionais)
     {
         $atualizar = false;
         $i=0;
@@ -185,7 +186,8 @@ class FormCreate extends Component
             if($taxas_value[$i] > 0){
                 $taxas[] = [
                     'id' => $taxas_ids[$i],
-                    'valor' => $taxas_value[$i]
+                    'valor' => $taxas_value[$i],
+                    'valor_adicional' => $taxas_adicionais[$i]
                 ];
             }
 
@@ -197,14 +199,13 @@ class FormCreate extends Component
 
 
         $this->emit('closeModal',"addTaxasVariaveis-$servico_id");
+        //$this->emit('os.form-create.reload');
     }
 
     public function cacularTrocoOs($total)
     {
         $valor = (double)Configuracao::convertToMoney($this->valor_pago);
         $this->troco = $valor - $total;
-        // $this->emit('closeModal','totalOS');
-        // $this->emit('openModal','totalOS');
     }
 
 
