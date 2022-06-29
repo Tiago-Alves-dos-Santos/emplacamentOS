@@ -7,7 +7,7 @@ use App\Models\Veiculos;
 
 class Table extends Component
 {
-    public $cliente_id = 0;
+    public $cliente_id;
     protected $listeners = [
         'veiculos-reload' => '$refresh',
         'veiculo.table.delete' => 'delete'
