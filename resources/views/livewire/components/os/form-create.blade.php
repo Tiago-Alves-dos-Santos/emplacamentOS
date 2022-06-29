@@ -10,7 +10,7 @@
                 <input type="search" wire:model='search_cliente' class="select-search form-control" placeholder="Nome cliente">
             </div>
             <div class="col-md-6 d-flex">
-                <select name="" id="" class="custom-select" wire:model.lazy='cliente_id' class="w-90" required>
+                <select name="" class="custom-select" wire:model.lazy='cliente_id' class="w-90" required id="cliente_id">
                     <option value="" selected>Selecione</option>
                     @foreach ($clientes as $value)
                         <option value="{{$value->id}}">{{$value->nome}}</option>
@@ -27,7 +27,7 @@
                 <input type="search" class="select-search form-control" placeholder="Placa" wire:model='search_veiculo'>
             </div>
             <div class="col-md-6">
-                <select name="" id="" class="custom-select" wire:model.defer='veiculo_id'>
+                <select name=""  class="custom-select" wire:model.defer='veiculo_id' id="veiculo_id">
                     <option value="" selected>Selecione</option>
                     @foreach ($veiculos_cliente as $value)
                         <option value="{{$value->id}}">{{$value->modelo}} - {{$value->placa}}</option>
@@ -217,8 +217,8 @@
 
         <div class="form-row mt-5">
             <div class="col-md-12 d-flex justify-content-end">
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#totalOS">
-                    TOTAL LUCRO
+                <button type="button" class="btn btn-danger btn-lg mr-2" title="ORÇAMENTO" onclick="pdfOrcamento(this)" data-lista-taxas="{{json_encode($taxa_servico_lista)}}" data-lista-servicos="{{json_encode($servicos_add)}}">
+                    <i class="fa-solid fa-file-pdf"></i>
                 </button>
                 <button type="submit" class="btn btn-success btn-lg">
                     SALVAR OS
@@ -326,6 +326,24 @@
                     Livewire.emit('os.form-create-addLista', servico_id, valor_input);
                     $("tr").find('input').val("");
                 }
+            }
+
+            function pdfOrcamento(campo){
+                let cliente_id = $("#cliente_id").val();
+                let veiculo_id = $("#veiculo_id").val();
+                let lista_servicos = $(campo).attr('data-lista-servicos');
+                let lista_taxas = $(campo).attr('data-lista-taxas');
+                //fazer validação, cliente é obrigatorio
+                if(!cliente_id){
+                    //toast
+                }
+                //fazer ajax postas
+                //dados corretos
+                console.log(cliente_id);
+                console.log(veiculo_id);
+                console.log(lista_servicos);
+                console.log(lista_taxas);
+
             }
 
         </script>

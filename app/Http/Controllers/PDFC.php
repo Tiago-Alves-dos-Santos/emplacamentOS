@@ -15,6 +15,11 @@ class PDFC extends Controller
         return $pdf->stream("os{$os->id}.pdf");
     }
 
+    public function osOrcamento(Request $request)
+    {
+        # code...
+    }
+
     public function lucroMensal(Request $request)
     {
         $data = explode('-', $request->data);

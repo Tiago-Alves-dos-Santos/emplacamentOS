@@ -61,6 +61,7 @@ Route::group( [ 'prefix' => 'home/' ], function()
         Route::get('/os/lista', OSLista::class)->name('view.os.lista');
         Route::get('/os/pdf/{id}', [PDFC::class, 'os'])->name('os.pdf');
         Route::get('/os/lucro-mensal/{data}/{total_despezas}', [PDFC::class, 'lucroMensal'])->name('os.lucro-mensal');
+        Route::get('/os/orcamento/', [PDFC::class, 'osOrcamento'])->name('os.orcamento');
         //despezas
         Route::get('/despeza/create', DespezaCreate::class)->name('view.despeza.create');
         Route::get('/despeza/mes-referente', FiltroMensal::class)->name('view.despeza.filter-mensal');
