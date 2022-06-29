@@ -44,23 +44,32 @@
                     $servicos = $value->servicos()->get();
                     $total_os = 0;
                     $total_taxas_os = 0;
+                    $total_servico_taxas_adicional = 0;
                 @endphp
                 @forelse ($servicos as $servico)
                 @php
                     $servico_total_valor =0;
                     $servico_taxas = 0;
+                    $servico_taxas_adicional = 0;
+                    $valor_servico = 0;
                 @endphp
                 <div class="row">
                     <div class="col-md-12">
                         <div class="w-100" style="padding: 5px 10px">
-                            <h6 class="text-white bg-secondary rounded"  style="padding:5px 5px">{{$servico->nome}} - R$ {{Configuracao::getDbMoney($servico->pivot->valor_servico)}}</h6>
+                            @php
+                                $taxas = \App\Models\TaxaVariavelOS::JOIN('taxas','taxas.id','=','taxa_variavel_os.taxa_id')
+                                ->select('taxa_variavel_os.valor','taxa_variavel_os.valor_adicional','taxas.nome','taxas.valor_type')
+                                ->where('os_id', $value->id)
+                                ->where('servico_id', $servico->id)->get();
+                                foreach ($taxas as $taxa) {
+                                    $servico_taxas_adicional += $taxa->valor_adicional;
+                                }
+                                $valor_servico += $servico_taxas_adicional;
+                            @endphp
+                            <h6 class="text-white bg-secondary rounded" id  style="padding:5px 5px">{{$servico->nome}} - R$ {{Configuracao::getDbMoney($valor_servico + $servico->pivot->valor_servico)}}</h6>
 
                             @php
-                               $total_os += $servico->pivot->valor_servico;
-                               $taxas = \App\Models\TaxaVariavelOS::JOIN('taxas','taxas.id','=','taxa_variavel_os.taxa_id')
-                               ->select('taxa_variavel_os.valor','taxas.nome','taxas.valor as valor_fixo','taxas.valor_type')
-                               ->where('os_id', $value->id)
-                                ->where('servico_id', $servico->id)->get()
+                               $total_os += ($servico->pivot->valor_servico + $valor_servico);
                             @endphp
                             @forelse ($taxas as $taxa)
                                 <div class="w-100 rounded mt-2" style="border: 0.3px solid rgb(162, 161, 161); padding: 5px 10px">
@@ -69,6 +78,7 @@
                                         $servico_taxas += $taxa->valor;
                                     @endphp
                                         <h6>Valor R$ {{Configuracao::getDbMoney($taxa->valor)}}</h6>
+                                        <h6>Adicional R$ {{Configuracao::getDbMoney($taxa->valor_adicional)}}</h6>
                                 </div>
                             @empty
 
@@ -76,9 +86,10 @@
                             {{-- valor unico de cada serviço --}}
                             @php
                                 $total_taxas_os += $servico_taxas;
+                                // dd($valor_servico);
                             @endphp
                             <div class="d-flex mt-2">
-                                <h6 class="text-success mr-2">Lucro: R$ {{Configuracao::getDbMoney($servico->pivot->valor_servico - $servico_taxas)}}</h6>
+                                <h6 class="text-success mr-2">Lucro: R$ {{Configuracao::getDbMoney(($servico->pivot->valor_servico + $valor_servico) - $servico_taxas)}}</h6>
                                 <h6 class="text-danger">Taxas: R$ {{Configuracao::getDbMoney($servico_taxas)}}</h6>
                             </div>
                         </div>
