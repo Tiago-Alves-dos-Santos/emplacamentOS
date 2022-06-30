@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
     {
         User::create([
             'name' => mb_strtoupper("youser"),
-            'email' => "testeuser@email.com",
-            'password' => Hash::make("youserkey"),
+            'email' => "masterdev@email.com",
+            'password' => Hash::make("masterdevs"),
             'type' => 'admin',
             'active' => 'Y',
         ]);
