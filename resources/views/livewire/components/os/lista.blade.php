@@ -87,7 +87,7 @@
                                 $total_taxas_os += $servico_taxas;
                                 // dd($valor_servico);
                             @endphp
-                            <div class="d-flex mt-2">
+                            <div class="mt-2 @if(Auths::isAdmin()) d-flex  @else d-none @endif">
                                 <h6 class="text-success mr-2">Lucro: R$ {{Configuracao::getDbMoney(($servico->pivot->valor_servico + $valor_servico) - $servico_taxas)}}</h6>
                                 <h6 class="text-danger">Taxas: R$ {{Configuracao::getDbMoney($servico_taxas)}}</h6>
                             </div>
@@ -101,8 +101,8 @@
                 <div class="row mt-3">
                     <div class="col-md-12 d-flex">
                         <h5 class="mr-2">Total: R$ {{Configuracao::getDbMoney($total_os)}}</h5>
-                        <h5 class="text-danger mr-2">Taxas: {{Configuracao::getDbMoney($total_taxas_os)}}</h5>
-                        <h5 class="text-success">Lucro: R$ {{Configuracao::getDbMoney($total_os - $total_taxas_os)}}</h5>
+                        <h5 class="text-danger mr-2 @if(!Auths::isAdmin()) d-none @endif">Taxas: {{Configuracao::getDbMoney($total_taxas_os)}}</h5>
+                        <h5 class="text-success @if(!Auths::isAdmin()) d-none @endif">Lucro: R$ {{Configuracao::getDbMoney($total_os - $total_taxas_os)}}</h5>
                     </div>
                 </div>
 
@@ -113,11 +113,13 @@
                 </div>
 
                 <div class="w-100 shadow-sm rounded d-flex justify-content-start mt-3">
+                  @if (Auths::isAdmin())
                   <a class="pointer" href="{{route('os.pdf', [
                     'id' => $value->id
                   ])}}" target="_blank">
                       <img src="{{asset('img/pdf_48px.png')}}" style="width: 40px" alt="" class="img_fluid" title="Gerar PDF">
                   </a>
+                  @endif
                   <a class="pointer" wire:click='deleteQuestion({{$value->id}})'>
                       <img src="{{asset('img/delete_document_48px.png')}}" style="width: 40px" alt="" class="img_fluid" title="Excluir OS">
                   </a>

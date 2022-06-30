@@ -33,7 +33,9 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                 Total Despezas</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total_despezas">R$ {{Configuracao::getDbMoney($total_despeza_mensal)}}</div>
+                            @if (Auths::isAdmin())
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="total_despezas">R$ {{Configuracao::getDbMoney($total_despeza_mensal)}}</div>
+                            @endif
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -63,6 +65,7 @@
     </div>
 
 
+    @if (Auths::isAdmin())
     <div class="row">
         <div class="col-xl-12 col-lg-7" style="height: 100%">
             <div class="card shadow mb-4">
@@ -97,6 +100,7 @@
             </div>
         </div>
     </div>
+    @endif
     @push('scripts')
         <script>
             let cor_lucro = 'rgb(50, 229, 92)';

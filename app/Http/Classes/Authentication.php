@@ -19,6 +19,15 @@ class Authentication
         return session('user');
     }
 
+    public static function getType()
+    {
+        return Authentication::user()->type;
+    }
+
+    public static function isAdmin(){
+        return (Authentication::getType() == 'admin')?true:false;
+    }
+
 }
 
 //middleware login com a classe acima
