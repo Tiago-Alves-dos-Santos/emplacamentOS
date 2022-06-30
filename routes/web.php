@@ -77,5 +77,5 @@ Route::group( [ 'prefix' => 'home/' ], function()
 
     });
 });
-
+//logout
 Route::get('/logout', [LoginC::class, 'logout'])->name('logout');
