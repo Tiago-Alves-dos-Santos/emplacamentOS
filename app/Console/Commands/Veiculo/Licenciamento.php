@@ -14,7 +14,7 @@ class Licenciamento extends Command
      *
      * @var string
      */
-    protected $signature = 'veiculo:vencimento';
+    protected $signature = 'veiculo:licenciamento';
 
     /**
      * The console command description.
