@@ -42,8 +42,6 @@ Route::group( [ 'prefix' => 'home/' ], function()
         Route::get('/', Dashboard::class)->name('home');
         Route::post('/ajax/data-dashboard', [DashboardC::class,'index'])->name('home.ajax.data-dashboard');
         //usuarios
-        Route::get('/usuario/dashboard',  UsuarioDashboard::class)->name('view.user.dashboard');
-        Route::get('/usuario/create',  UserCreate::class)->name('view.user.create');
         Route::get('/usuario/edit/{id}',  UserUpdate::class)->name('view.user.update');
         //clientes
         Route::get('/cliente/dashboard',  ClienteDashboard::class)->name('view.cliente.dashboard');
@@ -61,11 +59,22 @@ Route::group( [ 'prefix' => 'home/' ], function()
         Route::get('/os/lista', OSLista::class)->name('view.os.lista');
         Route::get('/os/pdf/{id}', [PDFC::class, 'os'])->name('os.pdf');
         Route::get('/os/lucro-mensal/{data}/{total_despezas}', [PDFC::class, 'lucroMensal'])->name('os.lucro-mensal');
+        Route::post('/os/orcamento/', [PDFC::class, 'osOrcamento'])->name('os.orcamento');
         //despezas
         Route::get('/despeza/create', DespezaCreate::class)->name('view.despeza.create');
-        Route::get('/despeza/mes-referente', FiltroMensal::class)->name('view.despeza.filter-mensal');
         //notificação
         Route::get('/notificacao/lista', NotificacaoLista::class)->name('view.notificacao.lista');
+
+        //acesso restrito admin
+        Route::group( ['middleware' => 'admin'], function()
+        {
+            //usuarios
+            Route::get('/usuario/dashboard',  UsuarioDashboard::class)->name('view.user.dashboard');
+            Route::get('/usuario/create',  UserCreate::class)->name('view.user.create');
+            //despezas
+            Route::get('/despeza/mes-referente', FiltroMensal::class)->name('view.despeza.filter-mensal');
+        });
+
     });
 });
 

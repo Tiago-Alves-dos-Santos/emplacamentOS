@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use PDF;
 use App\Models\OS;
+use App\Models\Cliente;
+use App\Models\Veiculos;
 use Illuminate\Http\Request;
+use App\Http\Classes\Configuracao;
 
 class PDFC extends Controller
 {
@@ -15,27 +18,57 @@ class PDFC extends Controller
         return $pdf->stream("os{$os->id}.pdf");
     }
 
+    public function osOrcamento(Request $request)
+    {
+        $cliente = isset($request->cliente_id)?Cliente::find($request->cliente_id):[];
+        $veiculo = isset($request->veiculo_id)?Veiculos::find($request->veiculo_id):[];
+        $lista_servicos = isset($request->lista_servicos)?json_decode($request->lista_servicos):"";
+        $lista_taxas = isset($request->lista_taxas)?json_decode($request->lista_taxas):"";
+        $pdf = PDF::loadView('pdf.os-orcamento', compact(
+            'cliente',
+            'veiculo',
+            'lista_servicos',
+            'lista_taxas'
+        ));
+        return $pdf->stream('orçamento.pdf');
+
+    }
+
     public function lucroMensal(Request $request)
     {
         $data = explode('-', $request->data);
-        $total_despeza_mensal = $request->total_despezas;
+        $total_despeza_mensal = base64_decode($request->total_despezas);
         $os_lucro_mensal = OS::lucroMensal($data[1], $data[0]);
+
+        if(($os_lucro_mensal->lucro - $total_despeza_mensal) > 0){
+            $cor_lucro = "rgb(50, 229, 92)";
+        }else{
+            $cor_lucro = 'rgb(219, 36, 8)';
+        }
+
         $chartData = [
             "type" => 'pie',
               "data" => [
                 "labels" => [
                     'Total',
-                    'Taxas e Despezas',
+                    'Taxas',
+                    'Despezas',
                     'Lucro',
                 ],
                   "datasets" => [
                     [
                         'label' => 'My First Dataset',
-                        'data' => [round($os_lucro_mensal->total), round($os_lucro_mensal->taxas + $total_despeza_mensal), round($os_lucro_mensal->lucro - $total_despeza_mensal)],
+                        'data' => [
+                                round($os_lucro_mensal->total + $os_lucro_mensal->taxas_adicionais),
+                                round($os_lucro_mensal->taxas),
+                                $total_despeza_mensal,
+                                round($os_lucro_mensal->lucro - $total_despeza_mensal)
+                            ],
                         'backgroundColor' => [
                         'rgb(54, 162, 235)',
                         'rgb(255, 99, 132)',
-                        'rgb(50, 229, 92)',
+                        'rgb(255, 233, 0)',
+                        $cor_lucro,
 
                         ],
                         'hoverOffset'=> 4

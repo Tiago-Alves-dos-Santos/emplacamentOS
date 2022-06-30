@@ -9,7 +9,7 @@ use App\Http\Classes\Configuracao;
 new Configuracao();
 class FormCreate extends Component
 {
-    public $cliente_id = 0;
+    public $cliente_id;
 
     public $placa = "";
     public $marca = "";
@@ -46,7 +46,8 @@ class FormCreate extends Component
             $this->msg_toast['information'] = 'Cadastro realizado com sucesso!';
             $this->msg_toast['type'] = $this->toast_type['success'];
             $this->emit('showToast', $this->msg_toast);
-            $this->resetExcept(['limpa']);
+            $this->resetExcept(['limpa','cliente_id']);
+            $this->emit('veiculos-reload');
         } catch (\Exception $e) {
             $this->msg_toast['title'] = 'Erro!';
             $this->msg_toast['information'] = $e->getMessage();

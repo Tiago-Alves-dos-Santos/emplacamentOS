@@ -15,7 +15,7 @@ function showToast(title,information, type_number, time){
 }
 
 function showAlert(title, information, color, custom_icon = ""){
-    let cor = ['red','green','orange','blue','purple','dark'];
+    let cor = ['red','green','orange','blue','purple','dark']; // 0 - 5
     let icons = "";
     switch (cor[color]) {
         case 'red':

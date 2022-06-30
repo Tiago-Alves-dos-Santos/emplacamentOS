@@ -18,7 +18,9 @@ class Despezas extends Model
 
     public function fornecedor()
     {
-        return $this->belongsTo(Fornecedor::class);
+        return $this->belongsTo(Fornecedor::class)->withTrashed();
     }
+
+
 
 }

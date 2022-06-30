@@ -20,8 +20,18 @@
             <a class="dropdown-item d-flex align-items-center" href="{{route('view.notificacao.lista')}}">
                 <div class="mr-3">
                     <div class="icon-circle bg-primary">
-                        <img src="{{asset('img/party_balloons_48px.png')}}" alt="" class="img-fluid">
                         {{-- <i class="fa-solid fa-exclamation text-white"></i> --}}
+                        @switch($value->titulo)
+                            @case("Aniversariante")
+                                <img src="{{asset('img/party_balloons_48px.png')}}" alt="" class="img-fluid">
+                                @break
+                            @case("Licenciamento")
+                                <img src="{{asset('img/driver_license_48px.png')}}" alt="" class="img-fluid">
+                                @break
+
+                            @default
+
+                        @endswitch
                     </div>
                 </div>
                 <div>
@@ -32,7 +42,17 @@
                         {{date('d', strtotime($value->created_at))}} {{strftime(' de %B', strtotime($value->created_at))}}
                         de {{date('Y', strtotime($value->created_at))}}
                     </div>
-                    <span class="font-weight-bold">{{Str::limit('Parabéns, seu cliente está', 20, '(...)')}}</span>
+                    @switch($value->titulo)
+                        @case("Aniversariante")
+                            <span class="font-weight-bold">{{Str::limit('Parabéns, seu cliente está', 20, '(...)')}}</span>
+                            @break
+                        @case("Licenciamento")
+                            <span class="font-weight-bold">{{Str::limit('Atenção ao licenciamento do veiculo', 40, '(...)')}}</span>
+                            @break
+
+                        @default
+
+                    @endswitch
                 </div>
             </a>
             @empty

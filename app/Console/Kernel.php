@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     {
         //daily
         $schedule->command('gerais:aniversariantes')->daily();
+        $schedule->command('veiculo:licenciamento')->daily();
     }
 
     /**

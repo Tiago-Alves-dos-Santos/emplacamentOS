@@ -33,7 +33,9 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                 Total Despezas</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total_despezas">R$ {{Configuracao::getDbMoney($total_despeza_mensal)}}</div>
+                            @if (Auths::isAdmin())
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="total_despezas">R$ {{Configuracao::getDbMoney($total_despeza_mensal)}}</div>
+                            @endif
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -63,6 +65,7 @@
     </div>
 
 
+    @if (Auths::isAdmin())
     <div class="row">
         <div class="col-xl-12 col-lg-7" style="height: 100%">
             <div class="card shadow mb-4">
@@ -80,7 +83,7 @@
                             <div class="dropdown-header">Opções</div>
                             <a class="dropdown-item" id="link_relatorio" href="{{route('os.lucro-mensal', [
                                 'data' => date('Y')."-".date('m'),
-                                'total_despezas' => $total_despeza_mensal
+                                'total_despezas' => base64_encode($total_despeza_mensal)
                             ])}}" target="_blank">Relátorio de lucro</a>
                             {{-- <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
@@ -97,21 +100,36 @@
             </div>
         </div>
     </div>
+    @endif
     @push('scripts')
         <script>
+            let cor_lucro = 'rgb(50, 229, 92)';
+            function alertLucroNegativo(lucro){
+                if(lucro < 0){
+                    showAlert('Atenção', 'O seu lucro está negativo: R$ <span style="color:red"">'+ moneyMaskValue(lucro,true)+'</span>' , 4);
+                    cor_lucro = 'rgb(219, 36, 8)';
+                }else{
+                    cor_lucro = 'rgb(50, 229, 92)'
+                }
+            }
+
+            alertLucroNegativo("{{($os_lucro_mensal->lucro - $total_despeza_mensal)}}");
+
             let data = {
                 labels: [
                     'Total',
-                    'Taxas e Despezas',
+                    'Taxas',
+                    'Despezas',
                     'Lucro',
                 ],
                 datasets: [{
                     label: 'My First Dataset',
-                    data: ["{{$os_lucro_mensal->total}}", "{{($os_lucro_mensal->taxas + $total_despeza_mensal)}}", "{{($os_lucro_mensal->lucro - $total_despeza_mensal)}}"],
+                    data: ["{{($os_lucro_mensal->total + $os_lucro_mensal->taxas_adicionais)}}", "{{($os_lucro_mensal->taxas)}}", "{{$total_despeza_mensal}}","{{($os_lucro_mensal->lucro - $total_despeza_mensal)}}"],
                     backgroundColor: [
                     'rgb(54, 162, 235)',
                     'rgb(255, 99, 132)',
-                    'rgb(50, 229, 92)',
+                    'rgb(255, 233, 0)',
+                    cor_lucro,
                     ],
                     hoverOffset: 4
                 }]
@@ -149,20 +167,23 @@
                         $("#total_despezas").html(moneyMaskValue(objeto.total_despeza_mensal, true));
                         $("#link_relatorio").attr('href', objeto.link.relatorio);
                         $("#os_realizadas").html(objeto.os_mes_atual)
+                        alertLucroNegativo(objeto.os_lucro_mensal.lucro - objeto.total_despeza_mensal);
                         //carrega grafico
                         let datas = {
                             labels: [
                                 'Total',
-                                'Taxas e Despezas',
+                                'Taxas',
+                                'Despezas',
                                 'Lucro',
                             ],
                             datasets: [{
                                 label: 'My First Dataset',
-                                data: [objeto.os_lucro_mensal.total, (objeto.os_lucro_mensal.taxas + objeto.total_despeza_mensal), (objeto.os_lucro_mensal.lucro + objeto.total_despeza_mensal)],
+                                data: [(objeto.os_lucro_mensal.total + objeto.os_lucro_mensal.taxas_adicionais), objeto.os_lucro_mensal.taxas, objeto.total_despeza_mensal, (objeto.os_lucro_mensal.lucro - objeto.total_despeza_mensal)],
                                 backgroundColor: [
                                 'rgb(54, 162, 235)',
                                 'rgb(255, 99, 132)',
-                                'rgb(50, 229, 92)',
+                                'rgb(255, 233, 0)',
+                                cor_lucro,
                                 ],
                                 hoverOffset: 4
                             }]

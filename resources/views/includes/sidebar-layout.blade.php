@@ -28,11 +28,13 @@
         Pessoal
     </div>
 
+    @if (Auths::isAdmin())
     <li class="nav-item @if($page_active == 'user.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.user.dashboard')}}">
             <i class="fa-solid fa-user"></i>
             <span>Usuários</span></a>
     </li>
+    @endif
     <li class="nav-item @if ($page_active == 'cliente.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.cliente.dashboard')}}">
             <i class="fa-solid fa-user"></i>
@@ -85,7 +87,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Despezas</h6>
                 <a class="collapse-item @if ($page_active == 'despeza.create') active @endif" href="{{route('view.despeza.create')}}">Nova</a>
+                @if (Auths::isAdmin())
                 <a class="collapse-item @if ($page_active == 'despeza.filter-mensal') active @endif" href="{{route('view.despeza.filter-mensal')}}">Mensal</a>
+                @endif
             </div>
         </div>
     </li>
