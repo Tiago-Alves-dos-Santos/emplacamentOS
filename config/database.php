@@ -48,7 +48,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'osserv55_emplcamentos_teste'),
+            'database' => env('DB_DATABASE', 'osserv55_emplacamentos_teste'),
             'username' => env('DB_USERNAME', 'osserv55_osserv'),
             'password' => env('DB_PASSWORD', 'masterdev'),
             'unix_socket' => env('DB_SOCKET', ''),
