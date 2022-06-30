@@ -4,9 +4,13 @@ namespace App\Http\Livewire\Components\Veiculo;
 
 use Livewire\Component;
 use App\Models\Veiculos;
+use Livewire\WithPagination;
+use App\Http\Classes\Configuracao;
 
 class Table extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $cliente_id;
     protected $listeners = [
         'veiculos-reload' => '$refresh',
@@ -37,7 +41,7 @@ class Table extends Component
     public function render()
     {
         return view('livewire.components.veiculo.table', [
-            'veiculos' => Veiculos::where('cliente_id', $this->cliente_id)->paginate(30)
+            'veiculos' => Veiculos::where('cliente_id', $this->cliente_id)->paginate(Configuracao::$LIMITE_PAGINA)
         ]);
     }
 }

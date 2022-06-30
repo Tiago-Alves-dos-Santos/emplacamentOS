@@ -30,7 +30,7 @@
                                       </a>
                                       {{-- <a class="dropdown-item" type="button" wire:click='updateStatus({{$value->id}})'>{{($value->active == 'Y')?'Desativar':'Ativar'}}</a> --}}
                                     </div>
-                                  </div>
+                                </div>
                             </td>
                         </tr>
                         @empty
@@ -40,6 +40,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="col-md-12">
+                    {{$veiculos->links()}}
+                </div>
             </div>
         </div>
     </div>
