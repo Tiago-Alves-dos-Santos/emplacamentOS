@@ -39,7 +39,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Tiago Alves 2022 - {{date('Y')}}</span>
+                        <span>Copyright &copy; <span style="font-weight: bolder">solucoessoft.com.br</span> 2022 - {{date('Y')}}</span>
                     </div>
                 </div>
             </footer>
