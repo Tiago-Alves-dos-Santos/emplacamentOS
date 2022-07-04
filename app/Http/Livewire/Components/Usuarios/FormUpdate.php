@@ -34,7 +34,7 @@ class FormUpdate extends Component
 
     public function mount($user_id)
     {
-        $this->user_id = $user_id;
+        $this->user_id = base64_decode($user_id);
         $user = User::find($this->user_id);
         $this->nome = $user->name;
         $this->email = $user->email;

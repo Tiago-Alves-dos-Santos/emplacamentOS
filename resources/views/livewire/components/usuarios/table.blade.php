@@ -47,7 +47,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                   <a href="{{route('view.user.update', [
-                                    'id' => $value->id
+                                    'id' => base64_encode($value->id)
                                   ])}}" class="dropdown-item" type="button">
                                     Editar
                                  </a>
