@@ -49,7 +49,7 @@ class Licenciamento extends Command
             setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
             date_default_timezone_set('America/Sao_Paulo');
 
-            $month_name = strftime('%B', mktime(0, 0, 0, 6, 10));
+            $month_name = strftime('%B', mktime(0, 0, 0, $mes_atual, 10));
             foreach($veiculos as $value){
                 $final_placa = $value->placa[strlen($value->placa) - 1];
                 // verifcar se final de placa é numero, mesmo se string

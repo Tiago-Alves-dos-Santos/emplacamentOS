@@ -131,7 +131,7 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="{{route('view.user.update', [
-                   'id' => Auths::user()->id
+                   'id' => base64_encode(Auths::user()->id)
                 ])}}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Perfil
