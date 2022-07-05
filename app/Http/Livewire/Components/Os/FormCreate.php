@@ -9,12 +9,16 @@ use Livewire\Component;
 use App\Models\Veiculos;
 use App\Models\ServicoOS;
 use App\Models\ServicoTaxa;
+use Livewire\WithPagination;
 use App\Models\TaxaVariavelOS;
 use App\Http\Classes\Configuracao;
 
 new Configuracao();
 class FormCreate extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    //banco
     public $cliente_id = 0;
     public $search_cliente = "";
     public $veiculo_id;
@@ -23,6 +27,8 @@ class FormCreate extends Component
     public $servicos_add = [];
     public $taxa_servico_lista = [];
     public $descricao = "";
+    public $desconto = null;
+    //variaveis de sistema
     public $valor_pago;
     public $troco =0;
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
@@ -99,7 +105,8 @@ class FormCreate extends Component
             $os = OS::create([
                 'cliente_id' => $this->cliente_id,
                 'veiculo_id' => (empty($this->veiculo_id)?null:$this->veiculo_id),
-                'descricao' => $this->descricao
+                'descricao' => $this->descricao,
+                'desconto' => Configuracao::convertToMoney($this->desconto)
             ]);
             //verficar se tem algum serviço selecionado
             if(count($this->servicos_add) > 0){
@@ -224,7 +231,7 @@ class FormCreate extends Component
             ->where('nome','like', "%{$this->search}%")
             ->orWhere('id','like', "%{$this->search}%")
             ->orderBy('id', 'desc')
-            ->paginate(10),
+            ->paginate(Configuracao::$LIMITE_PAGINA),
 
             'servicos_lista' => $this->servicos_add,
 

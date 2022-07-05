@@ -78,7 +78,7 @@ class Lista extends Component
             ->where('os.id', 'like', "%{$this->search['id']}%")
             ->where('clientes.nome', 'like', "%{$this->search['nome']}%")
             ->where('os.created_at', 'like', "%{$this->search['created_at']}%")
-            ->select('os.id','os.descricao','os.created_at','clientes.nome','veiculos.modelo','veiculos.placa')
+            ->select('os.id','os.descricao','os.created_at','os.desconto','clientes.nome','veiculos.modelo','veiculos.placa')
             ->paginate(Configuracao::$LIMITE_PAGINA)
         ]);
     }

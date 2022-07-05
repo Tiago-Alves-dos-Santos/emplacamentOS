@@ -35,5 +35,6 @@
                 @endforelse
             </tbody>
         </table>
+        {{$taxas->links()}}
     </div>
 </div>

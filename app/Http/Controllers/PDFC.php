@@ -24,11 +24,13 @@ class PDFC extends Controller
         $veiculo = isset($request->veiculo_id)?Veiculos::find($request->veiculo_id):[];
         $lista_servicos = isset($request->lista_servicos)?json_decode($request->lista_servicos):"";
         $lista_taxas = isset($request->lista_taxas)?json_decode($request->lista_taxas):"";
+        $desconto = $request->desconto;
         $pdf = PDF::loadView('pdf.os-orcamento', compact(
             'cliente',
             'veiculo',
             'lista_servicos',
-            'lista_taxas'
+            'lista_taxas',
+            'desconto'
         ));
         return $pdf->stream('orçamento.pdf');
 

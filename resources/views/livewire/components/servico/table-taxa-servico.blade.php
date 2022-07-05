@@ -1,7 +1,7 @@
 <div>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" style="overflow-x: hidden">
             <thead>
                 <th>Taxa</th>
                 <th>Tipo</th>
@@ -40,5 +40,6 @@
                 @endforelse
             </tbody>
         </table>
+        {{$taxas_servico->links()}}
     </div>
 </div>

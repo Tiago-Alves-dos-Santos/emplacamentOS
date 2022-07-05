@@ -18,6 +18,7 @@ class CreateOSTable extends Migration
             $table->bigInteger('cliente_id')->unsigned()->nullable();
             $table->bigInteger('veiculo_id')->unsigned()->nullable();
             $table->text('descricao')->nullable();
+            $table->double('desconto', 8, 2)->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->foreign('cliente_id')->references('id')->on('clientes');

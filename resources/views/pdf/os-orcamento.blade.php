@@ -146,6 +146,10 @@
                 </td>
             </tr>
         </tbody>
+        <caption>
+            Desconto: R$ {{Configuracao::getDbMoney($desconto)}}<br>
+            Valor Total: R$ {{($total_orcamento - $desconto)}}
+        </caption>
     </table>
 
 
