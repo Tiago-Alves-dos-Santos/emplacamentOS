@@ -100,7 +100,14 @@
 
                 <div class="row mt-3">
                     <div class="col-md-12 d-flex">
+                        @php
+
+                            $total_os -= $value->desconto;
+                        @endphp
                         <h5 class="mr-2">Total: R$ {{Configuracao::getDbMoney($total_os)}}</h5>
+                        @if (!empty($value->desconto))
+                            <h5 class="mr-2 text-info">Desconto: R$ {{Configuracao::getDbMoney($value->desconto)}}</h5>
+                        @endif
                         <h5 class="text-danger mr-2 @if(!Auths::isAdmin()) d-none @endif">Taxas: {{Configuracao::getDbMoney($total_taxas_os)}}</h5>
                         <h5 class="text-success @if(!Auths::isAdmin()) d-none @endif">Lucro: R$ {{Configuracao::getDbMoney($total_os - $total_taxas_os)}}</h5>
                     </div>
