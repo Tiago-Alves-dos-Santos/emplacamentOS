@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\OS;
 use App\Models\Cliente;
 use App\Models\Servico;
 use App\Models\Veiculos;
@@ -48,11 +49,17 @@ class OS extends Model
         $total_taxas_adicionais = TaxaVariavelOS::whereMonth('created_at', $mes)
         ->whereYear('created_at', $ano)->sum('valor_adicional');
 
-        $lucro = ($total_servicos + $total_taxas_adicionais) - $total_taxas;
+        //total de descontos das OS
+        $total_descontos = OS::where('desconto', '>', 0)
+        ->whereMonth('created_at', $mes)
+        ->whereYear('created_at', $ano)->sum('desconto');
+
+        $lucro = ($total_servicos + $total_taxas_adicionais) - ($total_taxas + $total_descontos);
         $retorno = [
-            'total' => $total_servicos,
+            'total' => ($total_servicos - $total_descontos),
             'taxas' => $total_taxas,
             'taxas_adicionais' => $total_taxas_adicionais,
+            'total_descontos' => $total_descontos,
             'lucro' => $lucro
         ];
         return (object)$retorno;
