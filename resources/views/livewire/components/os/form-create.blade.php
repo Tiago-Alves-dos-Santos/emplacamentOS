@@ -232,6 +232,7 @@
                 <input type="hidden" name="lista_taxas" value="{{json_encode($taxa_servico_lista)}}">
                 <input type="hidden" name="cliente_id" value="{{$cliente_id}}">
                 <input type="hidden" name="veiculo_id" value="{{$veiculo_id}}">
+                <input type="hidden" name="desconto" value="{{Configuracao::convertToMoney($desconto)}}">
                 <button type="submit" class="btn btn-danger btn-lg mr-2" title="ORÇAMENTO" formtarget="_blank">
                     <i class="fa-solid fa-file-pdf"></i>
                 </button>
