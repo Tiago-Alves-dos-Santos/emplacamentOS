@@ -241,23 +241,27 @@
 
     <div class="row mt-3">
         <div class="col-md-12" style="background-color: rgb(15, 15, 15); color: white; padding:10px">
-            <div class="w-100 d-flex justify-content-between" >
-                <h5>Total: R$ {{Configuracao::getDbMoney($total_os)}}</h5>
+            <div class="w-100 d-flex flex-column" >
+                @php
+                    $total_os -= (double)Configuracao::convertToMoney($this->desconto);
+                @endphp
+                <h5 class="text-info">Total: R$ {{Configuracao::getDbMoney($total_os)}}</h5>
                 <h5 class="text-danger">Taxas: R$ {{Configuracao::getDbMoney($total_all_taxas)}}</h5>
                 <h5 class="text-success">Lucro: R$ {{Configuracao::getDbMoney($total_os - $total_all_taxas)}}</h5>
+                <h5>Troco: R$ {{Configuracao::getDbMoney($troco)}}</h5>
             </div>
             <div class="w-100">
                 <div class="row">
                     <div class="col-md-4">
                         <input type="text" class="form-control" placeholder="R$ 0,00" onkeyup="moneyMask(this)" wire:model.lazy='valor_pago'>
                     </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Desconto R$ 0,00" onkeyup="moneyMask(this)" wire:model.lazy='desconto'>
+                    </div>
                     <div class="col-md-4 d-flex justify-content-center">
-                        <button type="button" class="btn btn-outline-light btn-block" wire:click.prevent='cacularTrocoOs({{($total_os - $total_all_taxas)}})'>
+                        <button type="button" class="btn btn-info btn-block" wire:click.prevent='cacularTrocoOs({{$total_os}})'>
                             CALCULAR
                         </button>
-                    </div>
-                    <div class="col-md-4 d-flex justify-content-start">
-                        <h4>Troco: R$ {{Configuracao::getDbMoney($troco)}}</h4>
                     </div>
                 </div>
             </div>
