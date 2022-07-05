@@ -123,6 +123,7 @@
         }
         $valor_servico += $servico_taxas_adicional;
     @endphp
+    <h3>Desconto: R$ {{Configuracao::getDbMoney($os->desconto)}}</h3>
     <div class="servico">
         <h3 style="font-size: 14pt">{{$value->nome}} - R$ {{Configuracao::getDbMoney($value->pivot->valor_servico + $valor_servico)}}</h3>
     </div>
@@ -153,7 +154,9 @@
     @empty
 
     @endforelse
-
+    @php
+        $total_os -= $os->desconto;
+    @endphp
     <div class="container-total" style="margin-top: 90px">
         <div class="result-total" style="border: 0.5px solid black">
             <h3 class="mr-2" style="position: relative; top:45px; left:0px; text-align: center">Total <br> R$ {{Configuracao::getDbMoney($total_os)}}</h5>

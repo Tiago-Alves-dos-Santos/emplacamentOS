@@ -5,11 +5,14 @@ namespace App\Http\Livewire\Components\Servico;
 use App\Models\Servico;
 use Livewire\Component;
 use App\Models\ServicoTaxa;
+use Livewire\WithPagination;
 use App\Http\Classes\Configuracao;
 
 new Configuracao();
 class TableTaxaServico extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $servico_id = 0;
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
@@ -49,7 +52,7 @@ class TableTaxaServico extends Component
         return view('livewire.components.servico.table-taxa-servico', [
             'taxas_servico' => Servico::find($this->servico_id)
             ->taxas()
-            ->get()
+            ->paginate(Configuracao::$LIMITE_PAGINA)
         ]);
     }
 }

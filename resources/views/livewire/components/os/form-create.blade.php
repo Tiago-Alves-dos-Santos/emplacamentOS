@@ -98,6 +98,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    @if (!empty($servicos))
+                        {{$servicos->links()}}
+                    @endif
                 </div>
             </div>
         </div>

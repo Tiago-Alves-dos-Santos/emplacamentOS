@@ -9,12 +9,15 @@ use Livewire\Component;
 use App\Models\Veiculos;
 use App\Models\ServicoOS;
 use App\Models\ServicoTaxa;
+use Livewire\WithPagination;
 use App\Models\TaxaVariavelOS;
 use App\Http\Classes\Configuracao;
 
 new Configuracao();
 class FormCreate extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     //banco
     public $cliente_id = 0;
     public $search_cliente = "";
@@ -228,7 +231,7 @@ class FormCreate extends Component
             ->where('nome','like', "%{$this->search}%")
             ->orWhere('id','like', "%{$this->search}%")
             ->orderBy('id', 'desc')
-            ->paginate(10),
+            ->paginate(Configuracao::$LIMITE_PAGINA),
 
             'servicos_lista' => $this->servicos_add,
 
