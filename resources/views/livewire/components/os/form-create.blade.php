@@ -10,7 +10,7 @@
                 <input type="search" wire:model='search_cliente' class="select-search form-control" placeholder="Nome cliente">
             </div>
             <div class="col-md-6 d-flex">
-                <select name="" class="custom-select" wire:model.lazy='cliente_id' class="w-90" required id="cliente_id">
+                <select name="" class="custom-select" wire:model.lazy='cliente_id' wire:change='veiculoClienteId' class="w-90" required id="cliente_id">
                     <option value="" selected>Selecione</option>
                     @foreach ($clientes as $value)
                         <option value="{{$value->id}}">{{$value->nome}}</option>
@@ -26,13 +26,21 @@
             <div class="col-md-6">
                 <input type="search" class="select-search form-control" placeholder="Placa" wire:model='search_veiculo'>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex">
                 <select name=""  class="custom-select" wire:model.lazy='veiculo_id' id="veiculo_id">
                     <option value="" selected>Selecione</option>
                     @foreach ($veiculos_cliente as $value)
                         <option value="{{$value->id}}">{{$value->modelo}} - {{$value->placa}}</option>
                     @endforeach
                 </select>
+                {{-- verifcar se tem cliente selecionado --}}
+                <button type="button" class="btn btn-info ml-2" @if(empty($cliente_id)) disabled @endif data-toggle="modal" data-target="#cadastrarVeiculo">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+
+                <button type="button" class="btn btn-primary ml-2" wire:click="$emit('os.form-create.reload')">
+                    <i class="fa-solid fa-arrows-rotate" wire:loading.class="rotate"></i>
+                </button>
             </div>
         </div>
 
@@ -285,6 +293,10 @@
             ];
         @endphp
         <livewire:components.cliente.form-create :setar_id='$setar_id'>
+    </x-modal>
+
+    <x-modal id="cadastrarVeiculo" titulo='Novo veículo {{$cliente_id}}' size='modal-lg'>
+        <livewire:components.veiculo.form-create>
     </x-modal>
 
     @push('scripts')
