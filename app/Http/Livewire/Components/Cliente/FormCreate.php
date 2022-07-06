@@ -21,6 +21,11 @@ class FormCreate extends Component
         'metodo_set_id' => ''
     ];*/
     public $setar_id;
+    //dados veiculo
+    public $modelo = "";
+    public $placa = "";
+    public $marcas = "";
+
     public $toast_type = ['success' => 0,'info' => 1,'warning' => 2,'error' => 3];
     public $msg_toast = [
         "title" => '',
@@ -59,12 +64,16 @@ class FormCreate extends Component
             if(!empty($this->setar_id) && $this->setar_id['setar_id']){
                 $this->emit($this->setar_id['metodo_set_id'], $cliente->id);
                 $this->emit('closeModal','cadastroCliente');
+            }else{
+                redirect()->route('view.cliente.update', [
+                    'id' => $cliente->id
+                ]);
             }
-            $this->msg_toast['title'] = 'Sucesso!';
-            $this->msg_toast['information'] = 'Cadastro realizado com sucesso!';
-            $this->msg_toast['type'] = $this->toast_type['success'];
-            $this->emit('showToast', $this->msg_toast);
-            $this->resetExcept(['limpa']);
+            // $this->msg_toast['title'] = 'Sucesso!';
+            // $this->msg_toast['information'] = 'Cadastro realizado com sucesso!';
+            // $this->msg_toast['type'] = $this->toast_type['success'];
+            // $this->emit('showToast', $this->msg_toast);
+            // $this->resetExcept(['limpa']);
 
        } catch (\Exception $e) {
             $this->msg_toast['title'] = 'Erro!';
