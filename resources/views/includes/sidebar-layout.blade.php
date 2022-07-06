@@ -52,7 +52,7 @@
     <li class="nav-item @if ($page_active == 'servico.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.servico.dashboard')}}">
             <i class="fa-solid fa-list-ul"></i>
-            <span>Serviços</span></a>
+            <span>Serviços / Produtos</span></a>
     </li>
     <li class="nav-item @if ($page_active == 'taxa.dashboard') active @endif">
         <a class="nav-link" href="{{route('view.taxa.dashboard')}}">

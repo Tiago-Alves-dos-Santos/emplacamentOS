@@ -99,7 +99,7 @@
     </div>
     @if (!empty($os->veiculo->modelo))
     <div class="sub-cabecalho">
-        <h5 style="text-align: center">{{$os->veiculo->modelo}} - {{$os->veiculo->placa}}</h5>
+        <h5 style="text-align: center">{{$os->veiculo->modelo}} <br> {{$os->veiculo->placa}}</h5>
     </div>
     @endif
     @php
