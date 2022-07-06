@@ -255,25 +255,23 @@
         <div class="col-md-12" style="background-color: rgb(15, 15, 15); color: white; padding:10px">
             <div class="w-100 d-flex flex-column" >
                 @php
-                    $total_os -= (double)Configuracao::convertToMoney($this->desconto);
+                    $total_os -= (double)Configuracao::convertToMoney($desconto);
                 @endphp
                 <h5 class="text-info">Total: R$ {{Configuracao::getDbMoney($total_os)}}</h5>
+                <h5 class="text-warning">Desconto: R$ {{$desconto ?? Configuracao::getDbMoney(0)}}</h5>
                 <h5 class="text-danger">Taxas: R$ {{Configuracao::getDbMoney($total_all_taxas)}}</h5>
                 <h5 class="text-success">Lucro: R$ {{Configuracao::getDbMoney($total_os - $total_all_taxas)}}</h5>
+                @if ($valor_pago > 0)
                 <h5>Troco: R$ {{Configuracao::getDbMoney($troco)}}</h5>
+                @endif
             </div>
             <div class="w-100">
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="R$ 0,00" onkeyup="moneyMask(this)" wire:model.lazy='valor_pago'>
+                        <input type="text" class="form-control" placeholder="Desconto R$ 0,00" onkeyup="moneyMask(this)" wire:model.lazy='desconto' wire:change='cacularTrocoOs({{$total_os}})'>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Desconto R$ 0,00" onkeyup="moneyMask(this)" wire:model.lazy='desconto'>
-                    </div>
-                    <div class="col-md-4 d-flex justify-content-center">
-                        <button type="button" class="btn btn-info btn-block" wire:click.prevent='cacularTrocoOs({{$total_os}})'>
-                            CALCULAR
-                        </button>
+                        <input type="text" class="form-control" placeholder="Valor pago R$ 0,00" onkeyup="moneyMask(this)" wire:model.lazy='valor_pago' wire:change='cacularTrocoOs({{$total_os}})'>
                     </div>
                 </div>
             </div>
