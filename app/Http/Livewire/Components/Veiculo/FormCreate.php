@@ -24,16 +24,22 @@ class FormCreate extends Component
     public $limpa = '';
     protected $listeners = [
         //'veiculos-reload' => '$refresh',
+        'veiculos.form-create.setClienteId' => 'setClienteId'
     ];
 
-    public function mount($cliente_id)
+    public function mount($cliente_id = 0)
+    {
+        $this->cliente_id = $cliente_id;
+    }
+
+    public function setClienteId($cliente_id)
     {
         $this->cliente_id = $cliente_id;
     }
 
     public function cadastrar()
     {
-        try {
+        // try {
             Veiculos::create([
                 'cliente_id' => $this->cliente_id,
                 'placa' => mb_strtoupper($this->placa),
@@ -48,12 +54,12 @@ class FormCreate extends Component
             $this->emit('showToast', $this->msg_toast);
             $this->resetExcept(['limpa','cliente_id']);
             $this->emit('veiculos-reload');
-        } catch (\Exception $e) {
-            $this->msg_toast['title'] = 'Erro!';
-            $this->msg_toast['information'] = $e->getMessage();
-            $this->msg_toast['type'] = $this->toast_type['error'];
-            $this->emit('showToast', $this->msg_toast);
-        }
+        // } catch (\Exception $e) {
+        //     $this->msg_toast['title'] = 'Erro!';
+        //     $this->msg_toast['information'] = $e->getMessage();
+        //     $this->msg_toast['type'] = $this->toast_type['error'];
+        //     $this->emit('showToast', $this->msg_toast);
+        // }
     }
     public function render()
     {

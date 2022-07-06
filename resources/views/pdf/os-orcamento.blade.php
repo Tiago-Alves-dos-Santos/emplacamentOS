@@ -92,6 +92,19 @@
         tr td{
             text-align: center;
         }
+        div.responsavel{
+            margin-top: 80px;
+            text-align: center;
+        }
+        div.responsavel div{
+            border:1px solid black;
+            width: 50%;
+            display: inline-block;
+        }
+        div.responsavel h3{
+            position: relative;
+            top:-20px;
+        }
     </style>
 </head>
 
@@ -101,11 +114,12 @@
         <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/logo.png'))) }}" style="width: 360px">
     </div>
     <div class="cabecalho">
-        <h3 style="width: 98%; text-align: center">{{$cliente->nome ?? '-'}}</h3>
+        <h3 style="width:60%; text-align: left">{{$cliente->nome ?? '-'}}</h3>
+        <h5 style="text-align: right"> Data: {{date('d/m/Y')}}</h5>
         <div class="clear"></div>
     </div>
     <div class="sub-cabecalho">
-        <h5 style="text-align: center">{{$veiculo->modelo ?? '-'}} - {{$veiculo->placa ?? ''}}</h5>
+        <h5 style="text-align: center">{{$veiculo->modelo ?? '-'}} <br> {{$veiculo->placa ?? ''}}</h5>
     </div>
     @php
         $servicos = (object)$lista_servicos;
@@ -148,10 +162,30 @@
         </tbody>
         <caption>
             Desconto: R$ {{Configuracao::getDbMoney($desconto)}}<br>
-            Valor Total: R$ {{($total_orcamento - $desconto)}}
+            Valor Total: R$ {{Configuracao::getDbMoney($total_orcamento - $desconto)}}
         </caption>
     </table>
 
+    <div class="responsavel">
+        <div></div>
+        <h3>
+            Responsável
+        </h3>
+    </div>
+
+    <div class="endereco">
+        <ul style="list-style-type: none">
+            <li>
+                <span style="font-weight: bolder">Instagram</span> <span style="letter-spacing: 2px">@phemplacamentos</span>
+            </li>
+            <li>
+                <span style="font-weight: bolder">Endereço</span> Rua Professor Garcez, 114, GRANJA-CE
+            </li>
+            <li>
+                <span style="font-weight: bolder">Celular</span> (88) 99630-5856
+            </li>
+        </ul>
+    </div>
 
     <script type="text/php">
         if ( isset($pdf) ) {

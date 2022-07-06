@@ -99,7 +99,7 @@
     </div>
     @if (!empty($os->veiculo->modelo))
     <div class="sub-cabecalho">
-        <h5 style="text-align: center">{{$os->veiculo->modelo}} - {{$os->veiculo->placa}}</h5>
+        <h5 style="text-align: center">{{$os->veiculo->modelo}} <br> {{$os->veiculo->placa}}</h5>
     </div>
     @endif
     @php
@@ -107,6 +107,7 @@
         $total_os = 0;
         $total_taxas_os = 0;
     @endphp
+    <h3>Desconto: R$ {{Configuracao::getDbMoney($os->desconto)}}</h3>
     @forelse ($servicos as $value)
     @php
         $servico_total_valor =0;
@@ -123,7 +124,6 @@
         }
         $valor_servico += $servico_taxas_adicional;
     @endphp
-    <h3>Desconto: R$ {{Configuracao::getDbMoney($os->desconto)}}</h3>
     <div class="servico">
         <h3 style="font-size: 14pt">{{$value->nome}} - R$ {{Configuracao::getDbMoney($value->pivot->valor_servico + $valor_servico)}}</h3>
     </div>

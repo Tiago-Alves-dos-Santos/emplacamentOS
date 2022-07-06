@@ -60,6 +60,13 @@ class FormCreate extends Component
     public function setIdCliente($cliente_id)
     {
         $this->cliente_id = $cliente_id;
+        $this->emit('veiculos.form-create.setClienteId', $this->cliente_id);
+        $this->emit('os.form-create.reload');
+    }
+
+    public function veiculoClienteId()
+    {
+        $this->emit('veiculos.form-create.setClienteId', $this->cliente_id);
         $this->emit('os.form-create.reload');
     }
 
@@ -229,7 +236,7 @@ class FormCreate extends Component
             'servicos' => ($this->search == "")?[]:
             Servico::whereNotIn('id', $servico_ids)
             ->where('nome','like', "%{$this->search}%")
-            ->orWhere('id','like', "%{$this->search}%")
+            ->orWhere('id',$this->search)
             ->orderBy('id', 'desc')
             ->paginate(Configuracao::$LIMITE_PAGINA),
 
