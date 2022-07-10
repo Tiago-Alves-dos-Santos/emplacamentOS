@@ -109,14 +109,15 @@ class FormCreate extends Component
     {
         try {
             //criar os
-            $os = OS::create([
-                'cliente_id' => $this->cliente_id,
-                'veiculo_id' => (empty($this->veiculo_id)?null:$this->veiculo_id),
-                'descricao' => $this->descricao,
-                'desconto' => Configuracao::convertToMoney($this->desconto)
-            ]);
+
             //verficar se tem algum serviço selecionado
             if(count($this->servicos_add) > 0){
+                $os = OS::create([
+                    'cliente_id' => $this->cliente_id,
+                    'veiculo_id' => (empty($this->veiculo_id)?null:$this->veiculo_id),
+                    'descricao' => $this->descricao,
+                    'desconto' => Configuracao::convertToMoney($this->desconto)
+                ]);
                 //cadastrar servicos nas servico_os
                 foreach($this->servicos_add as $value){
                     $value = (object) $value;
