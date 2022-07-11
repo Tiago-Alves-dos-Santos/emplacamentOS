@@ -108,10 +108,11 @@ class FormCreate extends Component
     public function saveOS()
     {
         try {
-            //criar os
 
+            $os = null;
             //verficar se tem algum serviço selecionado
             if(count($this->servicos_add) > 0){
+                //criar os
                 $os = OS::create([
                     'cliente_id' => $this->cliente_id,
                     'veiculo_id' => (empty($this->veiculo_id)?null:$this->veiculo_id),
@@ -164,10 +165,12 @@ class FormCreate extends Component
                 $this->emit('showToast', $this->msg_toast);
             }
 
-            $this->msg_toast['title'] = 'Sucesso!';
-            $this->msg_toast['information'] = "OS Nº {$os->id} criada com sucesso!";
-            $this->msg_toast['type'] = $this->toast_type['success'];
-            $this->emit('showToast', $this->msg_toast);
+            if(!empty($os)){
+                $this->msg_toast['title'] = 'Sucesso!';
+                $this->msg_toast['information'] = "OS Nº {$os->id} criada com sucesso!";
+                $this->msg_toast['type'] = $this->toast_type['success'];
+                $this->emit('showToast', $this->msg_toast);
+            }
 
             $this->resetExcept(['limpa']);
             $this->emit('os.form-create.reload');
