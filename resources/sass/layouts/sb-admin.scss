@@ -678,15 +678,20 @@ html {
     text-transform: uppercase;
     z-index: 1;
   }
+  .sidebar .sidebar-brand .sidebar-brand-icon{
+    margin: 10px 0;
+  }
 
   .sidebar .sidebar-brand .sidebar-brand-icon i {
     font-size: 2rem;
   }
 
+  /*
   .sidebar .sidebar-brand .sidebar-brand-icon img {
       width: 100px;
       height: 100px;
   }
+  */
 
   .sidebar .sidebar-brand .sidebar-brand-text {
     display: none;

@@ -4,10 +4,10 @@
     <a class="sidebar-brand d-flex flex-column align-items-center justify-content-start" href="index.html">
         <div class="sidebar-brand-icon">
             {{-- <i class="fas fa-laugh-wink"></i> --}}
-            <img src="{{asset('img/logo.png')}}" class="img-fluid" alt="">
+            <img src="{{asset('img/logo_menu.png')}}" class="img-fluid" alt="">
 
         </div>
-        <div class="sidebar-brand-text ml-1">emplacament<span class="fw-bolder">OS</span></div>
+        {{-- <div class="sidebar-brand-text ml-1">emplacament<span class="fw-bolder">OS</span></div> --}}
     </a>
 
     <!-- Divider -->
