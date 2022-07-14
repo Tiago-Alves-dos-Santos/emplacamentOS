@@ -44,8 +44,13 @@ class Licenciamento extends Command
         $data = new \DateTime();
         //retorna mes sem 0 a esquerda
         $mes_atual = $data->format('n');
-        $veiculos = Veiculos::where('placa', 'like', "%$mes_atual%")->get();
-        if($veiculos->count() > 0){
+        if($mes_atual == 10){
+            $veiculos = Veiculos::where('placa', 'like', "%0%")->get();
+        }else if($mes_atual < 10){
+            $veiculos = Veiculos::where('placa', 'like', "%$mes_atual%")->get();
+        }
+
+        if($veiculos->count() > 0 && $mes_atual <= 10){
             setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
             date_default_timezone_set('America/Sao_Paulo');
 

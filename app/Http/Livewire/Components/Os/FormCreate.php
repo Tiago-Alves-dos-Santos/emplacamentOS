@@ -223,7 +223,9 @@ class FormCreate extends Component
     public function cacularTrocoOs($total)
     {
         $valor = (double)Configuracao::convertToMoney($this->valor_pago);
-        $this->troco = $valor - $total;
+        $desconto = (double) Configuracao::convertToMoney($this->desconto);
+        $this->troco = $valor - ($total - $desconto);
+        //dd("Valor pago: ".$this->valor_pago." Total: ".$total." Troco: ". $this->troco);
     }
 
 

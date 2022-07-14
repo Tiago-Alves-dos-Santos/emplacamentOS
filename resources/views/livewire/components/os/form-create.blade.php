@@ -255,10 +255,11 @@
         <div class="col-md-12" style="background-color: rgb(15, 15, 15); color: white; padding:10px">
             <div class="w-100 d-flex flex-column" >
                 @php
-                    $total_os -= (double)Configuracao::convertToMoney($desconto);
+                    $pagar = $total_os - (double)Configuracao::convertToMoney($desconto);
                 @endphp
                 <h5 class="text-info">Total: R$ {{Configuracao::getDbMoney($total_os)}}</h5>
                 <h5 class="text-warning">Desconto: R$ {{$desconto ?? Configuracao::getDbMoney(0)}}</h5>
+                <h5>Pagar: R$ {{Configuracao::getDbMoney($pagar)}}</h5>
                 <h5 class="text-danger">Taxas: R$ {{Configuracao::getDbMoney($total_all_taxas)}}</h5>
                 <h5 class="text-success">Lucro: R$ {{Configuracao::getDbMoney($total_os - $total_all_taxas)}}</h5>
                 @if ($valor_pago > 0)
