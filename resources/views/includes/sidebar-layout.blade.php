@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex flex-column align-items-center justify-content-start" href="index.html">
+    <a class="sidebar-brand d-flex flex-column align-items-center justify-content-start" href="{{route('home')}}">
         <div class="sidebar-brand-icon">
             {{-- <i class="fas fa-laugh-wink"></i> --}}
             <img src="{{asset('img/logo_menu.png')}}" class="img-fluid" alt="">
