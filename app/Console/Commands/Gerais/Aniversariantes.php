@@ -47,7 +47,7 @@ class Aniversariantes extends Command
                 $idade = Configuracao::calcIdade($value->data_nasc);
                 Notification::create([
                     'titulo' => 'Aniversariante',
-                    'descricao' => "O cliente <span style='color:red'>{$value->nome}</span> está fazendo <span style='color:red'>$idade</span> anos hoje. Deseje os parabéns!!!",
+                    'descricao' => "O cliente <span style='color:red'>{$value->nome}</span> está fazendo <span style='color:red'>$idade</span> anos hoje(".date('d/m/Y')."). Deseje os parabéns!!!",
                 ]);
             }
         }
